@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "medicalclinic_front", "medicalclinic_front\medicalclinic_front.csproj", "{75056F6C-AB0A-4D08-97F7-ABB5CD661B64}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C228015E-7FFE-4356-830C-E2BA417E6AE6} = {C228015E-7FFE-4356-830C-E2BA417E6AE6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "medicalclinic_back", "medicalclinic_back\medicalclinic_back.csproj", "{C228015E-7FFE-4356-830C-E2BA417E6AE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75056F6C-AB0A-4D08-97F7-ABB5CD661B64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75056F6C-AB0A-4D08-97F7-ABB5CD661B64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75056F6C-AB0A-4D08-97F7-ABB5CD661B64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75056F6C-AB0A-4D08-97F7-ABB5CD661B64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C228015E-7FFE-4356-830C-E2BA417E6AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C228015E-7FFE-4356-830C-E2BA417E6AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C228015E-7FFE-4356-830C-E2BA417E6AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C228015E-7FFE-4356-830C-E2BA417E6AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBB363C3-5A54-46B2-B859-C41E4068EC41}
+	EndGlobalSection
+EndGlobal

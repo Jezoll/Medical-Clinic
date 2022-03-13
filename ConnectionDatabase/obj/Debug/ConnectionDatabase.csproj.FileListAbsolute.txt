@@ -1,6 +1,0 @@
-C:\Users\hubiw\Desktop\medical_clinic-master\ConnectionDatabase\bin\Debug\ConnectionDatabase.dll
-C:\Users\hubiw\Desktop\medical_clinic-master\ConnectionDatabase\bin\Debug\ConnectionDatabase.pdb
-C:\Users\hubiw\Desktop\medical_clinic-master\ConnectionDatabase\obj\Debug\ConnectionDatabase.csprojAssemblyReference.cache
-C:\Users\hubiw\Desktop\medical_clinic-master\ConnectionDatabase\obj\Debug\ConnectionDatabase.csproj.CoreCompileInputs.cache
-C:\Users\hubiw\Desktop\medical_clinic-master\ConnectionDatabase\obj\Debug\ConnectionDatabase.dll
-C:\Users\hubiw\Desktop\medical_clinic-master\ConnectionDatabase\obj\Debug\ConnectionDatabase.pdb
