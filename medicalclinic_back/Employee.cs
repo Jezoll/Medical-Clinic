@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace medicalclinic_back
 {
@@ -36,10 +37,10 @@ namespace medicalclinic_back
         public UserDepartment User_department { get => user_department; set => user_department = value; }
         public UserCredentials User_login { get => user_credentials; set => user_credentials = value; }
 
-        public Employee(int id, string first_name, string second_name, string pesel, char sex, string phone_number, string email, DateTime date_of_birth, bool is_active, MedicalSpecialization specialization, Address address, UserRole role, UserDepartment department) 
+        public Employee(int id, string first_name, string second_name, string pesel, char sex, string phone_number, string email, DateTime date_of_birth, bool is_active, MedicalSpecialization specialization, Address address, UserRole role, UserDepartment department)
         {
             this.id = id;
-            this.first_name = first_name;   
+            this.first_name = first_name;
             this.second_name = second_name;
             this.pesel = pesel;
             this.sex = sex;
@@ -53,10 +54,20 @@ namespace medicalclinic_back
             this.user_department = department;
         }
 
-        public static List<Employee> getAllEmployees(string sort_column = "employees.id", string sort_direction = "DESC") 
+        public static List<Employee> getAllEmployees(string sort_column = "employees.id", string sort_direction = "DESC", FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = null)
         {
+            string filter = "";
+            if (filter_column == FilterColumnEmployee.Role)
+            {
+                filter = $"WHERE user_roles.name = '{filter_query}'";
+            }
+            else if (filter_column == FilterColumnEmployee.Active)
+            {
+                filter = $"WHERE is_active = '{filter_query}'";
+            }
+
             Database.openConnection();
-            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id ORDER BY {sort_column} {sort_direction}";
+            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id {filter} ORDER BY {sort_column} {sort_direction}";
 
             MySqlDataReader data = Database.dataReader(query);
 
@@ -69,12 +80,106 @@ namespace medicalclinic_back
                 UserDepartment department = new UserDepartment(data.GetInt32(20), data.GetString(21));
 
                 Employee employee = new Employee(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), data.GetChar(4), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetBoolean(8), specialization, address, role, department);
-                
+
                 employees.Add(employee);
             }
 
             Database.closeConnection();
             return employees;
+        }
+
+        public bool validatePesel()//zakladam ze przy dodawaniu pracownika robimy obiekt employee. Inaczej trzebaby zmienic metode na static i dac jej argumenty(pesel, data ur,plec)
+        {
+            string dayOfBirth, monthOfBirth;
+            int yearOfBirth;
+            char gender;
+            bool result = false;
+
+            int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
+
+            gender = this.sex;
+
+
+            List<string> peselDigits = new List<string>(); //lista do przechowywania wszystkich cyfr podanego nr pesel
+            foreach(char digit in this.pesel.ToCharArray())
+            {
+                peselDigits.Add(digit.ToString());
+            }
+
+            yearOfBirth = this.date_of_birth.Year; // przypisywanie prawdziwego roku urodzin (wybranego z kalendarza)
+            if (this.date_of_birth.Day < 10) //przypisywanie prawdziwego dnia urodzin (wybranego z kalendarza) - taki jaki powinien byc w dobrym peselu
+            {
+                dayOfBirth = "0" + this.date_of_birth.Day.ToString();
+            }
+            else
+            {
+                dayOfBirth = this.date_of_birth.Day.ToString();
+            }
+
+            if(this.date_of_birth.Month < 10) // przypisywanie prawdziwego miesiaca urodzin (wybranego z kalendarza)
+            {
+                monthOfBirth = "0" + this.date_of_birth.Month.ToString();
+            }
+            else
+            {
+                monthOfBirth = this.date_of_birth.Month.ToString();
+            }
+
+
+            string thirdAndFourthDigit;
+
+            if (peselDigits.Count == 11)
+            {
+                if (yearOfBirth >= 2000) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
+                {
+                    if (this.date_of_birth.Month >=10)
+                    {
+                        thirdAndFourthDigit = "3" + monthOfBirth[1];
+                    }
+                    else
+                    {
+                        thirdAndFourthDigit = "2" + monthOfBirth[1];
+                    }
+
+                }
+                else
+                {
+                    thirdAndFourthDigit = monthOfBirth;
+                }
+
+                char[] yearAsCharArray = yearOfBirth.ToString().ToCharArray();
+                string firstTwoDigits = yearAsCharArray[2].ToString() + yearAsCharArray[3].ToString(); //pierwsze dwie cyfry, ktore powinny byc w prawidlowym peselu
+
+                string year = peselDigits[0] +  peselDigits[1]; //rok ktory wynika z podanego peselu
+                string month = peselDigits[2] + peselDigits[3]; // miesiac ktory wynika z podanego peselu
+                string day = peselDigits[4] + peselDigits[5]; // dzien urodzenia ktory wynika z podanego peselu
+
+                if (firstTwoDigits == year && thirdAndFourthDigit == month && dayOfBirth == day)//sprawdzenie czy data urodzenia wybrana pokrywa sie z datą wynikającą z nr pesel
+                {
+                    int tenthDigit = Convert.ToInt32(peselDigits[9]); //pobranie 10 cyfry nr pesel
+                    if (tenthDigit % 2 == 1 && gender == 'M' || tenthDigit % 2 == 0 && gender == 'K')
+                    {
+                        int checksum =0;
+                        for(int i = 0; i<= weights.Length - 1; i++) //wyliczanie sumy kontrolnej
+                        {
+                            checksum += Convert.ToInt32(peselDigits[i]) * weights[i];
+                        }
+                        checksum = checksum % 10;
+
+                        if(checksum != 0)
+                        {
+                            checksum = 10 - checksum;
+                        }
+
+                        if (checksum.ToString() == peselDigits[10]) //sprawdzenie czy wpisana cyfra kontrolna jest rowna wyliczonej przez program
+                        {
+                            result = true;
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -141,6 +141,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="FilterColumnEmployee.cs" />
     <Compile Include="UserDepartment.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="UserCredentials.cs" />

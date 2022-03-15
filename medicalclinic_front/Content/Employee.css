@@ -1,0 +1,12 @@
+﻿.table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin-top: 10px;
+}
+
+.table-content {
+    overflow-x: scroll;
+    margin-bottom: 10px;
+}

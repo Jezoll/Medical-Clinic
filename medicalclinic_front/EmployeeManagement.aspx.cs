@@ -1,6 +1,7 @@
 ﻿using medicalclinic_back;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Web.UI.WebControls;
 
 namespace medicalclinic
@@ -9,18 +10,19 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            employeesGridRefresh();
+            if (!Page.IsPostBack)
+                employeesGridRefresh();
         }
 
-        private void employeesGridRefresh(string sort_column = "employees.id", string sort_direction = "DESC")
+        private void employeesGridRefresh(string sort_column = "employees.id", string sort_direction = "DESC", FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = null)
         {
-            List<Employee> employees = Employee.getAllEmployees(sort_column, sort_direction);
-            fillDropDownListWithValues();
+            List<Employee> employees = Employee.getAllEmployees(sort_column, sort_direction, filter_column, filter_query);
+            fillDropDownListsWithValues();
             EmployeesGridView.DataSource = employees;
             EmployeesGridView.DataBind();
         }
 
-        private void fillDropDownListWithValues()
+        private void fillDropDownListsWithValues()
         {
             List<UserRole> data = UserRole.getAllRoles();
             DropDownListRoles.Items.Clear();
@@ -30,43 +32,23 @@ namespace medicalclinic
             }
         }
 
-        protected void ButtonFilter_Click(object sender, EventArgs e)
+        protected void ButtonFilterRoles_Click(object sender, EventArgs e)
         {
-            //if (RadioButtonName.Checked)
-            //{
-            //    string name = TextBoxName.Text;
-            //    if (name == "")
-            //    {
-            //        LabelName.Text = "Enter name before pressing filter button!!";
-            //    }
-            //    else
-            //    {
-            //        employeesGridRefresh(Employee.listEmployees.Where(emp => emp.First_name == name).ToList());
-            //        LabelName.Text = "Name";
-            //        TextBoxName.Text = "";
-            //    }
-            //}
-            //else if (RadioButtonSurname.Checked)
-            //{
-            //    string surname = TextBoxSurname.Text;
-            //    if (surname == "")
-            //    {
-            //        LabelSurname.Text = "Enter surname before pressing filter button!!";
-            //    }
-            //    else
-            //    {
-            //        employeesGridRefresh(Employee.listEmployees.Where(emp => emp.Last_name == surname).ToList());
-            //        LabelSurname.Text = "Surname";
-            //        TextBoxSurname.Text = "";
-            //    }
-            //}
-            //else if (RadioButtonUserRole.Checked)
-            //{
-            //    string role = DropDownListRoles.SelectedValue;
-            //    //role = "recepcjonista";
-            //    employeesGridRefresh(Employee.listEmployees.Where(emp => emp.User_role.Role == role).ToList());
-            //    // nie wiem dlaczego nie działa selected value i nawet jeśli zmienimy role to cały czas zaznaczona jest ta domyślna
-            //}
+            string query = DropDownListRoles.SelectedValue;
+            employeesGridRefresh(filter_column: FilterColumnEmployee.Role, filter_query: query);
+        }
+
+        protected void ButtonFilterActive_Click(object sender, EventArgs e)
+        {
+            string query = "";
+            if (CheckBoxIsActive.Checked) query = "1";
+            else query = "0";
+            employeesGridRefresh(filter_column: FilterColumnEmployee.Active, filter_query: query);
+        }
+
+        protected void ButtonFilterClear_Click(object sender, EventArgs e)
+        {
+            employeesGridRefresh();
         }
 
         protected string GetSortDirection(string column)
@@ -90,6 +72,17 @@ namespace medicalclinic
             string dir = GetSortDirection(e.SortExpression);
             switch (e.SortExpression)
             {
+                case "Id":
+                    sort_column = "employees.id";
+                    if (dir == "ASC")
+                    {
+                        sort_direction = "ASC";
+                    }
+                    else
+                    {
+                        sort_direction = "DESC";
+                    }
+                    break;
                 case "First_name":
                     sort_column = "first_name";
                     if (dir == "ASC")
@@ -286,5 +279,7 @@ namespace medicalclinic
             }
             employeesGridRefresh(sort_column, sort_direction);
         }
+
+
     }
 }
