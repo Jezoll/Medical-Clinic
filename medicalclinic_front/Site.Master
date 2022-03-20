@@ -12,10 +12,10 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <link href="./Content/bootstrap/bootstrap.min.css" rel="stylesheet" runat="server" />
-    <link href="./Content/bootstrap/bootstrap-theme.min.css" rel="stylesheet" runat="server" />
-    <link href="./Content/Default.css" rel="stylesheet" runat="server" />
-    <link href="./Content/Employee.css" rel="stylesheet" runat="server" />
+    <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" runat="server" />
+    <link href="~/Content/bootstrap/bootstrap-theme.min.css" rel="stylesheet" runat="server" />
+    <link href="~/Content/Default.css" rel="stylesheet" runat="server" />
+    <link href="~/Content/Employee.css" rel="stylesheet" runat="server" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>

@@ -3,6 +3,7 @@
 <asp:Content ID="EmployeeManagementContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="table-container">
         <div class="table-content">
+            <asp:Button ID="ButtonAdd" runat="server" OnClick="ButtonAdd_Click" Text="Add New Employee" />
         <asp:GridView
             ID="EmployeesGridView"
             runat="server"

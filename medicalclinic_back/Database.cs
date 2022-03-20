@@ -27,7 +27,7 @@ namespace medicalclinic_back
             connection.Close();
         }
 
-        public static MySqlCommand executeQuery(string query)
+        public static MySqlCommand command(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             return command;

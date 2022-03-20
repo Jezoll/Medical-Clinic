@@ -10,6 +10,7 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //popout dodano pracownika ma mieć OK co go zamyka i tyle
             if (!Page.IsPostBack)
                 employeesGridRefresh();
         }
@@ -278,6 +279,11 @@ namespace medicalclinic
                     break;
             }
             employeesGridRefresh(sort_column, sort_direction);
+        }
+
+        protected void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddEmployee.aspx");
         }
 
 

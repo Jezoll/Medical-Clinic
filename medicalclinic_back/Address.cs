@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
+using System.Diagnostics;
 
 namespace medicalclinic_back
 {
@@ -30,5 +32,25 @@ namespace medicalclinic_back
         public string Postal_code { get => postal_code; set => postal_code = value; }
         public string Street { get => street; set => street = value; }
         public string Number { get => number; set => number = value; }
+
+        public static string insertNewAddress(string country, string state, string city, string postal_code, string street, string number)
+        {
+            Database.openConnection();
+            string query = "INSERT INTO user_addresses (country, state, city, postal_code, street, number) VALUES (@country, @state, @city, @postal_code, @street, @number); SELECT LAST_INSERT_ID();";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@country", country);
+            command.Parameters.AddWithValue("@state", state);
+            command.Parameters.AddWithValue("@city", city);
+            command.Parameters.AddWithValue("@postal_code", postal_code);
+            command.Parameters.AddWithValue("@street", street);
+            command.Parameters.AddWithValue("@number", number);
+
+            string address_id = command.ExecuteScalar().ToString();
+            Database.closeConnection();
+
+            return address_id;
+        }
     }
 }
