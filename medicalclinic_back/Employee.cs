@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 
 namespace medicalclinic_back
 {
@@ -54,22 +56,48 @@ namespace medicalclinic_back
             this.user_department = department;
         }
 
-        public static List<Employee> getAllEmployees(string sort_column = "employees.id", string sort_direction = "DESC", FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = null)
+        public static List<Employee> getAllEmployees(string sort_column = "employees.id", SortDirection sort_direction = SortDirection.Ascending, FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = "1")
         {
-            string filter = "";
-            if (filter_column == FilterColumnEmployee.Role)
+            bool is_sort_column_correct = false;
+            string where_filter;
+            string order_sort;
+
+            foreach (DatabaseColumnName column in (DatabaseColumnName[]) Enum.GetValues(typeof(DatabaseColumnName)))
             {
-                filter = $"WHERE user_roles.name = '{filter_query}'";
+                if (sort_column == column.ToString().ToLower()) {
+                    is_sort_column_correct = true;
+                    break;
+                }
             }
-            else if (filter_column == FilterColumnEmployee.Active)
+
+            if (is_sort_column_correct)
             {
-                filter = $"WHERE is_active = '{filter_query}'";
+                if (sort_direction == SortDirection.Ascending)
+                    order_sort = $"ORDER BY {sort_column} ASC";
+                else
+                    order_sort = $"ORDER BY {sort_column} DESC";
+            } else order_sort = $"ORDER BY employees.id ASC";
+
+            if (filter_column == FilterColumnEmployee.Active)
+            {
+                where_filter = "WHERE is_active = @filter_query";
+            }
+            else if (filter_column == FilterColumnEmployee.Role)
+            {
+                where_filter = "WHERE user_roles.name = @filter_query";
+            }
+            else {
+                where_filter = "WHERE 1 = @filter_query";
             }
 
             Database.openConnection();
-            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id {filter} ORDER BY {sort_column} {sort_direction}";
+            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id {where_filter} {order_sort}";
 
-            MySqlDataReader data = Database.dataReader(query);
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@filter_query", filter_query);
+
+            MySqlDataReader data = command.ExecuteReader();
 
             List<Employee> employees = new List<Employee>();
             while (data.Read())
@@ -88,51 +116,91 @@ namespace medicalclinic_back
             return employees;
         }
 
-        public bool validatePesel()//zakladam ze przy dodawaniu pracownika robimy obiekt employee. Inaczej trzebaby zmienic metode na static i dac jej argumenty(pesel, data ur,plec)
+        public static void insertNewEmployee(string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth, string address_id = null) 
+        {
+            Database.openConnection();
+            string query = "INSERT INTO employees (first_name, second_name, pesel, sex, phone_number, email, date_of_birth, id_address) VALUES (@first_name, @second_name, @pesel, @sex, @phone_number, @email, @date_of_birth, @address_value)";
+
+
+            MySqlCommand command = Database.command(query);
+
+            if (address_id != null)
+            {
+                command.Parameters.AddWithValue("@address_value", address_id);
+            }
+            else {
+                command.Parameters.AddWithValue("@address_value", DBNull.Value);
+            }
+
+            command.Parameters.AddWithValue("@first_name", first_name);
+            command.Parameters.AddWithValue("@second_name", second_name);
+            command.Parameters.AddWithValue("@pesel", pesel);
+            command.Parameters.AddWithValue("@sex", sex);
+            command.Parameters.AddWithValue("@phone_number", phone_number);
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@date_of_birth", date_of_birth);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
+        public static bool validatePesel(string pesel, DateTime birth, string sex)
         {
             string dayOfBirth, monthOfBirth;
-            int yearOfBirth;
             char gender;
             bool result = false;
 
             int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
 
-            gender = this.sex;
-
-
-            List<string> peselDigits = new List<string>(); //lista do przechowywania wszystkich cyfr podanego nr pesel
-            foreach(char digit in this.pesel.ToCharArray())
+            if(sex=="true")
             {
-                peselDigits.Add(digit.ToString());
-            }
-
-            yearOfBirth = this.date_of_birth.Year; // przypisywanie prawdziwego roku urodzin (wybranego z kalendarza)
-            if (this.date_of_birth.Day < 10) //przypisywanie prawdziwego dnia urodzin (wybranego z kalendarza) - taki jaki powinien byc w dobrym peselu
-            {
-                dayOfBirth = "0" + this.date_of_birth.Day.ToString();
+                gender = 'M';
             }
             else
             {
-                dayOfBirth = this.date_of_birth.Day.ToString();
+                gender = 'K';
             }
+            
 
-            if(this.date_of_birth.Month < 10) // przypisywanie prawdziwego miesiaca urodzin (wybranego z kalendarza)
+
+            List<int> peselDigits = new List<int>(); //lista do przechowywania wszystkich cyfr podanego nr pesel
+            foreach (char digit in pesel)
             {
-                monthOfBirth = "0" + this.date_of_birth.Month.ToString();
+                if (char.IsDigit(digit))
+                {
+                    peselDigits.Add(Convert.ToInt32(digit.ToString()));
+                }
+                else
+                {
+                    return result;
+                }
             }
-            else
-            {
-                monthOfBirth = this.date_of_birth.Month.ToString();
-            }
-
-
-            string thirdAndFourthDigit;
 
             if (peselDigits.Count == 11)
             {
-                if (yearOfBirth >= 2000) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
+                if (birth.Day < 10) //przypisywanie prawdziwego dnia urodzin (wybranego z kalendarza) - taki jaki powinien byc w dobrym peselu
                 {
-                    if (this.date_of_birth.Month >=10)
+                    dayOfBirth = "0" + birth.Day.ToString();
+                }
+                else
+                {
+                    dayOfBirth = birth.Day.ToString();
+                }
+
+                if (birth.Month < 10) // przypisywanie prawdziwego miesiaca urodzin (wybranego z kalendarza)
+                {
+                    monthOfBirth = "0" + birth.Month.ToString();
+                }
+                else
+                {
+                    monthOfBirth = birth.Month.ToString();
+                }
+
+                string thirdAndFourthDigit;
+
+                if (birth.Year >= 2000) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
+                {
+                    if (birth.Month >= 10)
                     {
                         thirdAndFourthDigit = "3" + monthOfBirth[1];
                     }
@@ -147,39 +215,70 @@ namespace medicalclinic_back
                     thirdAndFourthDigit = monthOfBirth;
                 }
 
-                char[] yearAsCharArray = yearOfBirth.ToString().ToCharArray();
-                string firstTwoDigits = yearAsCharArray[2].ToString() + yearAsCharArray[3].ToString(); //pierwsze dwie cyfry, ktore powinny byc w prawidlowym peselu
+                string yearAsString = birth.Year.ToString();
+                string firstTwoDigits = yearAsString[2].ToString() + yearAsString[3].ToString(); //pierwsze dwie cyfry, ktore powinny byc w prawidlowym peselu
 
-                string year = peselDigits[0] +  peselDigits[1]; //rok ktory wynika z podanego peselu
-                string month = peselDigits[2] + peselDigits[3]; // miesiac ktory wynika z podanego peselu
-                string day = peselDigits[4] + peselDigits[5]; // dzien urodzenia ktory wynika z podanego peselu
+                string year = peselDigits[0].ToString() + peselDigits[1].ToString(); //rok ktory wynika z podanego peselu
+                string month = peselDigits[2].ToString() + peselDigits[3].ToString(); // miesiac ktory wynika z podanego peselu
+                string day = peselDigits[4].ToString() + peselDigits[5].ToString(); // dzien urodzenia ktory wynika z podanego peselu
 
-                if (firstTwoDigits == year && thirdAndFourthDigit == month && dayOfBirth == day)//sprawdzenie czy data urodzenia wybrana pokrywa sie z datą wynikającą z nr pesel
+                bool verifyYear = (firstTwoDigits == year);
+                bool verifyMonth = (thirdAndFourthDigit == month);
+                bool verifyDay = (dayOfBirth == day);
+                bool verifyGenderIfMen = (peselDigits[9] % 2 == 1 && gender == 'M');
+                bool verifyGenderIfWomen = (peselDigits[9] % 2 == 0 && gender == 'K');
+
+                if (verifyYear && verifyMonth && verifyDay && (verifyGenderIfMen || verifyGenderIfWomen))
                 {
-                    int tenthDigit = Convert.ToInt32(peselDigits[9]); //pobranie 10 cyfry nr pesel
-                    if (tenthDigit % 2 == 1 && gender == 'M' || tenthDigit % 2 == 0 && gender == 'K')
+                    int checksum = 0;
+                    for (int i = 0; i <= weights.Length - 1; i++) //wyliczanie sumy kontrolnej
                     {
-                        int checksum =0;
-                        for(int i = 0; i<= weights.Length - 1; i++) //wyliczanie sumy kontrolnej
-                        {
-                            checksum += Convert.ToInt32(peselDigits[i]) * weights[i];
-                        }
-                        checksum = checksum % 10;
+                        checksum += peselDigits[i] * weights[i];
+                    }
+                    checksum %= 10;
 
-                        if(checksum != 0)
-                        {
-                            checksum = 10 - checksum;
-                        }
+                    if (checksum != 0)
+                    {
+                        checksum = 10 - checksum;
+                    }
 
-                        if (checksum.ToString() == peselDigits[10]) //sprawdzenie czy wpisana cyfra kontrolna jest rowna wyliczonej przez program
-                        {
-                            result = true;
-                        }
+                    if (checksum.ToString() == peselDigits[10].ToString()) //sprawdzenie czy wpisana cyfra kontrolna jest rowna wyliczonej przez program
+                    {
+                        result = true;
                     }
                 }
+
             }
 
+
             return result;
+        }
+
+        public static bool validateEmail(string email)
+        {
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(email);
+
+            if(!match.Success)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool validatePeselUnique(string pesel)
+        {
+            List<Employee> EmployeesList = getAllEmployees();
+
+            foreach (Employee emp in EmployeesList)
+            {
+                if(emp.Pesel==pesel)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

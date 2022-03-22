@@ -14,7 +14,7 @@ namespace medicalclinic
                 employeesGridRefresh();
         }
 
-        private void employeesGridRefresh(string sort_column = "employees.id", string sort_direction = "DESC", FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = null)
+        private void employeesGridRefresh(string sort_column = "employees.id", SortDirection sort_direction = SortDirection.Ascending, FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = "1")
         {
             List<Employee> employees = Employee.getAllEmployees(sort_column, sort_direction, filter_column, filter_query);
             fillDropDownListsWithValues();
@@ -51,12 +51,12 @@ namespace medicalclinic
             employeesGridRefresh();
         }
 
-        protected string GetSortDirection(string column)
+        protected SortDirection GetSortDirection(string column)
         {
-            string nextDir = "ASC";
+            SortDirection nextDir = SortDirection.Ascending;
             if (ViewState["sort"] != null && ViewState["sort"].ToString() == column)
             {
-                nextDir = "DESC";
+                nextDir = SortDirection.Descending;
                 ViewState["sort"] = null;
             }
             else
@@ -68,216 +68,74 @@ namespace medicalclinic
 
         protected void EmployeesGridView_Sorting(object sender, GridViewSortEventArgs e)
         {
-            string sort_column, sort_direction;
-            string dir = GetSortDirection(e.SortExpression);
+            string sort_column;
+            SortDirection sort_direction = GetSortDirection(e.SortExpression);
             switch (e.SortExpression)
             {
                 case "Id":
                     sort_column = "employees.id";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "First_name":
                     sort_column = "first_name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Second_name":
                     sort_column = "second_name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Pesel":
                     sort_column = "pesel";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Sex":
                     sort_column = "sex";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Phone_number":
                     sort_column = "phone_number";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Date_of_birth":
                     sort_column = "date_of_birth";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Email":
                     sort_column = "email";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Is_active":
                     sort_column = "is_active";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "User_department.Name":
                     sort_column = "departments.name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Medical_specialization.Name":
                     sort_column = "medical_specializations.name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "User_role.Name":
                     sort_column = "user_roles.name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Address.Country":
                     sort_column = "country";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Address.State":
                     sort_column = "state";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Address.City":
                     sort_column = "city";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Address.Postal_code":
                     sort_column = "postal_code";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Address.Street":
                     sort_column = "street";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 case "Address.Number":
                     sort_column = "number";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
                     break;
                 default:
-                    {
-                        sort_column = "employees.id";
-                        sort_direction = "DESC";
-                    }
+                    sort_column = "employees.id";
                     break;
             }
             employeesGridRefresh(sort_column, sort_direction);
+        }
+
+        protected void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddEmployee.aspx");
         }
 
 

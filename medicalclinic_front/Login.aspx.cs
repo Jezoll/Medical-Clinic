@@ -18,7 +18,7 @@ namespace medicalclinic
             try
             {
                 Database.openConnection();
-                MySqlCommand command = Database.executeQuery("SELECT * FROM user_credentials where login = @username AND password = @password");
+                MySqlCommand command = Database.command("SELECT * FROM user_credentials where login = @username AND password = @password");
 
                 command.Parameters.AddWithValue("@username", TextBox1.Text);
                 command.Parameters.AddWithValue("@password", TextBox2.Text);
