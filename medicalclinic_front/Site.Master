@@ -1,5 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="medicalclinic.SiteMaster" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -12,10 +15,10 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" runat="server" />
-    <link href="~/Content/bootstrap/bootstrap-theme.min.css" rel="stylesheet" runat="server" />
-    <link href="~/Content/Default.css" rel="stylesheet" runat="server" />
-    <link href="~/Content/Employee.css" rel="stylesheet" runat="server" />
+    <link href="~/Content/bootstrap/bootstrap.css" type="text/css" rel="stylesheet" runat="server" />
+    <link href="~/Content/bootstrap/bootstrap-theme.css" type="text/css" rel="stylesheet" runat="server" />
+    <link href="~/Content/Default.css" type="text/css" rel="stylesheet" runat="server" />
+    <link href="~/Content/Employee.css" type="text/css" rel="stylesheet" runat="server" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -40,7 +43,6 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">

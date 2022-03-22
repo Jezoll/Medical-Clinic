@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 
 namespace medicalclinic_back
 {
@@ -55,22 +56,48 @@ namespace medicalclinic_back
             this.user_department = department;
         }
 
-        public static List<Employee> getAllEmployees(string sort_column = "employees.id", string sort_direction = "DESC", FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = null)
+        public static List<Employee> getAllEmployees(string sort_column = "employees.id", SortDirection sort_direction = SortDirection.Ascending, FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = "1")
         {
-            string filter = "";
-            if (filter_column == FilterColumnEmployee.Role)
+            bool is_sort_column_correct = false;
+            string where_filter;
+            string order_sort;
+
+            foreach (DatabaseColumnName column in (DatabaseColumnName[]) Enum.GetValues(typeof(DatabaseColumnName)))
             {
-                filter = $"WHERE user_roles.name = '{filter_query}'";
+                if (sort_column == column.ToString().ToLower()) {
+                    is_sort_column_correct = true;
+                    break;
+                }
             }
-            else if (filter_column == FilterColumnEmployee.Active)
+
+            if (is_sort_column_correct)
             {
-                filter = $"WHERE is_active = '{filter_query}'";
+                if (sort_direction == SortDirection.Ascending)
+                    order_sort = $"ORDER BY {sort_column} ASC";
+                else
+                    order_sort = $"ORDER BY {sort_column} DESC";
+            } else order_sort = $"ORDER BY employees.id ASC";
+
+            if (filter_column == FilterColumnEmployee.Active)
+            {
+                where_filter = "WHERE is_active = @filter_query";
+            }
+            else if (filter_column == FilterColumnEmployee.Role)
+            {
+                where_filter = "WHERE user_roles.name = @filter_query";
+            }
+            else {
+                where_filter = "WHERE 1 = @filter_query";
             }
 
             Database.openConnection();
-            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id {filter} ORDER BY {sort_column} {sort_direction}";
+            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id {where_filter} {order_sort}";
 
-            MySqlDataReader data = Database.dataReader(query);
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@filter_query", filter_query);
+
+            MySqlDataReader data = command.ExecuteReader();
 
             List<Employee> employees = new List<Employee>();
             while (data.Read())
@@ -105,7 +132,6 @@ namespace medicalclinic_back
                 command.Parameters.AddWithValue("@address_value", DBNull.Value);
             }
 
-
             command.Parameters.AddWithValue("@first_name", first_name);
             command.Parameters.AddWithValue("@second_name", second_name);
             command.Parameters.AddWithValue("@pesel", pesel);
@@ -113,7 +139,6 @@ namespace medicalclinic_back
             command.Parameters.AddWithValue("@phone_number", phone_number);
             command.Parameters.AddWithValue("@email", email);
             command.Parameters.AddWithValue("@date_of_birth", date_of_birth);
-
 
             command.ExecuteNonQuery();
             Database.closeConnection();

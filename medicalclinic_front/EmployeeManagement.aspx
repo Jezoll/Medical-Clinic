@@ -2,8 +2,8 @@
 
 <asp:Content ID="EmployeeManagementContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="table-container">
+        <asp:Button ID="ButtonAdd" CssClass="btn btn-default btn-employee-add" runat="server" OnClick="ButtonAdd_Click" Text="Add New Employee" />
         <div class="table-content">
-            <asp:Button ID="ButtonAdd" runat="server" OnClick="ButtonAdd_Click" Text="Add New Employee" />
         <asp:GridView
             ID="EmployeesGridView"
             runat="server"
@@ -34,19 +34,20 @@
             </Columns>
         </asp:GridView>
         </div>
-        <div class="container">
-            <div class="row align-items-start">
-                <asp:Label ID="LabelRoles" runat="server" Text="Roles"></asp:Label>
+        <div class="filters-container ">
+            <div class="filters-container__element">
+                <asp:Label ID="LabelRoles" CssClass="filter-label-employee" runat="server" Text="Roles"></asp:Label>
                 <asp:DropDownList ID="DropDownListRoles" runat="server"></asp:DropDownList>
-                <asp:Button ID="ButtonFilterRoles" runat="server" OnClick="ButtonFilterRoles_Click" Text="Filter" class="btn btn-secondary"/>
+                <asp:Button ID="ButtonFilterRoles" runat="server" OnClick="ButtonFilterRoles_Click" Text="Filter" CssClass="btn btn-default btn-filter-employee"/>
             </div>
-            <div class="row align-items-start">
-                <asp:Label ID="LabelIsActive" runat="server" Text="Is active?"></asp:Label>
-                <asp:CheckBox ID="CheckBoxIsActive" runat="server" />
-                <asp:Button ID="ButtonFilterActive" runat="server" OnClick="ButtonFilterActive_Click" Text="Filter" class="btn btn-secondary" />
+            <div class="filters-container__element">
+                <asp:Label ID="LabelIsActive" CssClass="filter-label-employee" runat="server" Text="Is active?"></asp:Label>
+                <asp:CheckBox ID="CheckBoxIsActive" CssClass="filter-checkbox-employee" runat="server" />
+                <asp:Button ID="ButtonFilterActive" runat="server" OnClick="ButtonFilterActive_Click" Text="Filter" CssClass="btn btn-default btn-filter-employee" />
             </div>
-            <div class="row align-items-start">
-                <asp:Button ID="ButtonFilterClear" runat="server" OnClick="ButtonFilterClear_Click" Text="Clear filters" class="btn btn-secondary" />
+            <div class="filters-container__element">
+                <asp:Button ID="ButtonFilterClear" runat="server" OnClick="ButtonFilterClear_Click" Text="Clear filters" CssClass="btn btn-default btn-filter-employee" />
             </div>
         </div>
+    </div>
 </asp:Content>

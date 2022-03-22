@@ -13,25 +13,22 @@ namespace medicalclinic
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        private string date_tmp;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 ComboboxRoleFill();
                 ComboboxSpecializationFill();
-                ComboboxYearsFill();
                 CalendarBirthDate.SelectedDate = DateTime.Today;
             }
-           
+            else
+            {
+                CalendarBirthDate.SelectedDate = DateTime.ParseExact(CalendarTextBox.Text, CalendarBirthDate.Format, null);
+            }
+            CalendarTextBox.Attributes.Add("readonly", "readonly");
         }
 
-        private void ComboboxYearsFill()
-        {
-            for (int i = DateTime.Today.Year; i >= 1900 ; i--)
-            {
-                DropDownListYears.Items.Add(i.ToString());
-            }
-        }
         private void ComboboxRoleFill()
         {
             List<UserRole> data = UserRole.getAllRoles();
@@ -85,8 +82,9 @@ namespace medicalclinic
 
         protected void ButtonNext_Click(object sender, EventArgs e)
         {
-            if (!Employee.validatePesel(TextBoxPESEL.Text, CalendarBirthDate.SelectedDate, DropDownListSex.SelectedValue))
+            if (!Employee.validatePesel(TextBoxPESEL.Text, (DateTime)CalendarBirthDate.SelectedDate, DropDownListSex.SelectedValue))
             {
+                Debug.WriteLine(CalendarBirthDate.SelectedDate.ToString());
                 AlertBox("incorrect pesel number");
                 return;
             }
@@ -116,7 +114,7 @@ namespace medicalclinic
 
             string address_id = Address.insertNewAddress(TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
 
-            Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, "m", TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarBirthDate.SelectedDate.ToString("yyyy-MM-dd"), address_id);
+            Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, "m", TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
 
 
             if (TextBoxEmail.Text.Length > 0)
@@ -150,12 +148,6 @@ namespace medicalclinic
         private void AlertBox(string AlertMessage)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + AlertMessage + "');", true);
-        }
-
-        protected void DropDownListYears_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CalendarBirthDate.SelectedDate = new DateTime(int.Parse(DropDownListYears.SelectedValue), 1, 1);
-            CalendarBirthDate.VisibleDate = CalendarBirthDate.SelectedDate;
         }
     }
 }
