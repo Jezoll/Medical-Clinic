@@ -20,8 +20,8 @@
         <asp:TextBox ID="TextBoxEmail" placeholder="Email" runat="server"></asp:TextBox><br />
         <asp:TextBox ID="TextBoxPhoneNumber" placeholder="Phone Number" runat="server" MaxLength="9"></asp:TextBox><br />
         <asp:DropDownList ID="DropDownListSex" runat="server">
-            <asp:ListItem Value="false">Female</asp:ListItem>
-            <asp:ListItem Value="true">Male</asp:ListItem>
+            <asp:ListItem>Female</asp:ListItem>
+            <asp:ListItem>Male</asp:ListItem>
         </asp:DropDownList><br />
         <asp:Button ID="ButtonNext" runat="server" Text="Next" Enabled="False" OnClick="ButtonNext_Click" />
         <asp:Button ID="ButtonCancel" runat="server" Text="Cancel" OnClick="ButtonCancel_Click" />

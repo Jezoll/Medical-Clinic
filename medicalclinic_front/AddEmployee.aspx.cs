@@ -114,7 +114,12 @@ namespace medicalclinic
 
             string address_id = Address.insertNewAddress(TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
 
-            Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, "m", TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
+            string sexLongName = DropDownListSex.SelectedValue.ToString();
+            string sex = "m";
+
+            if (sexLongName == "Female") sex = "k";
+
+            Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
 
 
             if (TextBoxEmail.Text.Length > 0)

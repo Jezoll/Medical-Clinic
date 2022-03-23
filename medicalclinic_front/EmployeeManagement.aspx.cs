@@ -137,5 +137,11 @@ namespace medicalclinic
         {
             Response.Redirect("AddEmployee.aspx");
         }
+
+        //protected void editEmployee(object sender, EventAgrs e)
+        //{
+
+        //}
+
     }
 }

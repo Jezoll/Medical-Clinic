@@ -11,8 +11,7 @@
             DataKeyNames="Id"
             AllowSorting="true"
             OnSorting="EmployeesGridView_Sorting"
-            CssClass="table table-hover table-condensed"
-            >
+            CssClass="table table-hover table-condensed"            >
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
                 <asp:BoundField DataField="First_name" HeaderText="First name" SortExpression="First_name" />
@@ -31,11 +30,8 @@
                 <asp:BoundField DataField="Address.City" HeaderText="City" SortExpression="Address.City"/>
                 <asp:BoundField DataField="Address.Postal_code" HeaderText="Postal code" SortExpression="Address.Postal_code"/>
                 <asp:BoundField DataField="Address.Street" HeaderText="Street" SortExpression="Address.Street"/>
-                <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="Address.Number"/>
+                <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="Address.Number"/> 
             </Columns>
-            <EditRowStyle CssClass="employee-table__row" />
-            <HeaderStyle CssClass="table-employee__header" />
-            <RowStyle CssClass="table-employee__row" />
         </asp:GridView>
         </div>
         <div class="filters-container ">
