@@ -11,12 +11,15 @@
         </asp:DropDownList>
         <asp:DropDownList ID="DropDownListSpecialization" runat="server" Visible="False">
         </asp:DropDownList><br />
-        <asp:TextBox ID="TextBoxCountry" placeholder="Country" runat="server"></asp:TextBox><br />
-        <asp:TextBox ID="TextBoxState" placeholder="State" runat="server"></asp:TextBox><br />
-        <asp:TextBox ID="TextBoxCity" placeholder="City" runat="server"></asp:TextBox><br />
+        
+        <asp:Panel ID="Panel1" runat="server">
+            <asp:TextBox ID="TextBoxCountry" placeholder="Country" runat="server"></asp:TextBox><br />
+            <asp:TextBox ID="TextBoxState" placeholder="State" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxCity" placeholder="City" runat="server"></asp:TextBox><br />
         <asp:TextBox ID="TextBoxPostalCode" placeholder="Postal Code" runat="server"></asp:TextBox><br />
         <asp:TextBox ID="TextBoxStreet" placeholder="Street" runat="server"></asp:TextBox><br />
         <asp:TextBox ID="TextBoxHouseNumber" placeholder="House Number" runat="server"></asp:TextBox><br />
+        </asp:Panel>     
         <asp:TextBox ID="TextBoxEmail" placeholder="Email" runat="server"></asp:TextBox><br />
         <asp:TextBox ID="TextBoxPhoneNumber" placeholder="Phone Number" runat="server" MaxLength="9"></asp:TextBox><br />
         <asp:DropDownList ID="DropDownListSex" runat="server">

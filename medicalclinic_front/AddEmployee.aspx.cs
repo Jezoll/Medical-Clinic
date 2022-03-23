@@ -95,6 +95,12 @@ namespace medicalclinic
                 return;
             }
 
+            if(!AdressCheck())
+            {
+                AlertBox("To add an address, all address fields must be completed");
+                    return;
+            }
+
             if(TextBoxEmail.Text.Length>0)
             {
                 if(!Employee.validateEmail(TextBoxEmail.Text))
@@ -148,6 +154,38 @@ namespace medicalclinic
         private void AlertBox(string AlertMessage)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + AlertMessage + "');", true);
+        }
+
+        private bool AdressCheck()
+        {
+            int notemptytextboxes = 0;
+            int textboxescount = 0;
+            TextBox currenttextbox;
+            foreach (Control tbox in Panel1.Controls)
+            {
+
+                if (tbox is TextBox)
+                {
+                    textboxescount++;
+                    currenttextbox = (TextBox)tbox;
+                }
+                else
+                {
+                    continue;
+                }
+
+                if (currenttextbox.Text.Length > 0)
+                {
+                    notemptytextboxes++;
+                }
+            }
+
+            if (notemptytextboxes > 0 && notemptytextboxes < textboxescount)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
