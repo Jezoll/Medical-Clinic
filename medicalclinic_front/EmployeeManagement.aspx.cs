@@ -137,7 +137,5 @@ namespace medicalclinic
         {
             Response.Redirect("AddEmployee.aspx");
         }
-
-
     }
 }

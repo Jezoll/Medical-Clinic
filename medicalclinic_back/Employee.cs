@@ -91,7 +91,7 @@ namespace medicalclinic_back
             }
 
             Database.openConnection();
-            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id {where_filter} {order_sort}";
+            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees LEFT JOIN medical_specializations ON employees.id_specialization = medical_specializations.id LEFT JOIN user_addresses ON employees.id_address = user_addresses.id LEFT JOIN user_roles ON employees.id_role = user_roles.id LEFT JOIN departments ON employees.id_department = departments.id {where_filter} {order_sort}";
 
             MySqlCommand command = Database.command(query);
 
@@ -102,10 +102,26 @@ namespace medicalclinic_back
             List<Employee> employees = new List<Employee>();
             while (data.Read())
             {
-                MedicalSpecialization specialization = new MedicalSpecialization(data.GetInt32(9), data.GetString(10));
-                Address address = new Address(data.GetInt32(11), data.GetString(12), data.GetString(13), data.GetString(14), data.GetString(15), data.GetString(16), data.GetString(17));
-                UserRole role = new UserRole(data.GetInt32(18), data.GetString(19));
-                UserDepartment department = new UserDepartment(data.GetInt32(20), data.GetString(21));
+                MedicalSpecialization specialization;
+                Address address;
+                UserRole role;
+                UserDepartment department;
+                if (data.GetValue(9) == DBNull.Value)
+                    specialization = new MedicalSpecialization(-1, string.Empty);
+                else
+                    specialization = new MedicalSpecialization(data.GetInt32(9), data.GetString(10));
+                if (data.GetValue(11) == DBNull.Value)
+                    address = new Address(-1, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+                else
+                    address = new Address(data.GetInt32(11), data.GetString(12), data.GetString(13), data.GetString(14), data.GetString(15), data.GetString(16), data.GetString(17));
+                if (data.GetValue(18) == DBNull.Value)
+                    role = new UserRole(-1, string.Empty);
+                else 
+                    role = new UserRole(data.GetInt32(18), data.GetString(19));
+                if (data.GetValue(20) == DBNull.Value)
+                    department = new UserDepartment(-1, string.Empty);
+                else
+                    department = new UserDepartment(data.GetInt32(20), data.GetString(21));
 
                 Employee employee = new Employee(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), data.GetChar(4), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetBoolean(8), specialization, address, role, department);
 

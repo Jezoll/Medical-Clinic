@@ -7,9 +7,10 @@
 }
 
 .table-content {
-    overflow-x: scroll;
+    overflow: scroll;
     margin-bottom: 10px;
     margin-top: 10px;
+    height: 400px
 }
 
 .btn-employee-add {
