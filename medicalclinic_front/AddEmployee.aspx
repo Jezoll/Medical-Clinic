@@ -12,7 +12,7 @@
         <asp:DropDownList ID="DropDownListSpecialization" runat="server" Visible="False">
         </asp:DropDownList><br />
         
-        <asp:Panel ID="Panel1" runat="server">
+        <asp:Panel ID="AddressPanel" runat="server">
             <asp:TextBox ID="TextBoxCountry" placeholder="Country" runat="server"></asp:TextBox><br />
             <asp:TextBox ID="TextBoxState" placeholder="State" runat="server"></asp:TextBox>
             <asp:TextBox ID="TextBoxCity" placeholder="City" runat="server"></asp:TextBox><br />

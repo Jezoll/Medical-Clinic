@@ -1,6 +1,7 @@
 ﻿using medicalclinic_back;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Web.UI.WebControls;
 
@@ -138,10 +139,10 @@ namespace medicalclinic
             Response.Redirect("AddEmployee.aspx");
         }
 
-        //protected void editEmployee(object sender, EventAgrs e)
-        //{
-
-        //}
-
+        protected void EmployeeCode_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = sender as LinkButton;
+            Debug.WriteLine(lnk.CommandArgument);
+        }
     }
 }

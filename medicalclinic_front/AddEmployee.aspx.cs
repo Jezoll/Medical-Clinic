@@ -13,7 +13,6 @@ namespace medicalclinic
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private string date_tmp;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -123,7 +122,10 @@ namespace medicalclinic
             string sexLongName = DropDownListSex.SelectedValue.ToString();
             string sex = "m";
 
-            if (sexLongName == "Female") sex = "k";
+            if (sexLongName == "Female")
+            {
+                sex = "k";
+            }
 
             Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
 
@@ -166,7 +168,7 @@ namespace medicalclinic
             int notemptytextboxes = 0;
             int textboxescount = 0;
             TextBox currenttextbox;
-            foreach (Control tbox in Panel1.Controls)
+            foreach (Control tbox in AddressPanel.Controls)
             {
 
                 if (tbox is TextBox)

@@ -11,7 +11,8 @@
             DataKeyNames="Id"
             AllowSorting="true"
             OnSorting="EmployeesGridView_Sorting"
-            CssClass="table table-hover table-condensed"            >
+            CssClass="table table-hover table-condensed"
+            >
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
                 <asp:BoundField DataField="First_name" HeaderText="First name" SortExpression="First_name" />
@@ -30,7 +31,14 @@
                 <asp:BoundField DataField="Address.City" HeaderText="City" SortExpression="Address.City"/>
                 <asp:BoundField DataField="Address.Postal_code" HeaderText="Postal code" SortExpression="Address.Postal_code"/>
                 <asp:BoundField DataField="Address.Street" HeaderText="Street" SortExpression="Address.Street"/>
-                <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="Address.Number"/> 
+                <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="Address.Number"/>
+                <asp:TemplateField HeaderText="Actions">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="EmployeeCode" OnClick="EmployeeCode_Click" runat="server" Text='Review employee'
+                        CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+                     </ItemTemplate>
+               </asp:TemplateField>
             </Columns>
         </asp:GridView>
         </div>
