@@ -139,10 +139,16 @@ namespace medicalclinic
             Response.Redirect("AddEmployee.aspx");
         }
 
-        protected void EmployeeCode_Click(object sender, EventArgs e)
+        protected void EmployeeReviewButton_Click(object sender, EventArgs e)
         {
             LinkButton lnk = sender as LinkButton;
-            Debug.WriteLine(lnk.CommandArgument);
+            Response.Redirect("EmployeeReview.aspx?id =" + lnk.CommandArgument);
+        }
+
+        protected void EmployeeEditButton_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = sender as LinkButton;
+            Response.Redirect("EmployeeEdit.aspx?id =" + lnk.CommandArgument);
         }
     }
 }

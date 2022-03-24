@@ -11,8 +11,35 @@ namespace medicalclinic
 {
 
 
-    public partial class WebForm1
+    public partial class WebForm5
     {
+
+        /// <summary>
+        /// Kontrolka IdLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label IdLabel;
+
+        /// <summary>
+        /// Kontrolka TextBoxID.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxID;
+
+        /// <summary>
+        /// Kontrolka NameLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NameLabel;
 
         /// <summary>
         /// Kontrolka TextBoxName.
@@ -24,6 +51,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxName;
 
         /// <summary>
+        /// Kontrolka SurnameLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SurnameLabel;
+
+        /// <summary>
         /// Kontrolka TextBoxSurname.
         /// </summary>
         /// <remarks>
@@ -33,6 +69,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxSurname;
 
         /// <summary>
+        /// Kontrolka PESELLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PESELLabel;
+
+        /// <summary>
         /// Kontrolka TextBoxPESEL.
         /// </summary>
         /// <remarks>
@@ -40,6 +85,15 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxPESEL;
+
+        /// <summary>
+        /// Kontrolka DateOfBirthLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DateOfBirthLabel;
 
         /// <summary>
         /// Kontrolka CalendarTextBox.
@@ -60,6 +114,15 @@ namespace medicalclinic
         protected global::AjaxControlToolkit.CalendarExtender CalendarBirthDate;
 
         /// <summary>
+        /// Kontrolka RoleLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label RoleLabel;
+
+        /// <summary>
         /// Kontrolka DropDownListRole.
         /// </summary>
         /// <remarks>
@@ -67,6 +130,15 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListRole;
+
+        /// <summary>
+        /// Kontrolka SpecializationLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SpecializationLabel;
 
         /// <summary>
         /// Kontrolka DropDownListSpecialization.
@@ -87,6 +159,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Panel AddressPanel;
 
         /// <summary>
+        /// Kontrolka CountryLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CountryLabel;
+
+        /// <summary>
         /// Kontrolka TextBoxCountry.
         /// </summary>
         /// <remarks>
@@ -94,6 +175,15 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxCountry;
+
+        /// <summary>
+        /// Kontrolka StateLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StateLabel;
 
         /// <summary>
         /// Kontrolka TextBoxState.
@@ -105,6 +195,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxState;
 
         /// <summary>
+        /// Kontrolka CityLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CityLabel;
+
+        /// <summary>
         /// Kontrolka TextBoxCity.
         /// </summary>
         /// <remarks>
@@ -112,6 +211,15 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxCity;
+
+        /// <summary>
+        /// Kontrolka PostalCodeLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PostalCodeLabel;
 
         /// <summary>
         /// Kontrolka TextBoxPostalCode.
@@ -123,6 +231,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxPostalCode;
 
         /// <summary>
+        /// Kontrolka StreetLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StreetLabel;
+
+        /// <summary>
         /// Kontrolka TextBoxStreet.
         /// </summary>
         /// <remarks>
@@ -130,6 +247,15 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxStreet;
+
+        /// <summary>
+        /// Kontrolka HouseNumerLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label HouseNumerLabel;
 
         /// <summary>
         /// Kontrolka TextBoxHouseNumber.
@@ -141,6 +267,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxHouseNumber;
 
         /// <summary>
+        /// Kontrolka EmailLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EmailLabel;
+
+        /// <summary>
         /// Kontrolka TextBoxEmail.
         /// </summary>
         /// <remarks>
@@ -148,6 +283,15 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxEmail;
+
+        /// <summary>
+        /// Kontrolka PhoneNumberLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PhoneNumberLabel;
 
         /// <summary>
         /// Kontrolka TextBoxPhoneNumber.
@@ -159,6 +303,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxPhoneNumber;
 
         /// <summary>
+        /// Kontrolka SexLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SexLabel;
+
+        /// <summary>
         /// Kontrolka DropDownListSex.
         /// </summary>
         /// <remarks>
@@ -168,13 +321,31 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.DropDownList DropDownListSex;
 
         /// <summary>
-        /// Kontrolka ButtonNext.
+        /// Kontrolka IsActiveStatusLabel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonNext;
+        protected global::System.Web.UI.WebControls.Label IsActiveStatusLabel;
+
+        /// <summary>
+        /// Kontrolka TextBoxIsAcitve.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxIsAcitve;
+
+        /// <summary>
+        /// Kontrolka ButtonConfirm.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonConfirm;
 
         /// <summary>
         /// Kontrolka ButtonCancel.

@@ -83,7 +83,6 @@ namespace medicalclinic
         {
             if (!Employee.validatePesel(TextBoxPESEL.Text, (DateTime)CalendarBirthDate.SelectedDate, DropDownListSex.SelectedValue))
             {
-                Debug.WriteLine(CalendarBirthDate.SelectedDate.ToString());
                 AlertBox("incorrect pesel number");
                 return;
             }

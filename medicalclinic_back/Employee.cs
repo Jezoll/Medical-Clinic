@@ -168,7 +168,7 @@ namespace medicalclinic_back
 
             int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
 
-            if(sex=="true")
+            if(sex=="Male")
             {
                 gender = 'M';
             }

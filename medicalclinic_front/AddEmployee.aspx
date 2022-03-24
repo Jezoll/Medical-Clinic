@@ -14,7 +14,7 @@
         
         <asp:Panel ID="AddressPanel" runat="server">
             <asp:TextBox ID="TextBoxCountry" placeholder="Country" runat="server"></asp:TextBox><br />
-            <asp:TextBox ID="TextBoxState" placeholder="State" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxState" placeholder="State" runat="server"></asp:TextBox><br />
             <asp:TextBox ID="TextBoxCity" placeholder="City" runat="server"></asp:TextBox><br />
         <asp:TextBox ID="TextBoxPostalCode" placeholder="Postal Code" runat="server"></asp:TextBox><br />
         <asp:TextBox ID="TextBoxStreet" placeholder="Street" runat="server"></asp:TextBox><br />
