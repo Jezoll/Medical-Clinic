@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using medicalclinic_back;
 
 namespace medicalclinic
 {
@@ -13,7 +14,12 @@ namespace medicalclinic
         protected void LogOut_Click(object sender, EventArgs e)
         {
             Session.RemoveAll();
+            LoginUser.logOut();
             Response.Redirect("Login.aspx");
+            
+            
+
+            
         }
     }
 }
