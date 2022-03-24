@@ -33,15 +33,20 @@
                 <asp:BoundField DataField="Address.Postal_code" HeaderText="Postal code" SortExpression="user_adresses.postal_code"/>
                 <asp:BoundField DataField="Address.Street" HeaderText="Street" SortExpression="user_adresses.street"/>
                 <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="user_adresses.number"/>
-                <asp:TemplateField HeaderText="Actions">
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="EmployeeReviewButton" OnClick="EmployeeReviewButton_Click" runat="server" Text='Review employee'
+                        CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+                     </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
                     <ItemTemplate>
                         <asp:LinkButton ID="EmployeeEditButton" OnClick="EmployeeEditButton_Click" runat="server" Text='Edit employee'
                         CommandArgument='<%# Eval("Id") %>'>
                         </asp:LinkButton>
                      </ItemTemplate>
-               </asp:TemplateField>
-
-
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
         </div>

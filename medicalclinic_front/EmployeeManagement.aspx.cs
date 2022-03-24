@@ -20,9 +20,26 @@ namespace medicalclinic
             List<Employee> employees = Employee.getAllEmployees(sort_column, sort_direction, filter_column, filter_query);
             ViewState["SortColumn"] = sort_column;
             ViewState["SortDirection"] = sort_direction;
+            ViewState["FilterQuery"] = filter_query;
+            ViewState["FilterColumn"] = filter_column;
             fillDropDownListsWithValues();
+            setInitialValuesOnFilters();
             EmployeesGridView.DataSource = employees;
             EmployeesGridView.DataBind();
+        }
+
+        private void setInitialValuesOnFilters() {
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Role)
+            {
+                DropDownListRoles.SelectedValue = ViewState["FilterQuery"].ToString();
+            }
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Active)
+            {
+                if (ViewState["FilterQuery"].ToString() == "1")
+                    CheckBoxIsActive.Checked = true;
+                else
+                    CheckBoxIsActive.Checked = false;
+            }
         }
 
         private void fillDropDownListsWithValues()
@@ -93,6 +110,24 @@ namespace medicalclinic
                     }
                 }
             }
+
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Role)
+            {
+                LabelRoles.CssClass += " filters-container__element--active";
+                LabelIsActive.CssClass = "filter-label-employee";
+
+            }
+            else if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Active)
+            {
+                LabelIsActive.CssClass += " filters-container__element--active";
+                LabelRoles.CssClass = "filter-label-employee";
+
+            }
+            else {
+                LabelRoles.CssClass = "filter-label-employee";
+                LabelIsActive.CssClass = "filter-label-employee";
+            }
+
         }
 
         protected void ButtonAdd_Click(object sender, EventArgs e)
