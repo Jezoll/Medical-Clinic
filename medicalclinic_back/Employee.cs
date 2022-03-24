@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
@@ -62,9 +64,11 @@ namespace medicalclinic_back
             string where_filter;
             string order_sort;
 
-            foreach (DatabaseColumnName column in (DatabaseColumnName[]) Enum.GetValues(typeof(DatabaseColumnName)))
+
+            foreach (DatabaseColumnName value in Enum.GetValues(typeof(DatabaseColumnName)))
             {
-                if (sort_column == column.ToString().ToLower()) {
+                string column = DatabaseColumnNameExtenstion.GetDescription(value);
+                if (sort_column == column) {
                     is_sort_column_correct = true;
                     break;
                 }
