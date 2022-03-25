@@ -172,7 +172,7 @@ namespace medicalclinic_back
 
             int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
 
-            if(sex=="Male")
+            if (sex == "Male")
             {
                 gender = 'M';
             }
@@ -180,7 +180,7 @@ namespace medicalclinic_back
             {
                 gender = 'K';
             }
-            
+
 
 
             List<int> peselDigits = new List<int>(); //lista do przechowywania wszystkich cyfr podanego nr pesel
@@ -198,36 +198,33 @@ namespace medicalclinic_back
 
             if (peselDigits.Count == 11)
             {
-                if (birth.Day < 10) //przypisywanie prawdziwego dnia urodzin (wybranego z kalendarza) - taki jaki powinien byc w dobrym peselu
-                {
-                    dayOfBirth = "0" + birth.Day.ToString();
-                }
-                else
-                {
-                    dayOfBirth = birth.Day.ToString();
-                }
-
-                if (birth.Month < 10) // przypisywanie prawdziwego miesiaca urodzin (wybranego z kalendarza)
-                {
-                    monthOfBirth = "0" + birth.Month.ToString();
-                }
-                else
-                {
-                    monthOfBirth = birth.Month.ToString();
-                }
+                dayOfBirth = birth.Day.ToString("00");
+                monthOfBirth = birth.Month.ToString("00");
 
                 string thirdAndFourthDigit;
 
-                if (birth.Year >= 2000) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
+                if (birth.Year >= 2000 && birth.Year < 2400) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
                 {
-                    if (birth.Month >= 10)
+
+                    int digitOfHundreds = (birth.Year - 2000) / 100; //pobiera cyfre setek z roku urodzenia >2000
+                    int toAddToMonth = 0;
+                    switch (digitOfHundreds)
                     {
-                        thirdAndFourthDigit = "3" + monthOfBirth[1];
+                        case 0:
+                            toAddToMonth = 20;
+                            break;
+                        case 1:
+                            toAddToMonth = 40;
+                            break;
+                        case 2:
+                            toAddToMonth = 60;
+                            break;
+                        case 3:
+                            toAddToMonth = 80;
+                            break;
+
                     }
-                    else
-                    {
-                        thirdAndFourthDigit = "2" + monthOfBirth[1];
-                    }
+                    thirdAndFourthDigit = (Convert.ToInt32(monthOfBirth) + toAddToMonth).ToString();
 
                 }
                 else
