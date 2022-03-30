@@ -15,36 +15,22 @@ namespace medicalclinic
         {
             IncorrectDataLabel.Visible = false;
             SendedMail.Visible = false;
-            
+
 
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (email.Text.IndexOf("@") != -1)
+            if (RecoveryPassword.checkCredentials(login.Text, email.Text))
             {
-                if (RecoveryPassword.checkCredentials(login.Text, email.Text))
-                {
-                    SendedMail.Visible=true;
-                    SendedMail.Text = Email.sendEmail("<a href=\"https://localhost:44320/PasswordChange.aspx\">Link do zmiany hasła</a>", "Link do zmiany hasła", email.Text);
-                    
-                }
-                else
-                {
-                    IncorrectDataLabel.Visible = true;
-                    IncorrectDataLabel.Text = "niepoprawne dane";
-                }
+                SendedMail.Text = Email.sendEmail("<a href=\"https://localhost:44320/PasswordChange.aspx\">Link do zmiany hasła</a>", "Link do zmiany hasła", email.Text);
+                Session["change_passw"] = email.Text;
             }
-            else
-            {
-                IncorrectDataLabel.Visible = true;
-                IncorrectDataLabel.Text = "niepoprawny format email";
-
-            }
-
+            SendedMail.Visible = true;
         }
+
     }
-
-
 }
-    
+
+
+

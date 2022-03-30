@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c228015e-7ffe-4356-830c-e2ba417e6ae6": {
+      "ProjectGuid": "c228015e-7ffe-4356-830c-e2ba417e6ae6",
+      "DisplayName": "medicalclinic_back",
+      "ColorIndex": 0
+    },
+    "75056f6c-ab0a-4d08-97f7-abb5cd661b64": {
+      "ProjectGuid": "75056f6c-ab0a-4d08-97f7-abb5cd661b64",
+      "DisplayName": "medicalclinic_front",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

@@ -18,8 +18,8 @@ namespace medicalclinic_back
         public static string wrongData()
         {
             NumOfAttempt--;
-            return "Nieprawidłowy login lub hasło! Pozostało "+NumOfAttempt+" próby.";
-        }      
+            return "Nieprawidłowy login lub hasło! Pozostało " + NumOfAttempt + " próby.";
+        }
         public static bool checkAttempt()
         {
             if (NumOfAttempt == 1)
@@ -42,7 +42,7 @@ namespace medicalclinic_back
             {
                 IsLogged = true;
                 NumOfAttempt = 3;
-                
+
             }
             sdr.Close();
             Database.closeConnection();
@@ -55,7 +55,7 @@ namespace medicalclinic_back
         }
         public static void logOut()
         {
-            IsLogged=false;
+            IsLogged = false;
         }
     }
 }

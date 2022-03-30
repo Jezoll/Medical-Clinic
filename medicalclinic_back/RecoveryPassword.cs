@@ -17,7 +17,21 @@ namespace medicalclinic_back
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@email", email);
             MySqlDataReader reader = cmd.ExecuteReader();
-            if(reader.Read())
+            if (reader.Read())
+            {
+                return true;
+            }
+            Database.closeConnection();
+            reader.Close();
+            return false;
+        }
+        public static bool changePassword(string email, string passw)
+        {
+            Database.openConnection();
+            MySqlCommand cmd = Database.executeQuery("UPDATE user_credentials SET password = @password WHERE login=(SELECT user_credentials.login FROM user_credentials LEFT JOIN employees ON employees.id_credentials = user_credentials.id WHERE employees.email = @email); ");
+            cmd.Parameters.AddWithValue("@password", passw);
+            cmd.Parameters.AddWithValue("@email", email);
+            if (cmd.ExecuteNonQuery() > 0)
             {
                 return true;
             }

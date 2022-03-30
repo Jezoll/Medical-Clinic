@@ -13,12 +13,12 @@ namespace medicalclinic_back
         public static string genToken { get; set; }
         public static string hash { get; set; }
         static SHA256 sha256 = SHA256.Create();
-        public static void generateToken(string token)
+        public void generateToken(string token)
         {
             genToken = token;
             hash = GetHash(sha256, genToken);
-               
- 
+
+
         }
         private static string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
@@ -52,9 +52,9 @@ namespace medicalclinic_back
 
             return comparer.Compare(hashOfInput, hash) == 0;
         }
-        public bool unhashToken()
+        public static bool unhashToken()
         {
-            
+
             if (VerifyHash(sha256, genToken, hash))
             {
                 return true;
@@ -65,6 +65,6 @@ namespace medicalclinic_back
             }
         }
     }
-    
-    }
+
+}
 

@@ -87,7 +87,15 @@ a {
     cursor: pointer;
     transition: background-color .3s;
 }
-
+    .inputs #returnBtn {
+        border: 0;
+        background: royalblue;
+        color: #fff;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color .3s;
+    }
 .inputs #Button1:hover {
     background-color: #2d5ff5;
 }

@@ -25,9 +25,10 @@
             </div>
             <div class="inputs">
                 <asp:TextBox ID="email" runat="server" placeholder="Email"></asp:TextBox>
-                <asp:TextBox ID="new_passw" runat="server" placeholder="Nowe hasło"></asp:TextBox>
-                <asp:TextBox ID="confirm_passw" runat="server" placeholder="Potwierdź nowe hasło"></asp:TextBox>
+                <asp:TextBox ID="new_passw" runat="server" placeholder="Nowe hasło" type="password"></asp:TextBox>
+                <asp:TextBox ID="confirm_passw" runat="server" placeholder="Potwierdź nowe hasło" type="password"></asp:TextBox>
                 <asp:Button ID="Button1" runat="server" Text="Zmień" OnClick="Button1_Click" />
+                <asp:Button ID="returnBtn" runat="server" Text="Anuluj" OnClick="returnBtn_Click"/>
                 <asp:Label ID="IncorrectDataLabel" runat="server" Text="Niepoprawne dane"></asp:Label>
             </div>
         </div>
