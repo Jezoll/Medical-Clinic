@@ -146,5 +146,10 @@ namespace medicalclinic
             LinkButton lnk = sender as LinkButton;
             Response.Redirect("EmployeeEdit.aspx?id =" + lnk.CommandArgument);
         }
+
+        protected void ButtonOffices_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("OfficesManagement.aspx");
+        }
     }
 }

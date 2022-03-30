@@ -142,6 +142,7 @@
     <Content Include="Content\Login.css" />
     <Content Include="Content\Default.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EditOfficeData.aspx" />
     <Content Include="EmployeeManagement.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -160,6 +161,7 @@
     <Content Include="EmployeeEdit.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Login.aspx" />
+    <Content Include="OfficesManagement.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -204,6 +206,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditOfficeData.aspx.cs">
+      <DependentUpon>EditOfficeData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditOfficeData.aspx.designer.cs">
+      <DependentUpon>EditOfficeData.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeManagement.aspx.cs">
       <DependentUpon>EmployeeManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -220,6 +229,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OfficesManagement.aspx.cs">
+      <DependentUpon>OfficesManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OfficesManagement.aspx.designer.cs">
+      <DependentUpon>OfficesManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
