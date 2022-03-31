@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 
 namespace medicalclinic
 {
@@ -48,7 +49,7 @@ namespace medicalclinic
         }
 
         protected void ButtonFilterClear_Click(object sender, EventArgs e)
-        {
+        {          
             employeesGridRefresh();
         }
 
@@ -150,5 +151,6 @@ namespace medicalclinic
             LinkButton lnk = sender as LinkButton;
             Response.Redirect("EmployeeEdit.aspx?id =" + lnk.CommandArgument);
         }
+
     }
 }

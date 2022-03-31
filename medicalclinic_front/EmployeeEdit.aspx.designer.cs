@@ -330,13 +330,13 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label IsActiveStatusLabel;
 
         /// <summary>
-        /// Kontrolka TextBoxIsAcitve.
+        /// Kontrolka CheckBoxIsActive.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxIsAcitve;
+        protected global::System.Web.UI.WebControls.CheckBox CheckBoxIsActive;
 
         /// <summary>
         /// Kontrolka ButtonConfirm.
