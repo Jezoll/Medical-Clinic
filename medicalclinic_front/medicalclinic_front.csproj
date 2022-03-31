@@ -159,6 +159,8 @@
     <Content Include="Content\bootstrap\bootstrap-theme.min.css.map" />
     <Content Include="EmployeeReview.aspx" />
     <Content Include="EmployeeEdit.aspx" />
+    <Content Include="PopupAdminPassword.aspx" />
+    <Content Include="PopupWindowMessage.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Login.aspx" />
     <Content Include="OfficesManagement.aspx" />
@@ -286,6 +288,20 @@
     </Compile>
     <Compile Include="EmployeeEdit.aspx.designer.cs">
       <DependentUpon>EmployeeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupAdminPassword.aspx.cs">
+      <DependentUpon>PopupAdminPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupAdminPassword.aspx.designer.cs">
+      <DependentUpon>PopupAdminPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindowMessage.aspx.cs">
+      <DependentUpon>PopupWindowMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupWindowMessage.aspx.designer.cs">
+      <DependentUpon>PopupWindowMessage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

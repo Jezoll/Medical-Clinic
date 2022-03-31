@@ -76,11 +76,11 @@ namespace medicalclinic
 
                     if (emp.Is_active)
                     {
-                        TextBoxIsAcitve.Text = "Active user";
+                        CheckBoxIsActive.Checked = true;
                     }
                     else
                     {
-                        TextBoxIsAcitve.Text = "Inactive user";
+                        CheckBoxIsActive.Checked = false;
                     }
 
                     break;

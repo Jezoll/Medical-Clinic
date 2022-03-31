@@ -43,8 +43,8 @@
             <asp:ListItem>Female</asp:ListItem>
             <asp:ListItem>Male</asp:ListItem>
         </asp:DropDownList><br />
-    <asp:Label ID="IsActiveStatusLabel" runat="server" Text="Status"></asp:Label>
-        <asp:TextBox ID="TextBoxIsAcitve" placeholder="IsActive" runat="server"  ></asp:TextBox>
+    <asp:Label ID="IsActiveStatusLabel" runat="server" Text="IsActive"></asp:Label>
+        <asp:CheckBox ID="CheckBoxIsActive" runat="server" />
     <br />
         <asp:Button ID="ButtonConfirm" runat="server" Text="Confirm" OnClick="ButtonConfirm_Click"  />
         <asp:Button ID="ButtonCancel" runat="server" Text="Cancel" OnClick="ButtonCancel_Click" />
