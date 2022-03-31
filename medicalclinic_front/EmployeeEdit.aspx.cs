@@ -12,6 +12,7 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CalendarTextBox.Attributes.Add("readonly", "readonly");
             if (!Page.IsPostBack)
             {
                 ComboboxRoleFill();
@@ -65,7 +66,7 @@ namespace medicalclinic
                     TextBoxEmail.Text = emp.Email;
                     TextBoxPhoneNumber.Text = emp.Phone_number;
 
-                    if (emp.Sex == 'k')
+                    if (emp.Sex == SexEnum.F)
                     {
                         DropDownListSex.SelectedIndex = 0;
                     }

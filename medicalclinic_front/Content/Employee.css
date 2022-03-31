@@ -34,11 +34,11 @@
     text-align: center;
 }
 
-.filters-container__element:last-child {
-    border-top: 1px solid black;
-    padding-top: 10px;
-    margin-top: 10px;
-}
+    .filters-container__element:last-child {
+        border-top: 1px solid black;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
 
 .btn-filter-employee {
     margin-left: auto;
@@ -55,3 +55,35 @@
 .filters-container__element--active {
     background-color: palegreen;
 }
+
+.employee-show {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+    .employee-show > input {
+        margin: 3px 0;
+    }
+
+/*    .employee-show > button {
+        margin: 3px 0;
+        width: 50%;
+        align-self: center;
+    }*/
+
+.employee-show__address {
+    display: flex;
+    flex-direction: column;
+}
+
+    .employee-show__address > input {
+        margin: 3px 0;
+    }
+
+/*    .employee-show__address > button {
+        margin: 3px 0;
+        width: 50%;
+        align-self: center;
+    }
+*/

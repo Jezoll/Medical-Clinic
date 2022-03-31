@@ -39,7 +39,7 @@ namespace medicalclinic
                     TextBoxEmail.Text = emp.Email;
                     TextBoxPhoneNumber.Text = emp.Phone_number;
 
-                    if(emp.Sex=='k')
+                    if(emp.Sex == SexEnum.F)
                     {
                         TextBoxSex.Text = "Female";
                     }

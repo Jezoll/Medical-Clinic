@@ -15,7 +15,7 @@ namespace medicalclinic_back
         private string first_name;
         private string second_name;
         private string pesel;
-        private char sex;
+        private SexEnum sex;
         private string phone_number;
         private string email;
         private DateTime date_of_birth;
@@ -30,7 +30,7 @@ namespace medicalclinic_back
         public string First_name { get => first_name; set => first_name = value; }
         public string Second_name { get => second_name; set => second_name = value; }
         public string Pesel { get => pesel; set => pesel = value; }
-        public char Sex { get => sex; set => sex = value; }
+        public SexEnum Sex { get => sex; set => sex = value; }
         public string Phone_number { get => phone_number; set => phone_number = value; }
         public string Email { get => email; set => email = value; }
         public DateTime Date_of_birth { get => date_of_birth; set => date_of_birth = value; }
@@ -41,7 +41,7 @@ namespace medicalclinic_back
         public UserDepartment User_department { get => user_department; set => user_department = value; }
         public UserCredentials User_login { get => user_credentials; set => user_credentials = value; }
 
-        public Employee(int id, string first_name, string second_name, string pesel, char sex, string phone_number, string email, DateTime date_of_birth, bool is_active, MedicalSpecialization specialization, Address address, UserRole role, UserDepartment department)
+        public Employee(int id, string first_name, string second_name, string pesel, SexEnum sex, string phone_number, string email, DateTime date_of_birth, bool is_active, MedicalSpecialization specialization, Address address, UserRole role, UserDepartment department)
         {
             this.id = id;
             this.first_name = first_name;
@@ -127,7 +127,7 @@ namespace medicalclinic_back
                 else
                     department = new UserDepartment(data.GetInt32(20), data.GetString(21));
 
-                Employee employee = new Employee(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), data.GetChar(4), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetBoolean(8), specialization, address, role, department);
+                Employee employee = new Employee(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), (SexEnum)Enum.Parse(typeof(SexEnum),data.GetString(4)), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetBoolean(8), specialization, address, role, department);
 
                 employees.Add(employee);
             }

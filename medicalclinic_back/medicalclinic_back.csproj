@@ -157,6 +157,7 @@
     <Compile Include="Office.cs" />
     <Compile Include="OfficeSpecialization.cs" />
     <Compile Include="OfficeUsedFor.cs" />
+    <Compile Include="SexEnum.cs" />
     <Compile Include="UserDepartment.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="UserCredentials.cs" />
