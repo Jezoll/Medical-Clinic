@@ -29,14 +29,15 @@ a {
 .back-to-home {
     position: absolute;
     top: 10px;
-    left: 10px;
-    font-size: 36px;
+    left: 0;
+    font-size: 24px;
     color: royalblue;
     cursor: pointer;
 }
 
 .back-to-home a {
     color: royalblue;
+    padding: 10px 10px;
 }
 
 .text-section {
@@ -96,9 +97,9 @@ a {
         cursor: pointer;
         transition: background-color .3s;
     }
-.inputs #Button1:hover {
-    background-color: #2d5ff5;
-}
+    .inputs #Button1:hover {
+        background-color: #2d5ff5;
+    }
 
 .forgot-pass {
     font-size: 14px;
@@ -109,8 +110,9 @@ a {
     color: #000;
     text-transform: capitalize;
 }
-.inputs #ButtonForgot.check-email {
-    background: #0504aa;
+.inputs #Button1.check-email {
+    background: black;
+    color: #fff;
     cursor: auto;
 }
 
