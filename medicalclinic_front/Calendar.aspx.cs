@@ -30,7 +30,7 @@ namespace medicalclinic
         }
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.id,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id where day(date) = '" + Calendar1.SelectedDate.Day + "'");
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.id,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id where day(date) = '" + Calendar1.SelectedDate.Day + "'");
             
                 MySqlDataReader r = command.ExecuteReader();
 
@@ -65,7 +65,7 @@ namespace medicalclinic
         {
             
 
-            MySqlCommand command = Database.executeQuery("SELECT date FROM visits where month(date) = '" + Calendar1.SelectedDate.Month + "'");
+            MySqlCommand command = Database.command("SELECT date FROM visits where month(date) = '" + Calendar1.SelectedDate.Month + "'");
                 MySqlDataReader r = command.ExecuteReader();
 
 
@@ -84,7 +84,7 @@ namespace medicalclinic
 
             if(RadioButtonList1.SelectedIndex==0)
             {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id ORDER BY pat.first_name ASC ");
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id ORDER BY pat.first_name ASC ");
                 MySqlDataReader r = command.ExecuteReader();
 
 
@@ -94,7 +94,7 @@ namespace medicalclinic
             }
             else
             {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id ORDER BY pat.first_name DESC ");
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id ORDER BY pat.first_name DESC ");
                 MySqlDataReader r = command.ExecuteReader();
 
 
@@ -113,7 +113,7 @@ namespace medicalclinic
         
             if(RadioButtonList2.SelectedIndex==0)
             {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.first_name like '" + TextBox1.Text + "%'"); ;
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.first_name like '" + TextBox1.Text + "%'"); ;
                 MySqlDataReader r = command.ExecuteReader();
 
 
@@ -124,7 +124,7 @@ namespace medicalclinic
             }
             else if(RadioButtonList2.SelectedIndex==1)
             {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.second_name like '" + TextBox1.Text + "%'");
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.second_name like '" + TextBox1.Text + "%'");
                 MySqlDataReader r = command.ExecuteReader();
 
 
@@ -135,7 +135,7 @@ namespace medicalclinic
             }
             else if(RadioButtonList2.SelectedIndex==2)
             {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.pesel like '" + TextBox1.Text + "%'");
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.pesel like '" + TextBox1.Text + "%'");
                 MySqlDataReader r = command.ExecuteReader();
 
 
@@ -146,7 +146,7 @@ namespace medicalclinic
             }
             else if(RadioButtonList2.SelectedIndex==3)
             {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date, vis.duration, vis.confirmed, vis.type, vis.id_patient, pat.first_name, pat.second_name, pat.pesel, pat.sex, pat.date_of_birth, pat.phone_number, pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.sex = '" + TextBox1.Text + "'");
+                MySqlCommand command = Database.command("SELECT vis.date, vis.duration, vis.confirmed, vis.type, vis.id_patient, pat.first_name, pat.second_name, pat.pesel, pat.sex, pat.date_of_birth, pat.phone_number, pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.sex = '" + TextBox1.Text + "'");
                 MySqlDataReader r = command.ExecuteReader();
 
 
@@ -157,7 +157,7 @@ namespace medicalclinic
             }
             else if(RadioButtonList2.SelectedIndex==4)
             {
-                MySqlCommand command = Database.executeQuery("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.date_of_birth like '" + TextBox1.Text + "%'");
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.date_of_birth like '" + TextBox1.Text + "%'");
                 MySqlDataReader r = command.ExecuteReader();
 
 

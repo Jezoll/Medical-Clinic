@@ -1,16 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="medicalclinic.Calendar" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Calendar.aspx.cs" Inherits="medicalclinic.Calendar" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="Calendar" ContentPlaceHolderID="MainContent" runat="server">
         <div>
-            
             <center>
                 <h1> CALENDAR </h1>
                 <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Calendar" Width="103px" />
@@ -60,6 +51,4 @@
             </center>
 
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>
