@@ -8,7 +8,6 @@ namespace medicalclinic_back
     {
         private static MySqlConnection connection;
         private static string connectionString = @"server=s162.cyber-folks.pl;database=vfczjombdo_medical-clinic;uid=vfczjombdo_tester;password=Testowanie10!";
-
         public static void openConnection()
         {
             try
@@ -45,5 +44,6 @@ namespace medicalclinic_back
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
             return dataAdapter;
         }
+        
     }
 }

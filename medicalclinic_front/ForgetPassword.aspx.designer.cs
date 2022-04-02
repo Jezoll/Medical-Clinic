@@ -11,17 +11,8 @@ namespace medicalclinic
 {
 
 
-    public partial class Login
+    public partial class ForgetPassword
     {
-
-        /// <summary>
-        /// Kontrolka reference.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden reference;
 
         /// <summary>
         /// Kontrolka form1.
@@ -33,22 +24,22 @@ namespace medicalclinic
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Kontrolka TextBox1.
+        /// Kontrolka email.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox email;
 
         /// <summary>
-        /// Kontrolka TextBox2.
+        /// Kontrolka login.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox login;
 
         /// <summary>
         /// Kontrolka Button1.
@@ -60,6 +51,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
+        /// Kontrolka SendedMail.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SendedMail;
+
+        /// <summary>
         /// Kontrolka IncorrectDataLabel.
         /// </summary>
         /// <remarks>
@@ -67,14 +67,5 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label IncorrectDataLabel;
-
-        /// <summary>
-        /// Kontrolka HiddenField1.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
     }
 }

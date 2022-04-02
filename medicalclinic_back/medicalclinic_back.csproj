@@ -52,8 +52,16 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="Microsoft.ScriptManager.MSAjax, Version=4.5.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.4.5.6\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+=======
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.6.0.3\lib\net461\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation, Version=6.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.6.0.3\lib\net461\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
+>>>>>>> grupa1
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.28.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.28\lib\net48\MySql.Data.dll</HintPath>
@@ -152,12 +160,20 @@
     <Compile Include="Address.cs" />
     <Compile Include="Calendar.cs" />
     <Compile Include="Database.cs" />
+<<<<<<< HEAD
     <Compile Include="DatabaseColumnName.cs" />
     <Compile Include="FilterColumnEmployee.cs" />
     <Compile Include="Office.cs" />
     <Compile Include="OfficeSpecialization.cs" />
     <Compile Include="OfficeUsedFor.cs" />
     <Compile Include="SexEnum.cs" />
+=======
+    <Compile Include="Email.cs" />
+    <Compile Include="RecoveryPassword.cs" />
+    <Compile Include="TimeBlock.cs" />
+    <Compile Include="LoginUser.cs" />
+    <Compile Include="Token.cs" />
+>>>>>>> grupa1
     <Compile Include="UserDepartment.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="UserCredentials.cs" />
