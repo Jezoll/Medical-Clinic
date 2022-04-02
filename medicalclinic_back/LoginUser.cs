@@ -34,7 +34,7 @@ namespace medicalclinic_back
         public static void logIn(string login, string passw)
         {
             Database.openConnection();
-            MySqlCommand cmd = Database.executeQuery("SELECT * FROM user_credentials where BINARY login =@login AND BINARY password = @password");
+            MySqlCommand cmd = Database.command("SELECT * FROM user_credentials where BINARY login =@login AND BINARY password = @password");
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@password", passw);
             MySqlDataReader sdr = cmd.ExecuteReader();

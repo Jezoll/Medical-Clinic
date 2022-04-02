@@ -178,6 +178,8 @@ namespace medicalclinic
             {
                 sex = "k";
             }
+
+            //TODO zrobić update
         }
 
         protected void TextBoxSurname_TextChanged(object sender, EventArgs e)
