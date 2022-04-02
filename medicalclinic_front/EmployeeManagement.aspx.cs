@@ -1,8 +1,10 @@
 ﻿using medicalclinic_back;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 
 namespace medicalclinic
 {
@@ -17,9 +19,28 @@ namespace medicalclinic
         private void employeesGridRefresh(string sort_column = "employees.id", SortDirection sort_direction = SortDirection.Ascending, FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = "1")
         {
             List<Employee> employees = Employee.getAllEmployees(sort_column, sort_direction, filter_column, filter_query);
+            ViewState["SortColumn"] = sort_column;
+            ViewState["SortDirection"] = sort_direction;
+            ViewState["FilterQuery"] = filter_query;
+            ViewState["FilterColumn"] = filter_column;
             fillDropDownListsWithValues();
+            setInitialValuesOnFilters();
             EmployeesGridView.DataSource = employees;
             EmployeesGridView.DataBind();
+        }
+
+        private void setInitialValuesOnFilters() {
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Role)
+            {
+                DropDownListRoles.SelectedValue = ViewState["FilterQuery"].ToString();
+            }
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Active)
+            {
+                if (ViewState["FilterQuery"].ToString() == "1")
+                    CheckBoxIsActive.Checked = true;
+                else
+                    CheckBoxIsActive.Checked = false;
+            }
         }
 
         private void fillDropDownListsWithValues()
@@ -47,7 +68,7 @@ namespace medicalclinic
         }
 
         protected void ButtonFilterClear_Click(object sender, EventArgs e)
-        {
+        {          
             employeesGridRefresh();
         }
 
@@ -70,67 +91,44 @@ namespace medicalclinic
         {
             string sort_column;
             SortDirection sort_direction = GetSortDirection(e.SortExpression);
-            switch (e.SortExpression)
-            {
-                case "Id":
-                    sort_column = "employees.id";
-                    break;
-                case "First_name":
-                    sort_column = "first_name";
-                    break;
-                case "Second_name":
-                    sort_column = "second_name";
-                    break;
-                case "Pesel":
-                    sort_column = "pesel";
-                    break;
-                case "Sex":
-                    sort_column = "sex";
-                    break;
-                case "Phone_number":
-                    sort_column = "phone_number";
-                    break;
-                case "Date_of_birth":
-                    sort_column = "date_of_birth";
-                    break;
-                case "Email":
-                    sort_column = "email";
-                    break;
-                case "Is_active":
-                    sort_column = "is_active";
-                    break;
-                case "User_department.Name":
-                    sort_column = "departments.name";
-                    break;
-                case "Medical_specialization.Name":
-                    sort_column = "medical_specializations.name";
-                    break;
-                case "User_role.Name":
-                    sort_column = "user_roles.name";
-                    break;
-                case "Address.Country":
-                    sort_column = "country";
-                    break;
-                case "Address.State":
-                    sort_column = "state";
-                    break;
-                case "Address.City":
-                    sort_column = "city";
-                    break;
-                case "Address.Postal_code":
-                    sort_column = "postal_code";
-                    break;
-                case "Address.Street":
-                    sort_column = "street";
-                    break;
-                case "Address.Number":
-                    sort_column = "number";
-                    break;
-                default:
-                    sort_column = "employees.id";
-                    break;
-            }
+            sort_column = e.SortExpression.ToString();
             employeesGridRefresh(sort_column, sort_direction);
+        }
+        protected void EmployeesGridView_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                foreach (TableCell tc in e.Row.Cells)
+                {
+                    if (tc.HasControls())
+                    {
+                        LinkButton lnk = (LinkButton)tc.Controls[0];
+                        if (lnk != null && ViewState["SortColumn"].ToString() == lnk.CommandArgument)
+                        {
+                            string sortArrow = (SortDirection)ViewState["SortDirection"] == SortDirection.Ascending ? " &#9650;" : " &#9660;";
+                            lnk.Text += sortArrow;
+                        }
+                    }
+                }
+            }
+
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Role)
+            {
+                LabelRoles.CssClass += " filters-container__element--active";
+                LabelIsActive.CssClass = "filter-label-employee";
+
+            }
+            else if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Active)
+            {
+                LabelIsActive.CssClass += " filters-container__element--active";
+                LabelRoles.CssClass = "filter-label-employee";
+
+            }
+            else {
+                LabelRoles.CssClass = "filter-label-employee";
+                LabelIsActive.CssClass = "filter-label-employee";
+            }
+
         }
 
         protected void ButtonAdd_Click(object sender, EventArgs e)
@@ -138,6 +136,21 @@ namespace medicalclinic
             Response.Redirect("AddEmployee.aspx");
         }
 
+        protected void EmployeeReviewButton_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = sender as LinkButton;
+            Response.Redirect("EmployeeReview.aspx?id =" + lnk.CommandArgument);
+        }
 
+        protected void EmployeeEditButton_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = sender as LinkButton;
+            Response.Redirect("EmployeeEdit.aspx?id =" + lnk.CommandArgument);
+        }
+
+        protected void ButtonOffices_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("OfficesManagement.aspx");
+        }
     }
 }

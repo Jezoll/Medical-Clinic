@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
@@ -13,7 +15,7 @@ namespace medicalclinic_back
         private string first_name;
         private string second_name;
         private string pesel;
-        private char sex;
+        private SexEnum sex;
         private string phone_number;
         private string email;
         private DateTime date_of_birth;
@@ -28,7 +30,7 @@ namespace medicalclinic_back
         public string First_name { get => first_name; set => first_name = value; }
         public string Second_name { get => second_name; set => second_name = value; }
         public string Pesel { get => pesel; set => pesel = value; }
-        public char Sex { get => sex; set => sex = value; }
+        public SexEnum Sex { get => sex; set => sex = value; }
         public string Phone_number { get => phone_number; set => phone_number = value; }
         public string Email { get => email; set => email = value; }
         public DateTime Date_of_birth { get => date_of_birth; set => date_of_birth = value; }
@@ -39,7 +41,7 @@ namespace medicalclinic_back
         public UserDepartment User_department { get => user_department; set => user_department = value; }
         public UserCredentials User_login { get => user_credentials; set => user_credentials = value; }
 
-        public Employee(int id, string first_name, string second_name, string pesel, char sex, string phone_number, string email, DateTime date_of_birth, bool is_active, MedicalSpecialization specialization, Address address, UserRole role, UserDepartment department)
+        public Employee(int id, string first_name, string second_name, string pesel, SexEnum sex, string phone_number, string email, DateTime date_of_birth, bool is_active, MedicalSpecialization specialization, Address address, UserRole role, UserDepartment department)
         {
             this.id = id;
             this.first_name = first_name;
@@ -62,9 +64,11 @@ namespace medicalclinic_back
             string where_filter;
             string order_sort;
 
-            foreach (DatabaseColumnName column in (DatabaseColumnName[]) Enum.GetValues(typeof(DatabaseColumnName)))
+
+            foreach (DatabaseColumnName value in Enum.GetValues(typeof(DatabaseColumnName)))
             {
-                if (sort_column == column.ToString().ToLower()) {
+                string column = DatabaseColumnNameExtenstion.GetDescription(value);
+                if (sort_column == column) {
                     is_sort_column_correct = true;
                     break;
                 }
@@ -91,7 +95,7 @@ namespace medicalclinic_back
             }
 
             Database.openConnection();
-            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees INNER JOIN medical_specializations ON employees.id_specialization = medical_specializations.id INNER JOIN user_addresses ON employees.id_address = user_addresses.id INNER JOIN user_roles ON employees.id_role = user_roles.id INNER JOIN departments ON employees.id_department = departments.id {where_filter} {order_sort}";
+            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees LEFT JOIN medical_specializations ON employees.id_specialization = medical_specializations.id LEFT JOIN user_addresses ON employees.id_address = user_addresses.id LEFT JOIN user_roles ON employees.id_role = user_roles.id LEFT JOIN departments ON employees.id_department = departments.id {where_filter} {order_sort}";
 
             MySqlCommand command = Database.command(query);
 
@@ -102,12 +106,28 @@ namespace medicalclinic_back
             List<Employee> employees = new List<Employee>();
             while (data.Read())
             {
-                MedicalSpecialization specialization = new MedicalSpecialization(data.GetInt32(9), data.GetString(10));
-                Address address = new Address(data.GetInt32(11), data.GetString(12), data.GetString(13), data.GetString(14), data.GetString(15), data.GetString(16), data.GetString(17));
-                UserRole role = new UserRole(data.GetInt32(18), data.GetString(19));
-                UserDepartment department = new UserDepartment(data.GetInt32(20), data.GetString(21));
+                MedicalSpecialization specialization;
+                Address address;
+                UserRole role;
+                UserDepartment department;
+                if (data.GetValue(9) == DBNull.Value)
+                    specialization = new MedicalSpecialization(-1, string.Empty);
+                else
+                    specialization = new MedicalSpecialization(data.GetInt32(9), data.GetString(10));
+                if (data.GetValue(11) == DBNull.Value)
+                    address = new Address(-1, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+                else
+                    address = new Address(data.GetInt32(11), data.GetString(12), data.GetString(13), data.GetString(14), data.GetString(15), data.GetString(16), data.GetString(17));
+                if (data.GetValue(18) == DBNull.Value)
+                    role = new UserRole(-1, string.Empty);
+                else 
+                    role = new UserRole(data.GetInt32(18), data.GetString(19));
+                if (data.GetValue(20) == DBNull.Value)
+                    department = new UserDepartment(-1, string.Empty);
+                else
+                    department = new UserDepartment(data.GetInt32(20), data.GetString(21));
 
-                Employee employee = new Employee(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), data.GetChar(4), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetBoolean(8), specialization, address, role, department);
+                Employee employee = new Employee(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), (SexEnum)Enum.Parse(typeof(SexEnum),data.GetString(4)), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetBoolean(8), specialization, address, role, department);
 
                 employees.Add(employee);
             }
@@ -152,7 +172,7 @@ namespace medicalclinic_back
 
             int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
 
-            if(sex=="true")
+            if (sex == "Male")
             {
                 gender = 'M';
             }
@@ -160,7 +180,7 @@ namespace medicalclinic_back
             {
                 gender = 'K';
             }
-            
+
 
 
             List<int> peselDigits = new List<int>(); //lista do przechowywania wszystkich cyfr podanego nr pesel
@@ -178,36 +198,33 @@ namespace medicalclinic_back
 
             if (peselDigits.Count == 11)
             {
-                if (birth.Day < 10) //przypisywanie prawdziwego dnia urodzin (wybranego z kalendarza) - taki jaki powinien byc w dobrym peselu
-                {
-                    dayOfBirth = "0" + birth.Day.ToString();
-                }
-                else
-                {
-                    dayOfBirth = birth.Day.ToString();
-                }
-
-                if (birth.Month < 10) // przypisywanie prawdziwego miesiaca urodzin (wybranego z kalendarza)
-                {
-                    monthOfBirth = "0" + birth.Month.ToString();
-                }
-                else
-                {
-                    monthOfBirth = birth.Month.ToString();
-                }
+                dayOfBirth = birth.Day.ToString("00");
+                monthOfBirth = birth.Month.ToString("00");
 
                 string thirdAndFourthDigit;
 
-                if (birth.Year >= 2000) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
+                if (birth.Year >= 2000 && birth.Year < 2400) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
                 {
-                    if (birth.Month >= 10)
+
+                    int digitOfHundreds = (birth.Year - 2000) / 100; //pobiera cyfre setek z roku urodzenia >2000
+                    int toAddToMonth = 0;
+                    switch (digitOfHundreds)
                     {
-                        thirdAndFourthDigit = "3" + monthOfBirth[1];
+                        case 0:
+                            toAddToMonth = 20;
+                            break;
+                        case 1:
+                            toAddToMonth = 40;
+                            break;
+                        case 2:
+                            toAddToMonth = 60;
+                            break;
+                        case 3:
+                            toAddToMonth = 80;
+                            break;
+
                     }
-                    else
-                    {
-                        thirdAndFourthDigit = "2" + monthOfBirth[1];
-                    }
+                    thirdAndFourthDigit = (Convert.ToInt32(monthOfBirth) + toAddToMonth).ToString();
 
                 }
                 else

@@ -8,12 +8,13 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
+
 
 namespace medicalclinic
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private string date_tmp;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -84,29 +85,34 @@ namespace medicalclinic
         {
             if (!Employee.validatePesel(TextBoxPESEL.Text, (DateTime)CalendarBirthDate.SelectedDate, DropDownListSex.SelectedValue))
             {
-                Debug.WriteLine(CalendarBirthDate.SelectedDate.ToString());
-                AlertBox("incorrect pesel number");
+                AlertBox("Incorrect PESEL number.", false);
                 return;
             }
 
             if(!Employee.validatePeselUnique(TextBoxPESEL.Text))
             {
-                AlertBox("This pesel is already in the database");
+                AlertBox("This PESEL is already in the database.", false);
                 return;
+            }
+
+            if(!AdressCheck())
+            {
+                AlertBox("To add an address, all address fields must be completed.", false);
+                    return;
             }
 
             if(TextBoxEmail.Text.Length>0)
             {
                 if(!Employee.validateEmail(TextBoxEmail.Text))
                 {
-                    AlertBox("incorrect e-mail adress");
+                    AlertBox("Incorrect e-mail adress.", false);
                     return;
                 }
             }
 
             if (TextBoxPhoneNumber.Text!="" && TextBoxPhoneNumber.Text.Length != 9)
             {
-                AlertBox("incorrect phone number");
+                AlertBox("Incorrect phone number.", false);
                 return;
             }
 
@@ -114,7 +120,15 @@ namespace medicalclinic
 
             string address_id = Address.insertNewAddress(TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
 
-            Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, "m", TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
+            string sexLongName = DropDownListSex.SelectedValue.ToString();
+            string sex = "M";
+
+            if (sexLongName == "Female")
+            {
+                sex = "F";
+            }
+
+            Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
 
 
             if (TextBoxEmail.Text.Length > 0)
@@ -129,8 +143,7 @@ namespace medicalclinic
                 smtpClient.Send("medicalclinicjandzban@gmail.com", TextBoxEmail.Text, "MedicalClinic", "You were added as employee to our Medical Clinic Database, Congratulations (this message was generated for students project)");
             }
 
-            AlertBox("New Employee has been added to batabase");
-            Response.Redirect("AddUser.aspx");
+            AlertBox("New Employee has been added to database", true);
         }
         protected void DropDownListRole_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -145,9 +158,47 @@ namespace medicalclinic
         
         }
 
-        private void AlertBox(string AlertMessage)
+        private void AlertBox(string AlertMessage, bool success)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + AlertMessage + "');", true);
+            string alert = "alert('" + AlertMessage + "');";
+            if (success) 
+            {
+                alert = "alert('" + AlertMessage + "'); window.open('AddUser.aspx', '_self');";
+            }
+
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
+        }
+
+        private bool AdressCheck()
+        {
+            int notemptytextboxes = 0;
+            int textboxescount = 0;
+            TextBox currenttextbox;
+            foreach (Control tbox in AddressPanel.Controls)
+            {
+
+                if (tbox is TextBox)
+                {
+                    textboxescount++;
+                    currenttextbox = (TextBox)tbox;
+                }
+                else
+                {
+                    continue;
+                }
+
+                if (currenttextbox.Text.Length > 0)
+                {
+                    notemptytextboxes++;
+                }
+            }
+
+            if (notemptytextboxes > 0 && notemptytextboxes < textboxescount)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

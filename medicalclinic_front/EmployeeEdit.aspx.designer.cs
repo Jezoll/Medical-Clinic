@@ -11,8 +11,35 @@ namespace medicalclinic
 {
 
 
-    public partial class WebForm1
+    public partial class WebForm5
     {
+
+        /// <summary>
+        /// IdLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label IdLabel;
+
+        /// <summary>
+        /// TextBoxID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxID;
+
+        /// <summary>
+        /// NameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NameLabel;
 
         /// <summary>
         /// TextBoxName control.
@@ -24,6 +51,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxName;
 
         /// <summary>
+        /// SurnameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SurnameLabel;
+
+        /// <summary>
         /// TextBoxSurname control.
         /// </summary>
         /// <remarks>
@@ -33,6 +69,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxSurname;
 
         /// <summary>
+        /// PESELLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PESELLabel;
+
+        /// <summary>
         /// TextBoxPESEL control.
         /// </summary>
         /// <remarks>
@@ -40,6 +85,15 @@ namespace medicalclinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxPESEL;
+
+        /// <summary>
+        /// DateOfBirthLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DateOfBirthLabel;
 
         /// <summary>
         /// CalendarTextBox control.
@@ -60,6 +114,15 @@ namespace medicalclinic
         protected global::AjaxControlToolkit.CalendarExtender CalendarBirthDate;
 
         /// <summary>
+        /// RoleLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label RoleLabel;
+
+        /// <summary>
         /// DropDownListRole control.
         /// </summary>
         /// <remarks>
@@ -67,6 +130,15 @@ namespace medicalclinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListRole;
+
+        /// <summary>
+        /// SpecializationLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SpecializationLabel;
 
         /// <summary>
         /// DropDownListSpecialization control.
@@ -87,6 +159,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Panel AddressPanel;
 
         /// <summary>
+        /// CountryLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CountryLabel;
+
+        /// <summary>
         /// TextBoxCountry control.
         /// </summary>
         /// <remarks>
@@ -94,6 +175,15 @@ namespace medicalclinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxCountry;
+
+        /// <summary>
+        /// StateLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StateLabel;
 
         /// <summary>
         /// TextBoxState control.
@@ -105,6 +195,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxState;
 
         /// <summary>
+        /// CityLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CityLabel;
+
+        /// <summary>
         /// TextBoxCity control.
         /// </summary>
         /// <remarks>
@@ -112,6 +211,15 @@ namespace medicalclinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxCity;
+
+        /// <summary>
+        /// PostalCodeLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PostalCodeLabel;
 
         /// <summary>
         /// TextBoxPostalCode control.
@@ -123,6 +231,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxPostalCode;
 
         /// <summary>
+        /// StreetLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StreetLabel;
+
+        /// <summary>
         /// TextBoxStreet control.
         /// </summary>
         /// <remarks>
@@ -130,6 +247,15 @@ namespace medicalclinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxStreet;
+
+        /// <summary>
+        /// HouseNumerLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label HouseNumerLabel;
 
         /// <summary>
         /// TextBoxHouseNumber control.
@@ -141,6 +267,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxHouseNumber;
 
         /// <summary>
+        /// EmailLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EmailLabel;
+
+        /// <summary>
         /// TextBoxEmail control.
         /// </summary>
         /// <remarks>
@@ -148,6 +283,15 @@ namespace medicalclinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxEmail;
+
+        /// <summary>
+        /// PhoneNumberLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PhoneNumberLabel;
 
         /// <summary>
         /// TextBoxPhoneNumber control.
@@ -159,6 +303,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBoxPhoneNumber;
 
         /// <summary>
+        /// SexLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SexLabel;
+
+        /// <summary>
         /// DropDownListSex control.
         /// </summary>
         /// <remarks>
@@ -168,13 +321,31 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.DropDownList DropDownListSex;
 
         /// <summary>
-        /// ButtonNext control.
+        /// IsActiveStatusLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonNext;
+        protected global::System.Web.UI.WebControls.Label IsActiveStatusLabel;
+
+        /// <summary>
+        /// CheckBoxIsActive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBoxIsActive;
+
+        /// <summary>
+        /// ButtonConfirm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonConfirm;
 
         /// <summary>
         /// ButtonCancel control.
