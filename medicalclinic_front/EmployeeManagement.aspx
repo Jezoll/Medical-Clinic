@@ -1,49 +1,123 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="EmployeeManagement.aspx.cs" Inherits="medicalclinic.EmployeeManagement" %>
 
 <asp:Content ID="EmployeeManagementContent" ContentPlaceHolderID="MainContent" runat="server">
-        <asp:GridView 
-            ID="EmployeesGridView" 
-            runat="server" 
-            AutoGenerateColumns="False" 
-            DataKeyNames="Id" 
+    <div class="table-container">
+        <asp:Button ID="ButtonAdd" CssClass="btn btn-default btn-employee-add" runat="server" OnClick="ButtonAdd_Click" Text="Add New Employee" />
+        <div class="table-content">
+        <asp:GridView
+            ID="EmployeesGridView"
+            runat="server"
+            AutoGenerateColumns="False"
+            DataKeyNames="Id"
             AllowSorting="true"
-            OnSorting="EmployeesGridView_Sorting"  
+            OnSorting="EmployeesGridView_Sorting"
+            CssClass="table table-hover table-condensed"
+            OnRowCreated="EmployeesGridView_RowCreated"
             >
             <Columns>
-                <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
-                <asp:BoundField DataField="First_name" HeaderText="First name" SortExpression="First_name" />
-                <asp:BoundField DataField="Second_name" HeaderText="Last name" SortExpression="Second_name"/>
-                <asp:BoundField DataField="Pesel" HeaderText="PESEL" SortExpression="Pesel"/>
-                <asp:BoundField DataField="Sex" HeaderText="Sex" SortExpression="Sex"/>
-                <asp:BoundField DataField="Phone_number" HeaderText="Phone number" SortExpression="Phone_number"/>
-                <asp:BoundField DataField="Date_of_birth" HeaderText="Date of birth" SortExpression="Date_of_birth"/>
-                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email"/>
-                <asp:CheckBoxField DataField="Is_active" HeaderText="Is active employee" SortExpression="Is_active"/>
-                <asp:BoundField DataField="User_department.Name" HeaderText="Department" SortExpression="User_department.Name"/>
-                <asp:BoundField DataField="Medical_specialization.Name" HeaderText="Medical specialization" SortExpression="Medical_specialization.Name"/>
-                <asp:BoundField DataField="User_role.Name" HeaderText="Role" SortExpression="User_role.Name"/>
-                <asp:BoundField DataField="Address.Country" HeaderText="Country" SortExpression="Address.Country"/>
-                <asp:BoundField DataField="Address.State" HeaderText="State" SortExpression="Address.State"/>
-                <asp:BoundField DataField="Address.City" HeaderText="City" SortExpression="Address.City"/>
-                <asp:BoundField DataField="Address.Postal_code" HeaderText="Postal code" SortExpression="Address.Postal_code"/>
-                <asp:BoundField DataField="Address.Street" HeaderText="Street" SortExpression="Address.Street"/>
-                <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="Address.Number"/>
+                <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="employees.id" />
+                <asp:BoundField DataField="First_name" HeaderText="First name" SortExpression="first_name" />
+                <asp:BoundField DataField="Second_name" HeaderText="Last name" SortExpression="second_name"/>
+                <asp:BoundField DataField="Pesel" HeaderText="PESEL" SortExpression="pesel"/>
+                <asp:BoundField DataField="Sex" HeaderText="Sex" SortExpression="sex"/>
+                <asp:BoundField DataField="Phone_number" HeaderText="Phone number" SortExpression="phone_number"/>
+                <asp:BoundField DataField="Date_of_birth" DataFormatString="{0:d}" HeaderText="Date of birth" SortExpression="date_of_birth"/>
+                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="email"/>
+                <asp:CheckBoxField DataField="Is_active" HeaderText="Is active employee" SortExpression="is_active"/>
+                <asp:BoundField DataField="User_department.Name" HeaderText="Department" SortExpression="departments.name"/>
+                <asp:BoundField DataField="Medical_specialization.Name" HeaderText="Medical specialization" SortExpression="medical_specializations.name"/>
+                <asp:BoundField DataField="User_role.Name" HeaderText="Role" SortExpression="user_roles.name"/>
+                <asp:BoundField DataField="Address.Country" HeaderText="Country" SortExpression="user_adresses.country"/>
+                <asp:BoundField DataField="Address.State" HeaderText="State" SortExpression="user_adresses.state"/>
+                <asp:BoundField DataField="Address.City" HeaderText="City" SortExpression="user_adresses.city"/>
+                <asp:BoundField DataField="Address.Postal_code" HeaderText="Postal code" SortExpression="user_adresses.postal_code"/>
+                <asp:BoundField DataField="Address.Street" HeaderText="Street" SortExpression="user_adresses.street"/>
+                <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="user_adresses.number"/>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="EmployeeReviewButton" OnClick="EmployeeReviewButton_Click" runat="server" Text='Review employee'
+                        CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+                     </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="EmployeeEditButton" OnClick="EmployeeEditButton_Click" runat="server" Text='Edit employee'
+                        CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+                     </ItemTemplate>
+               </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="IsActiveChange" runat="server" Text='Deactivate/Reactivate Employee'
+                        CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+                         <ajaxToolkit:ModalPopupExtender ID="PopupAdminPassword" runat="server" PopupControlID="Panl1" TargetControlID="IsActiveChange"  
+    CancelControlID="ButtonOK" BackgroundCssClass="Background">  
+</ajaxToolkit:ModalPopupExtender>  
+<asp:Panel ID="Panl1" runat="server" CssClass="Popup" align="center" style = "display:none">  
+    <iframe style=" width: 250px; height: 250px;" id="irm1" src="PopupAdminPassword.aspx" runat="server"></iframe>  
+   <br/>  
+    <asp:Button ID="ButtonOK" runat="server" Text="OK" />  
+</asp:Panel>
+
+                         <style type="text/css">  
+        .Background  
+        {  
+            background-color: Black;  
+            filter: alpha(opacity=90);  
+            opacity: 0.8;  
+        }  
+        .Popup  
+        {  
+            background-color: #FFFFFF;  
+            border-width: 3px;  
+            border-style: solid;  
+            border-color: black;  
+            padding-top: 10px;  
+            padding-left: 10px;  
+            width: 300px;  
+            height: 300px;  
+        }  
+        .lbl  
+        {  
+            font-size:16px;  
+            font-style:italic;  
+            font-weight:bold;  
+        }  
+    </style>  
+                     </ItemTemplate>
+               </asp:TemplateField>
+
+
+
             </Columns>
         </asp:GridView>
-        <div>
-            <asp:Label ID="LabelName" runat="server" Text="Name"></asp:Label>
-            <asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
-            <asp:RadioButton ID="RadioButtonName" runat="server" Text="Filter By Name" GroupName="FilterEmployeesGroup"/>
         </div>
-        <div>
-            <asp:Label ID="LabelSurname" runat="server" Text="Surname"></asp:Label>
-            <asp:TextBox ID="TextBoxSurname" runat="server"></asp:TextBox>
-            <asp:RadioButton ID="RadioButtonSurname" runat="server" Text="Filter By Surname" GroupName="FilterEmployeesGroup"/>
+        <div class="filters-container ">
+            <div class="filters-container__element">
+                <asp:Label ID="LabelRoles" CssClass="filter-label-employee" runat="server" Text="Roles"></asp:Label>
+                <asp:DropDownList ID="DropDownListRoles" runat="server"></asp:DropDownList>
+                <asp:Button ID="ButtonFilterRoles" runat="server" OnClick="ButtonFilterRoles_Click" Text="Filter" CssClass="btn btn-default btn-filter-employee"/>
+            </div>
+            <div class="filters-container__element">
+                <asp:Label ID="LabelIsActive" CssClass="filter-label-employee" runat="server" Text="Is active?"></asp:Label>
+                <asp:CheckBox ID="CheckBoxIsActive" CssClass="filter-checkbox-employee" runat="server" />
+                <asp:Button ID="ButtonFilterActive" runat="server" OnClick="ButtonFilterActive_Click" Text="Filter" CssClass="btn btn-default btn-filter-employee" />
+            </div>
+            <div class="filters-container__element">
+                <asp:Button ID="ButtonFilterClear" runat="server" OnClick="ButtonFilterClear_Click" Text="Clear filters" CssClass="btn btn-default btn-filter-employee" />
+            </div>
         </div>
-        <div>
-            <asp:Label ID="LabelRole" runat="server" Text="Role In The System"></asp:Label>
-            <asp:DropDownList ID="DropDownListRoles" runat="server"></asp:DropDownList>
-            <asp:RadioButton ID="RadioButtonUserRole" runat="server" Text="Filter By Role In The System" GroupName="FilterEmployeesGroup"/>
-        </div>
-            <asp:Button ID="ButtonFilter" runat="server" OnClick="ButtonFilter_Click" Text="Filter" Width="122px" />
+    </div>
+
+   
 </asp:Content>
+
+
+
+
+
+
+
+

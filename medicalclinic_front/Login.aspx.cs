@@ -29,6 +29,8 @@ namespace medicalclinic
         {
             try
             {
+                Database.openConnection();
+                MySqlCommand command = Database.command("SELECT * FROM user_credentials where login = @username AND password = @password");
 
                 if (TextBox1.Text == "" || TextBox2.Text == "")
                 {

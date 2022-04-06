@@ -15,6 +15,15 @@ namespace medicalclinic
     {
 
         /// <summary>
+        /// ButtonAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAdd;
+
+        /// <summary>
         /// EmployeesGridView control.
         /// </summary>
         /// <remarks>
@@ -24,67 +33,13 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.GridView EmployeesGridView;
 
         /// <summary>
-        /// LabelName control.
+        /// LabelRoles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelName;
-
-        /// <summary>
-        /// TextBoxName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxName;
-
-        /// <summary>
-        /// RadioButtonName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButtonName;
-
-        /// <summary>
-        /// LabelSurname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelSurname;
-
-        /// <summary>
-        /// TextBoxSurname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSurname;
-
-        /// <summary>
-        /// RadioButtonSurname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButtonSurname;
-
-        /// <summary>
-        /// LabelRole control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelRole;
+        protected global::System.Web.UI.WebControls.Label LabelRoles;
 
         /// <summary>
         /// DropDownListRoles control.
@@ -96,21 +51,48 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.DropDownList DropDownListRoles;
 
         /// <summary>
-        /// RadioButtonUserRole control.
+        /// ButtonFilterRoles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButtonUserRole;
+        protected global::System.Web.UI.WebControls.Button ButtonFilterRoles;
 
         /// <summary>
-        /// ButtonFilter control.
+        /// LabelIsActive control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonFilter;
+        protected global::System.Web.UI.WebControls.Label LabelIsActive;
+
+        /// <summary>
+        /// CheckBoxIsActive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBoxIsActive;
+
+        /// <summary>
+        /// ButtonFilterActive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFilterActive;
+
+        /// <summary>
+        /// ButtonFilterClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFilterClear;
     }
 }

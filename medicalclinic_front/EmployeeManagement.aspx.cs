@@ -1,7 +1,10 @@
 ﻿using medicalclinic_back;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 
 namespace medicalclinic
 {
@@ -9,18 +12,38 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            employeesGridRefresh();
+            if (!Page.IsPostBack)
+                employeesGridRefresh();
         }
 
-        private void employeesGridRefresh(string sort_column = "employees.id", string sort_direction = "DESC")
+        private void employeesGridRefresh(string sort_column = "employees.id", SortDirection sort_direction = SortDirection.Ascending, FilterColumnEmployee filter_column = FilterColumnEmployee.Undefined, string filter_query = "1")
         {
-            List<Employee> employees = Employee.getAllEmployees(sort_column, sort_direction);
-            fillDropDownListWithValues();
+            List<Employee> employees = Employee.getAllEmployees(sort_column, sort_direction, filter_column, filter_query);
+            ViewState["SortColumn"] = sort_column;
+            ViewState["SortDirection"] = sort_direction;
+            ViewState["FilterQuery"] = filter_query;
+            ViewState["FilterColumn"] = filter_column;
+            fillDropDownListsWithValues();
+            setInitialValuesOnFilters();
             EmployeesGridView.DataSource = employees;
             EmployeesGridView.DataBind();
         }
 
-        private void fillDropDownListWithValues()
+        private void setInitialValuesOnFilters() {
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Role)
+            {
+                DropDownListRoles.SelectedValue = ViewState["FilterQuery"].ToString();
+            }
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Active)
+            {
+                if (ViewState["FilterQuery"].ToString() == "1")
+                    CheckBoxIsActive.Checked = true;
+                else
+                    CheckBoxIsActive.Checked = false;
+            }
+        }
+
+        private void fillDropDownListsWithValues()
         {
             List<UserRole> data = UserRole.getAllRoles();
             DropDownListRoles.Items.Clear();
@@ -30,51 +53,31 @@ namespace medicalclinic
             }
         }
 
-        protected void ButtonFilter_Click(object sender, EventArgs e)
+        protected void ButtonFilterRoles_Click(object sender, EventArgs e)
         {
-            //if (RadioButtonName.Checked)
-            //{
-            //    string name = TextBoxName.Text;
-            //    if (name == "")
-            //    {
-            //        LabelName.Text = "Enter name before pressing filter button!!";
-            //    }
-            //    else
-            //    {
-            //        employeesGridRefresh(Employee.listEmployees.Where(emp => emp.First_name == name).ToList());
-            //        LabelName.Text = "Name";
-            //        TextBoxName.Text = "";
-            //    }
-            //}
-            //else if (RadioButtonSurname.Checked)
-            //{
-            //    string surname = TextBoxSurname.Text;
-            //    if (surname == "")
-            //    {
-            //        LabelSurname.Text = "Enter surname before pressing filter button!!";
-            //    }
-            //    else
-            //    {
-            //        employeesGridRefresh(Employee.listEmployees.Where(emp => emp.Last_name == surname).ToList());
-            //        LabelSurname.Text = "Surname";
-            //        TextBoxSurname.Text = "";
-            //    }
-            //}
-            //else if (RadioButtonUserRole.Checked)
-            //{
-            //    string role = DropDownListRoles.SelectedValue;
-            //    //role = "recepcjonista";
-            //    employeesGridRefresh(Employee.listEmployees.Where(emp => emp.User_role.Role == role).ToList());
-            //    // nie wiem dlaczego nie działa selected value i nawet jeśli zmienimy role to cały czas zaznaczona jest ta domyślna
-            //}
+            string query = DropDownListRoles.SelectedValue;
+            employeesGridRefresh(filter_column: FilterColumnEmployee.Role, filter_query: query);
         }
 
-        protected string GetSortDirection(string column)
+        protected void ButtonFilterActive_Click(object sender, EventArgs e)
         {
-            string nextDir = "ASC";
+            string query = "";
+            if (CheckBoxIsActive.Checked) query = "1";
+            else query = "0";
+            employeesGridRefresh(filter_column: FilterColumnEmployee.Active, filter_query: query);
+        }
+
+        protected void ButtonFilterClear_Click(object sender, EventArgs e)
+        {          
+            employeesGridRefresh();
+        }
+
+        protected SortDirection GetSortDirection(string column)
+        {
+            SortDirection nextDir = SortDirection.Ascending;
             if (ViewState["sort"] != null && ViewState["sort"].ToString() == column)
             {
-                nextDir = "DESC";
+                nextDir = SortDirection.Descending;
                 ViewState["sort"] = null;
             }
             else
@@ -86,205 +89,68 @@ namespace medicalclinic
 
         protected void EmployeesGridView_Sorting(object sender, GridViewSortEventArgs e)
         {
-            string sort_column, sort_direction;
-            string dir = GetSortDirection(e.SortExpression);
-            switch (e.SortExpression)
-            {
-                case "First_name":
-                    sort_column = "first_name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Second_name":
-                    sort_column = "second_name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Pesel":
-                    sort_column = "pesel";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Sex":
-                    sort_column = "sex";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Phone_number":
-                    sort_column = "phone_number";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Date_of_birth":
-                    sort_column = "date_of_birth";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Email":
-                    sort_column = "email";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Is_active":
-                    sort_column = "is_active";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "User_department.Name":
-                    sort_column = "departments.name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Medical_specialization.Name":
-                    sort_column = "medical_specializations.name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "User_role.Name":
-                    sort_column = "user_roles.name";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Address.Country":
-                    sort_column = "country";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Address.State":
-                    sort_column = "state";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Address.City":
-                    sort_column = "city";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Address.Postal_code":
-                    sort_column = "postal_code";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Address.Street":
-                    sort_column = "street";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                case "Address.Number":
-                    sort_column = "number";
-                    if (dir == "ASC")
-                    {
-                        sort_direction = "ASC";
-                    }
-                    else
-                    {
-                        sort_direction = "DESC";
-                    }
-                    break;
-                default:
-                    {
-                        sort_column = "employees.id";
-                        sort_direction = "DESC";
-                    }
-                    break;
-            }
+            string sort_column;
+            SortDirection sort_direction = GetSortDirection(e.SortExpression);
+            sort_column = e.SortExpression.ToString();
             employeesGridRefresh(sort_column, sort_direction);
+        }
+        protected void EmployeesGridView_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                foreach (TableCell tc in e.Row.Cells)
+                {
+                    if (tc.HasControls())
+                    {
+                        LinkButton lnk = (LinkButton)tc.Controls[0];
+                        if (lnk != null && ViewState["SortColumn"].ToString() == lnk.CommandArgument)
+                        {
+                            string sortArrow = (SortDirection)ViewState["SortDirection"] == SortDirection.Ascending ? " &#9650;" : " &#9660;";
+                            lnk.Text += sortArrow;
+                        }
+                    }
+                }
+            }
+
+            if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Role)
+            {
+                LabelRoles.CssClass += " filters-container__element--active";
+                LabelIsActive.CssClass = "filter-label-employee";
+
+            }
+            else if ((FilterColumnEmployee)ViewState["FilterColumn"] == FilterColumnEmployee.Active)
+            {
+                LabelIsActive.CssClass += " filters-container__element--active";
+                LabelRoles.CssClass = "filter-label-employee";
+
+            }
+            else {
+                LabelRoles.CssClass = "filter-label-employee";
+                LabelIsActive.CssClass = "filter-label-employee";
+            }
+
+        }
+
+        protected void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddEmployee.aspx");
+        }
+
+        protected void EmployeeReviewButton_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = sender as LinkButton;
+            Response.Redirect("EmployeeReview.aspx?id =" + lnk.CommandArgument);
+        }
+
+        protected void EmployeeEditButton_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = sender as LinkButton;
+            Response.Redirect("EmployeeEdit.aspx?id =" + lnk.CommandArgument);
+        }
+
+        protected void ButtonOffices_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("OfficesManagement.aspx");
         }
     }
 }

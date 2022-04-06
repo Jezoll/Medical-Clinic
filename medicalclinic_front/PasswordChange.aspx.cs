@@ -17,6 +17,7 @@ namespace medicalclinic
             {
                 Response.Redirect("Login.aspx");
             }
+            IncorrectDataLabel.Visible = false;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -24,7 +25,7 @@ namespace medicalclinic
            
             if(new_passw.Text == confirm_passw.Text)
             {
-                if(RecoveryPassword.changePassword(email.Text,new_passw.Text))
+                if(RecoveryPassword.changePassword(login.Text,new_passw.Text))
                 {
                     IncorrectDataLabel.Visible = true;
                     IncorrectDataLabel.Text = "Hasło zostało pomyślnie zmienione";
@@ -40,7 +41,7 @@ namespace medicalclinic
         protected void returnBtn_Click(object sender, EventArgs e)
         {
             Session.Abandon();
-            email.Text = "";
+            login.Text = "";
             new_passw.Text = "";
             confirm_passw.Text = "";
             Response.Redirect("HomePage.html");

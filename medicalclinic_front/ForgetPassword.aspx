@@ -16,7 +16,7 @@
     <form id="form1" runat="server">
         <div>
     <div class="back-to-home">
-        <a href="./HomePage.html"<i class="far fa-arrow-alt-circle-left"></i></a>
+        <a href="./HomePage.html">powrót</a>
     </div>
         <div class="container">
             <div class="text-section">
@@ -26,7 +26,7 @@
             <div class="inputs">
                 <asp:TextBox ID="email" runat="server" placeholder="Email"></asp:TextBox>
                 <asp:TextBox ID="login" runat="server" placeholder="Login"></asp:TextBox>
-                <asp:Button ID="Button1" runat="server" Text="Wyślij" OnClick="Button1_Click" class="check_email" disabled />
+                <asp:Button ID="Button1" runat="server" Text="Wyślij" OnClick="Button1_Click" class="check-email" disabled />
                 <asp:Label ID="SendedMail" runat="server" Text=""></asp:Label>
                 <asp:Label ID="IncorrectDataLabel" runat="server" Text="Niepoprawne dane"></asp:Label>
             </div>

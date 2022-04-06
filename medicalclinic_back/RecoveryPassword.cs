@@ -13,7 +13,7 @@ namespace medicalclinic_back
         public static bool checkCredentials(string login, string email)
         {
             Database.openConnection();
-            MySqlCommand cmd = Database.executeQuery("SELECT user_credentials.login, employees.email FROM user_credentials LEFT JOIN employees ON employees.id_credentials = user_credentials.id WHERE user_credentials.login = @login AND employees.email = @email; ");
+            MySqlCommand cmd = Database.command("SELECT user_credentials.login, employees.email FROM user_credentials LEFT JOIN employees ON employees.id_credentials = user_credentials.id WHERE user_credentials.login = @login AND employees.email = @email; ");
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@email", email);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -25,12 +25,12 @@ namespace medicalclinic_back
             reader.Close();
             return false;
         }
-        public static bool changePassword(string email, string passw)
+        public static bool changePassword(string login, string passw)
         {
             Database.openConnection();
-            MySqlCommand cmd = Database.executeQuery("UPDATE user_credentials SET password = @password WHERE login=(SELECT user_credentials.login FROM user_credentials LEFT JOIN employees ON employees.id_credentials = user_credentials.id WHERE employees.email = @email); ");
+            MySqlCommand cmd = Database.command("UPDATE user_credentials SET password = @password WHERE login=@login; ");
             cmd.Parameters.AddWithValue("@password", passw);
-            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@login", login);
             if (cmd.ExecuteNonQuery() > 0)
             {
                 return true;

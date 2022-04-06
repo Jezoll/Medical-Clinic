@@ -17,7 +17,7 @@
 
 <body>
     <div class="back-to-home">
-        <a href="./HomePage.html"<i class="far fa-arrow-alt-circle-left"></i></a>
+        <a href="./HomePage.html">powrót</a>
     </div>
     <div class="aspNetHidden">
         <input type="hidden" name="reference" id="reference" runat="server" />
