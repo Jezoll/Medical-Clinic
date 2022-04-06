@@ -5,6 +5,7 @@
     <div class="employee-show">
         <asp:Label ID="IdLabel" runat="server" Text="ID"></asp:Label>
         <asp:TextBox ID="TextBoxID" placeholder="ID" runat="server" Enabled="False"></asp:TextBox>
+        <asp:HiddenField ID="HideFieldIDAddress" runat="server"></asp:HiddenField>
         <asp:Label ID="NameLabel" runat="server" Text="Name"></asp:Label>
         <asp:TextBox ID="TextBoxName" placeholder="Name*" runat="server" AutoPostBack="True" OnTextChanged="TextBoxName_TextChanged"></asp:TextBox>
         <asp:Label ID="SurnameLabel" runat="server" Text="Surname"></asp:Label>

@@ -52,5 +52,25 @@ namespace medicalclinic_back
 
             return address_id;
         }
+
+        public static void updateAddress(string id, string country, string state, string city, string postal_code, string street, string number)
+        {
+            Database.openConnection();
+
+            string query = "UPDATE employees SET country = @country, state = @state, city = @city, postal_code = @postal_code, street = @street, number = @number WHERE id = @id";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@country", country);
+            command.Parameters.AddWithValue("@state", state);
+            command.Parameters.AddWithValue("@city", city);
+            command.Parameters.AddWithValue("@postal_code", postal_code);
+            command.Parameters.AddWithValue("@street", street);
+            command.Parameters.AddWithValue("@number", number);
+            command.Parameters.AddWithValue("@id", id);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
     }
 }

@@ -164,6 +164,27 @@ namespace medicalclinic_back
             Database.closeConnection();
         }
 
+        public static void updateEmployee(string id, string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth)
+        {
+            Database.openConnection();
+
+            string query = "UPDATE employees SET first_name = @first_name, second_name = @second_name, pesel = @pesel, sex = @sex, phone_number = @phone_number, email = @email, date_of_birth = @date_of_birth WHERE id = @id";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@first_name", first_name);
+            command.Parameters.AddWithValue("@second_name", second_name);
+            command.Parameters.AddWithValue("@pesel", pesel);
+            command.Parameters.AddWithValue("@sex", sex);
+            command.Parameters.AddWithValue("@phone_number", phone_number);
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@date_of_birth", date_of_birth);
+            command.Parameters.AddWithValue("@id", id);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
         public static bool validatePesel(string pesel, DateTime birth, string sex)
         {
             string dayOfBirth, monthOfBirth;

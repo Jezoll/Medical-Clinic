@@ -29,6 +29,7 @@ namespace medicalclinic
                     }
 
                     TextBoxID.Text = emp.Id.ToString();
+                    HideFieldIDAddress.Value = emp.Address.Id.ToString();
                     TextBoxName.Text = emp.First_name;
                     TextBoxSurname.Text = emp.Second_name;
                     TextBoxPESEL.Text = emp.Pesel;
@@ -167,10 +168,6 @@ namespace medicalclinic
                 return;
             }
 
-
-
-            string address_id = Address.insertNewAddress(TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
-
             string sexLongName = DropDownListSex.SelectedValue.ToString();
             string sex = "m";
 
@@ -179,7 +176,8 @@ namespace medicalclinic
                 sex = "k";
             }
 
-            //TODO zrobić update
+            Employee.updateEmployee(TextBoxID.Text ,TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text);
+            Address.updateAddress(HideFieldIDAddress.Value, TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
         }
 
         protected void TextBoxSurname_TextChanged(object sender, EventArgs e)
