@@ -44,8 +44,8 @@ namespace medicalclinic
                         Session["id"] = TextBox1.Text;
                         //Random rd = new Random();
                         //int rand_num = rd.Next(5000, 9999);
-                        //HiddenField1.Value = TextBox1.Text;
-                        //Token.generateToken(HiddenField1.Value);
+                       HiddenField1.Value = TextBox1.Text;
+                       Token.generateToken(HiddenField1.Value);
                         Response.Redirect("Default.aspx");
                         //Session.RemoveAll();
                     }
