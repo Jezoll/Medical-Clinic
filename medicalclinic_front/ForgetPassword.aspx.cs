@@ -24,7 +24,8 @@ namespace medicalclinic
             if (RecoveryPassword.checkCredentials(login.Text, email.Text))
             {
                 SendedMail.Text = Email.sendEmail("<a href=\"https://localhost:44320/PasswordChange.aspx\">Link do zmiany hasła</a>", "Link do zmiany hasła", email.Text);
-                Session["change_passw"] = email.Text;
+                Session["change_passw"] = DateTime.Now;
+                Session["change_passw_login"] = login.Text;
             }
             SendedMail.Visible = true;
         }

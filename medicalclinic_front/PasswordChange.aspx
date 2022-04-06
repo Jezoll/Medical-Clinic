@@ -16,7 +16,7 @@
     <form id="form1" runat="server">
         <div>
     <div class="back-to-home">
-        <a href="./HomePage.html"<i class="far fa-arrow-alt-circle-left"></i></a>
+        <a href="./HomePage.html"><i class="far fa-arrow-alt-circle-left"></i></a>
     </div>
         <div class="container">
             <div class="text-section">
@@ -24,7 +24,7 @@
                 <p>medical clinic</p>
             </div>
             <div class="inputs">
-                <asp:TextBox ID="login" runat="server" placeholder="Login"></asp:TextBox>
+                <asp:Label ID="head_info" runat="server"></asp:Label>
                 <asp:TextBox ID="new_passw" runat="server" placeholder="Nowe hasło" type="password"></asp:TextBox>
                 <asp:TextBox ID="confirm_passw" runat="server" placeholder="Potwierdź nowe hasło" type="password"></asp:TextBox>
                 <asp:Button ID="Button1" runat="server" Text="Zmień" OnClick="Button1_Click" />

@@ -26,7 +26,7 @@
             <div class="inputs">
                 <asp:TextBox ID="email" runat="server" placeholder="Email"></asp:TextBox>
                 <asp:TextBox ID="login" runat="server" placeholder="Login"></asp:TextBox>
-                <asp:Button ID="Button1" runat="server" Text="Wyślij" OnClick="Button1_Click" class="check-email" disabled />
+                <asp:Button ID="Button1" runat="server" Text="Wyślij" OnClick="Button1_Click" class="check-email"/>
                 <asp:Label ID="SendedMail" runat="server" Text=""></asp:Label>
                 <asp:Label ID="IncorrectDataLabel" runat="server" Text="Niepoprawne dane"></asp:Label>
             </div>
