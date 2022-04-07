@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using medicalclinic_back;
+using System.Diagnostics;
 
 namespace medicalclinic
 {
+    
     public partial class WebForm5 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -33,6 +35,7 @@ namespace medicalclinic
                     TextBoxName.Text = emp.First_name;
                     TextBoxSurname.Text = emp.Second_name;
                     TextBoxPESEL.Text = emp.Pesel;
+                    ViewState["CurrentPesel"] = emp.Pesel;
                     CalendarBirthDate.SelectedDate = emp.Date_of_birth;
                     int i = 0;
                     foreach (var item in DropDownListRole.Items)
@@ -137,19 +140,20 @@ namespace medicalclinic
         {
             if (!Employee.validatePesel(TextBoxPESEL.Text, (DateTime)CalendarBirthDate.SelectedDate, DropDownListSex.SelectedValue))
             {
-                AlertBox("incorrect pesel number");
+                AlertBox("incorrect pesel number",false);
                 return;
             }
 
-            if (!Employee.validatePeselUnique(TextBoxPESEL.Text))
+            
+            if (!Employee.validatePeselUnique(TextBoxPESEL.Text) && TextBoxPESEL.Text!= ViewState["CurrentPesel"].ToString())
             {
-                AlertBox("This pesel is already in the database");
+                AlertBox("This pesel is already in the database",false);
                 return;
             }
 
             if (!AdressCheck())
             {
-                AlertBox("To add an address, all address fields must be completed");
+                AlertBox("To add an address, all address fields must be completed",false);
                 return;
             }
 
@@ -157,14 +161,14 @@ namespace medicalclinic
             {
                 if (!Employee.validateEmail(TextBoxEmail.Text))
                 {
-                    AlertBox("incorrect e-mail adress");
+                    AlertBox("incorrect e-mail adress",false);
                     return;
                 }
             }
 
             if (TextBoxPhoneNumber.Text != "" && TextBoxPhoneNumber.Text.Length != 9)
             {
-                AlertBox("incorrect phone number");
+                AlertBox("incorrect phone number",false);
                 return;
             }
 
@@ -178,6 +182,8 @@ namespace medicalclinic
 
             Employee.updateEmployee(TextBoxID.Text ,TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text);
             Address.updateAddress(HideFieldIDAddress.Value, TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
+
+            AlertBox("User has been edited", true);
         }
 
         protected void TextBoxSurname_TextChanged(object sender, EventArgs e)
@@ -203,9 +209,15 @@ namespace medicalclinic
             DropDownListSpecialization.Visible = true;
         }
 
-        private void AlertBox(string AlertMessage)
+        private void AlertBox(string AlertMessage, bool success)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + AlertMessage + "');", true);
+            string alert = "alert('" + AlertMessage + "');";
+            if (success)
+            {
+                alert = "alert('" + AlertMessage + "'); window.open('EmployeeManagement.aspx', '_self');";
+            }
+
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
 
         private bool AdressCheck()

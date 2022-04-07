@@ -57,7 +57,7 @@ namespace medicalclinic_back
         {
             Database.openConnection();
 
-            string query = "UPDATE employees SET country = @country, state = @state, city = @city, postal_code = @postal_code, street = @street, number = @number WHERE id = @id";
+            string query = "UPDATE user_addresses SET country = @country, state = @state, city = @city, postal_code = @postal_code, street = @street, number = @number WHERE id = @id";
 
             MySqlCommand command = Database.command(query);
 
