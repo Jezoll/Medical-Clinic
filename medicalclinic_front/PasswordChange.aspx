@@ -14,9 +14,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-    <div class="back-to-home">
-        <a href="./HomePage.html"><i class="far fa-arrow-alt-circle-left"></i></a>
+    <div class="popup">
+        <p>Hasła spełniają wymogi</p>
+        <asp:Button ID="Button2" runat="server" Text="Zmień" OnClick="Button2_Click" class="change-password"/>
     </div>
         <div class="container">
             <div class="text-section">
@@ -27,12 +27,13 @@
                 <asp:Label ID="head_info" runat="server"></asp:Label>
                 <asp:TextBox ID="new_passw" runat="server" placeholder="Nowe hasło" type="password"></asp:TextBox>
                 <asp:TextBox ID="confirm_passw" runat="server" placeholder="Potwierdź nowe hasło" type="password"></asp:TextBox>
-                <asp:Button ID="Button1" runat="server" Text="Zmień" OnClick="Button1_Click" />
+                <asp:Button ID="Button1" runat="server" Text="Zmień" class="change-password"/>
                 <asp:Button ID="returnBtn" runat="server" Text="Anuluj" OnClick="returnBtn_Click"/>
                 <asp:Label ID="IncorrectDataLabel" runat="server" Text="Niepoprawne dane"></asp:Label>
             </div>
         </div>
-        </div>
     </form>
+
+     <script src="./Scripts/check_password_change.js"></script>
 </body>
 </html>

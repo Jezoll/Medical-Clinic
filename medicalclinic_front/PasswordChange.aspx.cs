@@ -11,17 +11,16 @@ namespace medicalclinic
     public partial class PasswordChange : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-          
+        {       
             if (Session["change_passw"] == null)
             {
                 Response.Redirect("Login.aspx");
             }
             IncorrectDataLabel.Visible = false;
-            head_info.Text = "Zmiana hasła dla użytkownika: "+Session["change_passw_login"].ToString();
+            head_info.Text = "Zmiana hasła dla użytkownika: "+Session["change_passw_login"].ToString(); 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button2_Click(object sender, EventArgs e)
         {
            
             if(new_passw.Text == confirm_passw.Text)
@@ -30,7 +29,6 @@ namespace medicalclinic
                 {
                     IncorrectDataLabel.Visible = true;
                     IncorrectDataLabel.Text = "Hasło zostało pomyślnie zmienione";
-                    //Button1.Enabled = false;
                 }
             }
             else
@@ -45,8 +43,6 @@ namespace medicalclinic
             Session.Abandon();
             new_passw.Text = "";
             confirm_passw.Text = "";
-            Response.Redirect("HomePage.html");
-
         }
     }
 }
