@@ -339,13 +339,31 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Button Button_delete;
 
         /// <summary>
-        /// Kontrolka ConfirmMessageResponse.
+        /// Kontrolka ConfirmMessageResponseDelete.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponse;
+        protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseDelete;
+
+        /// <summary>
+        /// Kontrolka Button_modify.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_modify;
+
+        /// <summary>
+        /// Kontrolka ConfirmMessageResponseModify.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseModify;
 
         /// <summary>
         /// Kontrolka Button_close.

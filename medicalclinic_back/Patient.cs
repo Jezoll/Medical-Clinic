@@ -82,6 +82,26 @@ namespace medicalclinic_back
             Database.closeConnection();
         }
 
+        public static void ModifyPatient(int id, string first_name, string surname, string pesel, string sex, string phone_number, string email, string date_of_birth)
+        {
+            Database.openConnection();
+            string query = $"UPDATE patients SET first_name = @FirstName, second_name = @Surname, pesel = @Pesel, sex = @Sex, date_of_birth = @Date, phone_number = @PhoneNumber, email = @Email WHERE id = @Id;";
+            
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@Id", id);
+            command.Parameters.AddWithValue("@FirstName", first_name);
+            command.Parameters.AddWithValue("@Surname", surname);
+            command.Parameters.AddWithValue("@Pesel", pesel);
+            command.Parameters.AddWithValue("@Sex", sex);
+            command.Parameters.AddWithValue("@PhoneNumber", phone_number);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Date", date_of_birth);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
         public static void AddNewPatient(string first_name, string surname, string pesel, string sex, string phone_number, string email, string date_of_birth)
         {
             Database.openConnection();
@@ -134,7 +154,7 @@ namespace medicalclinic_back
 
             int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
 
-            if (sex == "Male")
+            if (sex == "M")
             {
                 gender = 'M';
             }

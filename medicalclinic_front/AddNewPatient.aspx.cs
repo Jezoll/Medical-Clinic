@@ -71,7 +71,7 @@ namespace medicalclinic
                 return;
             }
 
-            if (!Patient.ValidatePesel(TextBoxPesel.Text, DateTime.Parse(TextBoxDateOfBirth.Text), DropDownListSex.SelectedValue))
+            if (!Patient.ValidatePesel(TextBoxPesel.Text, DateTime.Parse(TextBoxDateOfBirth.Text), sex))
             {
                 AlertBox("Pesel does not match date of birth or gender!", false);
                 return;

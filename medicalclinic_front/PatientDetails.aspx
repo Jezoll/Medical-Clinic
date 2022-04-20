@@ -7,11 +7,19 @@
         {
             if (confirm('Are you sure you want to remove this patient from the database?'))
             {
-                $('#ConfirmMessageResponse').val('Yes');
+                $('#ConfirmMessageResponseDelete').val('Yes');
             }
             else
             {
-                $('#ConfirmMessageResponse').val('No');
+                $('#ConfirmMessageResponseDelete').val('No');
+            }
+        }
+        function ModifyAlertFunction() {
+            if (confirm('Are you sure you want to modify data of this patient?')) {
+                $('#ConfirmMessageResponseModify').val('Yes');
+            }
+            else {
+                $('#ConfirmMessageResponseModify').val('No');
             }
         }
     </script>
@@ -114,7 +122,11 @@
     </div>
     <div>
         <asp:Button ID="Button_delete" runat="server" OnClick="Button_Delete_Click" OnClientClick ="return DeleteAlertFunction()" Text="Delete" />
-        <asp:HiddenField ID="ConfirmMessageResponse" runat="server" ClientIDMode="Static" />
+        <asp:HiddenField ID="ConfirmMessageResponseDelete" runat="server" ClientIDMode="Static" />
+    </div>
+    <div>
+        <asp:Button ID="Button_modify" runat="server" OnClientClick ="return ModifyAlertFunction()" Text="Modify" OnClick="Button_Modify_Click" />
+        <asp:HiddenField ID="ConfirmMessageResponseModify" runat="server" ClientIDMode="Static" />
     </div>
     <asp:Button ID="Button_close" runat="server" OnClick="Button_close_Click" Text="Close" />
 </asp:Content>

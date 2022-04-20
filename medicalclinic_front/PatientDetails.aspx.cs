@@ -70,13 +70,80 @@ namespace medicalclinic
         protected void Button_Delete_Click(object sender, EventArgs e)
         {
             int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
-            string confirm_value = ConfirmMessageResponse.Value;
+            string confirm_value = ConfirmMessageResponseDelete.Value;
             if (confirm_value == "Yes")
             {
                 Patient.DeletePatient(selected_patient_id);
                 Response.Redirect("ListPatients.aspx");
             }
         }
+        private void AlertBox(string AlertMessage, bool success)
+        {
+            string alert = "alert('" + AlertMessage + "');";
+            if (success)
+            {
+                alert = "alert('" + AlertMessage + "'); window.open('ListPatients.aspx', '_self');";
+            }
 
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
+        }
+        protected void Button_Modify_Click(object sender, EventArgs e)
+        {
+            string sex = "M";
+            int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
+            string confirm_value = ConfirmMessageResponseModify.Value;
+            if (RadioButton_sex_female.Checked)
+            {
+                sex = "F";
+            }
+            Label9.Text = sex;
+            if (TextBox_first_name.Text.Equals(""))
+            {
+                AlertBox("Empty name space!", false);
+                return;
+            }
+            if (TextBox_surname.Text.Equals(""))
+            {
+                AlertBox("Empty surname space!", false);
+                return;
+            }
+            if (TextBox_pesel.Text.Length < 11)
+            {
+                AlertBox("Empty or too short pesel number!", false);
+                return;
+            }
+            if (TextBox_date_of_birth.Text.Equals(""))
+            {
+                AlertBox("Empty date of birth space!", false);
+                return;
+            }
+            if (TextBox_phone_number.Text.Length < 9 || !Patient.ValidatePhoneNumber(TextBox_phone_number.Text))
+            {
+                AlertBox("Incorrect phone number!", false);
+                return;
+            }
+            if (TextBox_email.Text.Equals("") || !Patient.ValidateEmail(TextBox_email.Text))
+            {
+                AlertBox("Incorrect e-mail adress!", false);
+                return;
+            }
+            if (!Patient.ValidatePesel(TextBox_pesel.Text, DateTime.Parse(TextBox_date_of_birth.Text), sex))
+            {
+                AlertBox("Pesel does not match date of birth or gender!", false);
+                return;
+            }
+            if (TextBox_pesel.Text != Label_pesel_value.Text && !Patient.ValidatePeselUnique(TextBox_pesel.Text))
+            {
+                AlertBox("Patient with this pesel already exist in datebase!", false);
+                return;
+            }
+
+            if (confirm_value == "Yes")
+            {
+                Patient.ModifyPatient(selected_patient_id, TextBox_first_name.Text, TextBox_surname.Text, TextBox_pesel.Text, sex, TextBox_phone_number.Text, TextBox_email.Text, TextBox_date_of_birth.Text);
+                Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
+            }
+
+        }
     }
 }
