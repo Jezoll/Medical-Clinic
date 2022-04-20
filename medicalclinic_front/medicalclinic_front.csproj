@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Calendar.aspx" />
+    <Content Include="Calendar_AddAppointment.aspx" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
@@ -149,6 +150,7 @@
     <Content Include="Content\Homepage.css" />
     <Content Include="Content\img\medical_clinic.jpg" />
     <Content Include="Content\Employee.css" />
+    <Content Include="Content\img\Calendar_refresh_button.png" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\Default.css" />
     <Content Include="Default.aspx" />
@@ -221,6 +223,13 @@
     </Compile>
     <Compile Include="Calendar.aspx.designer.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Calendar_AddAppointment.aspx.cs">
+      <DependentUpon>Calendar_AddAppointment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendar_AddAppointment.aspx.designer.cs">
+      <DependentUpon>Calendar_AddAppointment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

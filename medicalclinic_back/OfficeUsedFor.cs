@@ -24,6 +24,7 @@ namespace medicalclinic_back
         public static List<OfficeUsedFor> GetAllTypes()
         {
             Database.openConnection();
+
             string query = "SELECT id, type FROM used_for";
 
             MySqlDataReader data = Database.dataReader(query);

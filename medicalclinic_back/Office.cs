@@ -79,7 +79,8 @@ namespace medicalclinic_back
             string query = "insert into offices (id_office_specialization,id_used_for,number_of_office) values(@idSpecialization,@idUsedFor,@numberOfOffice)";
 
             MySqlCommand command = Database.command(query);
-
+            command.ExecuteNonQuery();
+            Database.closeConnection();
             int specID = 0;
             foreach(OfficeSpecialization spec in OfficeSpecialization.GetAllSpecializations())
             {
