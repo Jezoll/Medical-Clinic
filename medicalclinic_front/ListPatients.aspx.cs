@@ -145,7 +145,7 @@ namespace medicalclinic
 
         protected void ButtonClose_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ReceptionMenu.aspx");
+            Response.Redirect("Login.aspx");
         }
 
         protected void PatientsGridView_SelectedIndexChanged(object sender, EventArgs e)
