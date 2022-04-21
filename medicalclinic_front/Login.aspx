@@ -35,6 +35,19 @@
                 <p class="forgot-pass"><a href="ForgetPassword.aspx">zapomniałeś hasła?</a></p>
                 <asp:Label ID="IncorrectDataLabel" runat="server" Text="Nieprawidłowe dane logowania"></asp:Label>
                 <asp:HiddenField ID="HiddenField1" runat="server" />
+                <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="Timer1_Tick">
+                </asp:Timer>
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+                
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                <asp:Label ID="LabelSec" runat="server" Text="0"></asp:Label>
+                    </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="tick" />
+                </Triggers>
+                </asp:UpdatePanel>
             </div>
         </div>
     </form>

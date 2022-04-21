@@ -15,14 +15,32 @@ namespace medicalclinic
         {
             //Email.sendEmail("rerere", "rererer");
             IncorrectDataLabel.Visible = false;
-            if (LoginUser.checkAttempt())
+            Session["reset"] = LoginUser.NumOfAttempt;
+
+            LabelSec.Visible = false;
+            IncorrectDataLabel.Visible = false;
+            try
             {
-                TextBox1.Enabled = false;
-                TextBox2.Enabled = false;
-                Button1.Enabled = false;
-                IncorrectDataLabel.Visible = true;
-                IncorrectDataLabel.Text = LoginUser.showInfo();
+                Session["reset"] = LoginUser.NumOfAttempt;
+                if (DateTime.Parse(Session["timer"].ToString()) != DateTime.Parse(DateTime.Now.ToString()) & (int)Session["reset"] < 1) //zmień ten warunek
+                {
+                    Button1.Enabled = false;
+                    TextBox1.Enabled = false;
+                    TextBox2.Enabled = false;
+                }
+                if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
+                {
+                    LabelSec.Visible = true;
+                    Button1.Enabled = false;
+                    TextBox1.Enabled = false;
+                    TextBox2.Enabled = false;
+                }
+
+
+
             }
+            catch (NullReferenceException)
+            { }
 
         }
         protected void Button1_Click(object sender, EventArgs e)
@@ -37,6 +55,13 @@ namespace medicalclinic
                     IncorrectDataLabel.Visible = true;
                     IncorrectDataLabel.Text = "Wprowadź dane!";
                     
+                }
+                if (LoginUser.checkAttempt() & Session["timer"] == null)
+                {
+                    Session["timer"] = DateTime.Now.AddMinutes(1).ToString(); // nie rzutuj do stringa
+                    Button1.Enabled = false;
+                    TextBox1.Enabled = false;
+                    TextBox2.Enabled = false;
                 }
                 else
                 {
@@ -73,6 +98,38 @@ namespace medicalclinic
             }
         }
 
-        
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
+                {
+                    LabelSec.Visible = true;
+                    LabelSec.Text = ((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalMinutes)
+                        .ToString() + ":" + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalSeconds));
+                    Button1.Enabled = false;
+                    TextBox1.Enabled = false;
+                    TextBox2.Enabled = false;
+                }
+                else if (DateTime.Parse(Session["timer"].ToString()) <= DateTime.Parse(DateTime.Now.ToString()))
+                {
+
+                    Session["timer"] = null;
+                    Button1.Enabled = true;
+                    TextBox1.Enabled = true;
+                    TextBox2.Enabled = true;
+                    LoginUser.NumOfAttempt = 3;
+                    Response.Redirect("Login.aspx");
+                }
+
+
+
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+        }
     }
 }
