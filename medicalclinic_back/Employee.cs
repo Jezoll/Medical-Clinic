@@ -164,6 +164,20 @@ namespace medicalclinic_back
             Database.closeConnection();
         }
 
+        public static void createRelationToUser(string user_id, string employee_id)
+        {
+            Database.openConnection();
+            string query = "UPDATE employees SET id_credentials = @user_id WHERE id = @employee_id";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@user_id", user_id);
+            command.Parameters.AddWithValue("@employee_id", employee_id);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
         public static void updateEmployee(string id, string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth)
         {
             Database.openConnection();

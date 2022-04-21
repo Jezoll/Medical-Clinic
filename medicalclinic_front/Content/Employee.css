@@ -60,17 +60,25 @@
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+    width: 25%;
+}
+    .employee-show > input[type="submit"] {
+        width: 30%;
+        align-self: flex-end;
+    }
+
+.employee-show__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 0;
 }
 
+.employee-show__dropdownlist, .employee-show__item > input {
+    width: 50%;
+}
     .employee-show > input {
         margin: 3px 0;
     }
-
-/*    .employee-show > button {
-        margin: 3px 0;
-        width: 50%;
-        align-self: center;
-    }*/
 
 .employee-show__address {
     display: flex;
@@ -81,9 +89,6 @@
         margin: 3px 0;
     }
 
-/*    .employee-show__address > button {
-        margin: 3px 0;
-        width: 50%;
-        align-self: center;
-    }
-*/
+.employee-add-user {
+    margin-top: 25px;
+}

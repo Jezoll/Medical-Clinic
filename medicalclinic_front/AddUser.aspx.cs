@@ -11,7 +11,6 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void ButtonSKIP_Click(object sender, EventArgs e)
@@ -32,9 +31,7 @@ namespace medicalclinic
 
         private void LeaveThisForm()
         {
-
             Response.Redirect("EmployeeManagement.aspx");
-            
         }
     }
 }
