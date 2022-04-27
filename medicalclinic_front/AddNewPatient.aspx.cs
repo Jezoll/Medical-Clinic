@@ -35,15 +35,15 @@ namespace medicalclinic
                 sex = "F";
             }
 
-            if (TextBoxName.Text.Equals(""))
+            if (TextBoxName.Text.Equals("") || !Patient.ValidateName(TextBoxName.Text))
             {
-                AlertBox("Empty name field!", false);
+                AlertBox("Incorrect name field!", false);
                 return;
             }
 
-            if (TextBoxSurname.Text.Equals(""))
+            if (TextBoxSurname.Text.Equals("") || !Patient.ValidateSurname(TextBoxSurname.Text))
             {
-                AlertBox("Empty surname field!", false);
+                AlertBox("Incorrect surname field!", false);
                 return;
             }
 

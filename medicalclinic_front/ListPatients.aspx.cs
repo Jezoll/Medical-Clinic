@@ -8,7 +8,6 @@ namespace medicalclinic
 {
     public partial class ListPatients : System.Web.UI.Page
     {
-        public int selected_patient_id;
         protected void Page_Load(object sender, EventArgs e)
         {
 

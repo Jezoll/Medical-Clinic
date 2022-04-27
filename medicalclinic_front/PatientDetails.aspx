@@ -84,6 +84,11 @@
         <asp:Label ID="Label_email_value" runat="server" Text="Label"></asp:Label>
         
     </div>
+        <div>
+        <asp:Label ID="Label_activity" runat="server" Text="Status: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
+        <asp:Label ID="Label_activity_value" runat="server" Text="Not Active"></asp:Label>
+        
+    </div>
     </div>
 
     <div >
@@ -108,11 +113,11 @@
     </div>
     <div>
         <asp:Label ID="Label11" runat="server" Text="New Pesel: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
-        <asp:TextBox ID="TextBox_pesel" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBox_pesel" runat="server" MaxLength="11"></asp:TextBox>
     </div>
     <div>
          <asp:Label ID="Label13" runat="server" Text="New phone number: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
-         <asp:TextBox ID="TextBox_phone_number" runat="server"></asp:TextBox>
+         <asp:TextBox ID="TextBox_phone_number" runat="server" MaxLength="9"></asp:TextBox>
     </div>
     <div>
         <asp:Label ID="Label15" runat="server" Text="New email: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
@@ -128,5 +133,6 @@
         <asp:Button ID="Button_modify" runat="server" OnClientClick ="return ModifyAlertFunction()" Text="Modify" OnClick="Button_Modify_Click" />
         <asp:HiddenField ID="ConfirmMessageResponseModify" runat="server" ClientIDMode="Static" />
     </div>
+    <asp:Button ID="Button_activity" runat="server" Text="Activate Patient" OnClick="Button_activity_Click" />
     <asp:Button ID="Button_close" runat="server" OnClick="Button_close_Click" Text="Close" />
-</asp:Content>
+    </asp:Content>

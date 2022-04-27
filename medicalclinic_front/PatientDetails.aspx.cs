@@ -21,7 +21,12 @@ namespace medicalclinic
                 foreach (Patient p in patients)
                 {
                     if (p.Id == selected_patient_id)
-                    {
+                    {  
+                        if (p.Activity.ToString() == "Y") //Checking if patient is active
+                        {
+                            Label_activity_value.Text = "Active";
+                            Button_activity.Text = "Deactivate Patient";
+                        }
                         Label_first_name_value.Text = p.First_name;
                         TextBox_first_name.Text = p.First_name.ToString();
                         Label_surname_value.Text = p.Second_name;
@@ -96,15 +101,15 @@ namespace medicalclinic
             {
                 sex = "F";
             }
-            Label9.Text = sex;
-            if (TextBox_first_name.Text.Equals(""))
+            if (TextBox_first_name.Text.Equals("") || !Patient.ValidateName(TextBox_first_name.Text))
             {
-                AlertBox("Empty name space!", false);
+                AlertBox("Incorrect name field!", false);
                 return;
             }
-            if (TextBox_surname.Text.Equals(""))
+
+            if (TextBox_surname.Text.Equals("") || !Patient.ValidateSurname(TextBox_surname.Text))
             {
-                AlertBox("Empty surname space!", false);
+                AlertBox("Incorrect surname field!", false);
                 return;
             }
             if (TextBox_pesel.Text.Length < 11)
@@ -144,6 +149,33 @@ namespace medicalclinic
                 Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
             }
 
+        }
+
+        protected void Button_activity_Click(object sender, EventArgs e)
+        {
+            string activity = "";
+            string p_name = null;
+            string p_surname = null;
+            string p_pesel = null;
+            string last_apppointment_date = null;
+            int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
+            List<Patient> patients = Patient.GetPatients(p_name, p_surname, p_pesel, last_apppointment_date);
+            foreach (Patient p in patients)
+            {
+                if (p.Id == selected_patient_id)
+                {
+                    activity = p.Activity.ToString();
+                }
+            }
+            if (activity == "Y")
+            {
+                Patient.ChangePatientsActivity(selected_patient_id, "N");
+            }
+            if (activity == "N")
+            {
+                Patient.ChangePatientsActivity(selected_patient_id, "Y");
+            }
+            Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
         }
     }
 }

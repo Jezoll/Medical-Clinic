@@ -18,6 +18,7 @@ namespace medicalclinic_back
         private string email;
         private DateTime date_of_birth;
         private string date_of_last_appointment;
+        private ActivityEnum activity;
 
         public int Id { get => id; set => id = value; }
         public string First_name { get => first_name; set => first_name = value; }
@@ -28,8 +29,9 @@ namespace medicalclinic_back
         public string Email { get => email; set => email = value; }
         public DateTime Date_of_birth { get => date_of_birth; set => date_of_birth = value; }
         public string Date_of_last_appointment { get => date_of_last_appointment; set => date_of_last_appointment = value; }
+        public ActivityEnum Activity { get => activity; set => activity = value; }
 
-        public Patient(int id, string first_name, string second_name, string pesel, SexEnum sex, string phone_number, string email, DateTime date_of_birth, string date_of_last_appointment)
+        public Patient(int id, string first_name, string second_name, string pesel, SexEnum sex, string phone_number, string email, DateTime date_of_birth, ActivityEnum activity, string date_of_last_appointment)
         {
             this.id = id;
             this.first_name = first_name;
@@ -40,6 +42,7 @@ namespace medicalclinic_back
             this.email = email;
             this.date_of_birth = date_of_birth;
             this.date_of_last_appointment = date_of_last_appointment;
+            this.activity = activity;
         }
 
         public static List<Patient> GetPatients(string patient_name, string patient_surname, string patient_pesel, string appointment_date, string sort_column = "p.id", string sort_direction = "ASC")
@@ -51,12 +54,12 @@ namespace medicalclinic_back
             string p_pesel = "'" + patient_pesel + "%'";
             if (appointment_date == null)
             {
-                query = $"SELECT p.id, p.first_name, p.second_name, p.pesel, p.sex, p.phone_number, p.email, p.date_of_birth, IFNULL((SELECT MAX(v.date) FROM visits v WHERE p.id = v.id_patient), (SELECT 'no appointments')) as date FROM patients p WHERE p.first_name LIKE {p_name} AND p.second_name LIKE {p_surname} AND p.pesel LIKE {p_pesel} ORDER BY {sort_column} {sort_direction}";
+                query = $"SELECT p.id, p.first_name, p.second_name, p.pesel, p.sex, p.phone_number, p.email, p.date_of_birth, p.is_active, IFNULL((SELECT MAX(v.date) FROM visits v WHERE p.id = v.id_patient), (SELECT 'no appointments')) as date FROM patients p WHERE p.first_name LIKE {p_name} AND p.second_name LIKE {p_surname} AND p.pesel LIKE {p_pesel} ORDER BY {sort_column} {sort_direction}";
             }
             else
             {
                 string v_date = "'" + appointment_date + "'";
-                query = $"SELECT p.id, p.first_name, p.second_name, p.pesel, p.sex, p.phone_number, p.email, p.date_of_birth, CONVERT((SELECT MAX(v.date) FROM visits v WHERE p.id = v.id_patient), NCHAR) as date FROM patients p WHERE ABS(DATEDIFF({v_date}, (SELECT MAX(v.date) FROM visits v WHERE p.id = v.id_patient))) <= 3 AND p.first_name LIKE {p_name} AND p.second_name LIKE {p_surname} AND p.pesel LIKE {p_pesel} ORDER BY {sort_column} {sort_direction}";
+                query = $"SELECT p.id, p.first_name, p.second_name, p.pesel, p.sex, p.phone_number, p.email, p.date_of_birth, p.is_active, CONVERT((SELECT MAX(v.date) FROM visits v WHERE p.id = v.id_patient), NCHAR) as date FROM patients p WHERE ABS(DATEDIFF({v_date}, (SELECT MAX(v.date) FROM visits v WHERE p.id = v.id_patient))) <= 3 AND p.first_name LIKE {p_name} AND p.second_name LIKE {p_surname} AND p.pesel LIKE {p_pesel} ORDER BY {sort_column} {sort_direction}";
             }
 
             MySqlDataReader data = Database.dataReader(query);
@@ -64,7 +67,7 @@ namespace medicalclinic_back
             List<Patient> patients = new List<Patient>();
             while (data.Read())
             {
-                Patient patient = new Patient(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), (SexEnum)Enum.Parse(typeof(SexEnum), data.GetString(4)), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetString(8));
+                Patient patient = new Patient(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), (SexEnum)Enum.Parse(typeof(SexEnum), data.GetString(4)), data.GetString(5), data.GetString(6), data.GetDateTime(7), (ActivityEnum)Enum.Parse(typeof(ActivityEnum), data.GetString(8)), data.GetString(9));
 
                 patients.Add(patient);
             }
@@ -105,6 +108,19 @@ namespace medicalclinic_back
             command.ExecuteNonQuery();
             Database.closeConnection();
         }
+        public static void ChangePatientsActivity(int id, string new_activity)
+        {
+            Database.openConnection();
+            string query = $"UPDATE patients SET is_active = @NewActivity WHERE id = @Id;";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@Id", id);
+            command.Parameters.AddWithValue("@NewActivity", new_activity);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
 
         public static void AddNewPatient(string first_name, string surname, string pesel, string sex, string phone_number, string email, string date_of_birth)
         {
@@ -125,7 +141,30 @@ namespace medicalclinic_back
             command.ExecuteNonQuery();
             Database.closeConnection();
         }
+        public static bool ValidateName(string first_name)
+        {
+            Regex regex = new Regex(@"^[A-Za-z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$");
+            Match match = regex.Match(first_name);
 
+            if (!match.Success)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public static bool ValidateSurname(string surname)
+        {
+            Regex regex = new Regex(@"^[A-Za-z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$");
+            Match match = regex.Match(surname);
+
+            if (!match.Success)
+            {
+                return false;
+            }
+
+            return true;
+        }
         public static bool ValidateEmail(string email)
         {
             Regex regex = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");

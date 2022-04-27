@@ -186,6 +186,24 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label Label_email_value;
 
         /// <summary>
+        /// Kontrolka Label_activity.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_activity;
+
+        /// <summary>
+        /// Kontrolka Label_activity_value.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_activity_value;
+
+        /// <summary>
         /// Kontrolka Label_modify.
         /// </summary>
         /// <remarks>
@@ -364,6 +382,15 @@ namespace medicalclinic
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseModify;
+
+        /// <summary>
+        /// Kontrolka Button_activity.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_activity;
 
         /// <summary>
         /// Kontrolka Button_close.

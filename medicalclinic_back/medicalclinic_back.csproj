@@ -155,6 +155,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityEnum.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Appointments.cs" />
     <Compile Include="Calendar.cs" />
