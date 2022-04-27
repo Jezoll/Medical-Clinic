@@ -85,19 +85,19 @@ namespace medicalclinic
         {
             if (!Employee.validatePesel(TextBoxPESEL.Text, (DateTime)CalendarBirthDate.SelectedDate, DropDownListSex.SelectedValue))
             {
-                AlertBox("Incorrect PESEL number.", false);
+                AlertBox("Incorrect PESEL number.");
                 return;
             }
 
             if(!Employee.validatePeselUnique(TextBoxPESEL.Text))
             {
-                AlertBox("This PESEL is already in the database.", false);
+                AlertBox("This PESEL is already in the database.");
                 return;
             }
 
             if(!AdressCheck())
             {
-                AlertBox("To add an address, all address fields must be completed.", false);
+                AlertBox("To add an address, all address fields must be completed.");
                     return;
             }
 
@@ -105,14 +105,14 @@ namespace medicalclinic
             {
                 if(!Employee.validateEmail(TextBoxEmail.Text))
                 {
-                    AlertBox("Incorrect e-mail adress.", false);
+                    AlertBox("Incorrect e-mail adress.");
                     return;
                 }
             }
 
             if (TextBoxPhoneNumber.Text!="" && TextBoxPhoneNumber.Text.Length != 9)
             {
-                AlertBox("Incorrect phone number.", false);
+                AlertBox("Incorrect phone number.");
                 return;
             }
 
@@ -128,8 +128,7 @@ namespace medicalclinic
                 sex = "F";
             }
 
-            Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
-
+            string employee_id = Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
 
             if (TextBoxEmail.Text.Length > 0)
             {
@@ -143,7 +142,8 @@ namespace medicalclinic
                 smtpClient.Send("medicalclinicjandzban@gmail.com", TextBoxEmail.Text, "MedicalClinic", "You were added as employee to our Medical Clinic Database, Congratulations (this message was generated for students project)");
             }
 
-            AlertBox("New Employee has been added to database", true);
+            AlertBox("New Employee has been added to database");
+            OpenUserWindow(employee_id);
         }
         protected void DropDownListRole_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -158,15 +158,16 @@ namespace medicalclinic
         
         }
 
-        private void AlertBox(string AlertMessage, bool success)
+        private void AlertBox(string AlertMessage)
         {
             string alert = "alert('" + AlertMessage + "');";
-            if (success) 
-            {
-                alert = "alert('" + AlertMessage + "'); window.open('AddUser.aspx', '_self');";
-            }
-
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
+        }
+
+        private void OpenUserWindow(string employee_id) 
+        {
+            string window = "window.open('AddUser.aspx?emp="+ employee_id +"', '_self');";
+            ClientScript.RegisterStartupScript(this.GetType(), "openuserwindow", window, true);
         }
 
         private bool AdressCheck()

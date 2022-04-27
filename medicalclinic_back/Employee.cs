@@ -136,10 +136,10 @@ namespace medicalclinic_back
             return employees;
         }
 
-        public static void insertNewEmployee(string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth, string address_id = null) 
+        public static string insertNewEmployee(string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth, string address_id = null) 
         {
             Database.openConnection();
-            string query = "INSERT INTO employees (first_name, second_name, pesel, sex, phone_number, email, date_of_birth, id_address) VALUES (@first_name, @second_name, @pesel, @sex, @phone_number, @email, @date_of_birth, @address_value)";
+            string query = "INSERT INTO employees (first_name, second_name, pesel, sex, phone_number, email, date_of_birth, id_address) VALUES (@first_name, @second_name, @pesel, @sex, @phone_number, @email, @date_of_birth, @address_value); SELECT LAST_INSERT_ID();";
 
 
             MySqlCommand command = Database.command(query);
@@ -160,8 +160,11 @@ namespace medicalclinic_back
             command.Parameters.AddWithValue("@email", email);
             command.Parameters.AddWithValue("@date_of_birth", date_of_birth);
 
-            command.ExecuteNonQuery();
+
+            string employee_id = command.ExecuteScalar().ToString();
             Database.closeConnection();
+
+            return employee_id;
         }
 
         public static void createRelationToUser(string user_id, string employee_id)

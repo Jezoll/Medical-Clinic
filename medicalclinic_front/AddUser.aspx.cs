@@ -1,4 +1,5 @@
-﻿using System;
+﻿using medicalclinic_back;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,17 +17,20 @@ namespace medicalclinic
         protected void ButtonSKIP_Click(object sender, EventArgs e)
         {
             LeaveThisForm();
-            //wywal do employee management
             //wyswietl popout
         }
 
         protected void ButtonOK_Click(object sender, EventArgs e)
         {
-            LeaveThisForm();
+            string login = TextBoxLogin.Text;
+            string password = TextBoxPassword.Text;
+            string employee_id = Request.QueryString["emp"].ToString();
             //sprawdz poprawnosc loginu i uprawnien
-            //dodaj usera
-            //wywal do employee management
+
+            string user_id = UserCredentials.insertNewUser(login, password);
+            Employee.createRelationToUser(user_id, employee_id);
             //wyswietl popout
+            LeaveThisForm();
         }
 
         private void LeaveThisForm()
