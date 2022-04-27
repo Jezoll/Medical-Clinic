@@ -79,6 +79,10 @@ namespace medicalclinic_back
             MySqlCommand command = Database.command(query);
             command.Parameters.AddWithValue("@Id", Id);
             command.ExecuteNonQuery();
+            string query1 = $"DELETE FROM visits WHERE @Id = id_patient";
+            MySqlCommand command1 = Database.command(query1);
+            command1.Parameters.AddWithValue("@Id", Id);
+            command1.ExecuteNonQuery();
             Database.closeConnection();
         }
 
