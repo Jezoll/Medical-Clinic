@@ -75,11 +75,11 @@ namespace medicalclinic_back
         public static void DeletePatient(int Id)
         {
             Database.openConnection();
-            string query = $"DELETE FROM patients WHERE @Id = id";
+            string query = $"DELETE FROM visits WHERE @Id = id_patient";
             MySqlCommand command = Database.command(query);
             command.Parameters.AddWithValue("@Id", Id);
             command.ExecuteNonQuery();
-            string query1 = $"DELETE FROM visits WHERE @Id = id_patient";
+            string query1 = $"DELETE FROM patients WHERE @Id = id";
             MySqlCommand command1 = Database.command(query1);
             command1.Parameters.AddWithValue("@Id", Id);
             command1.ExecuteNonQuery();
@@ -128,7 +128,7 @@ namespace medicalclinic_back
 
         public static bool ValidateEmail(string email)
         {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Regex regex = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
             Match match = regex.Match(email);
 
             if (!match.Success)

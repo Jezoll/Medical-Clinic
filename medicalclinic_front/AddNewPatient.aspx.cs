@@ -37,13 +37,13 @@ namespace medicalclinic
 
             if (TextBoxName.Text.Equals(""))
             {
-                AlertBox("Empty name space!", false);
+                AlertBox("Empty name field!", false);
                 return;
             }
 
             if (TextBoxSurname.Text.Equals(""))
             {
-                AlertBox("Empty surname space!", false);
+                AlertBox("Empty surname field!", false);
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace medicalclinic
 
             if (TextBoxDateOfBirth.Text.Equals(""))
             {
-                AlertBox("Empty date of birth space!", false);
+                AlertBox("Empty date of birth field!", false);
                 return;
             }
 
@@ -67,7 +67,7 @@ namespace medicalclinic
 
             if (TextBoxEmail.Text.Equals("") || !Patient.ValidateEmail(TextBoxEmail.Text))
             {
-                AlertBox("Incorrect e-mail adress!", false);
+                AlertBox("Incorrect e-mail address!", false);
                 return;
             }
 
