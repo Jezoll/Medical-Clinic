@@ -14,16 +14,13 @@ const handleCancelBtn = e => {
 }
 
 const checkPassword = (pass1, pass2) => {
-    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
-
-    if (re.test(pass1.value) || re.test(pass2.value))
-        if (pass1.value === pass2.value) {
-            btn.classList.remove('change-password')
-            return true;
-        }
-        else {
+        if ((pass1.value !== pass2.value) || (pass1.value == '' && pass2.value == '')) {
             btn.classList.add('change-password');
             return false;
+        }
+        else {
+            btn.classList.remove('change-password')
+            return true;
         }
 }
 
