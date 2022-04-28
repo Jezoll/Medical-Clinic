@@ -25,9 +25,10 @@ const checkPassword = (pass1, pass2) => {
 }
 
 const handleSubmitBtn = e => {
-    e.preventDefault();
-    if (checkPassword(pass, confirmPass))
-        popup.style.display = 'block'
+    if (!checkPassword(pass, confirmPass))
+        e.preventDefault();
+
+    confirm('Hasła się zgadzają!');
 }
 
 [pass, confirmPass].forEach(el => el.addEventListener('keyup', function () {

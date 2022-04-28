@@ -38,7 +38,6 @@ namespace medicalclinic
             if (RecoveryPassword.changePassword(Session["change_passw_login"].ToString(), new_passw.Text))
             {
                 IncorrectDataLabel.Visible = true;
-                
             }
            
         }
