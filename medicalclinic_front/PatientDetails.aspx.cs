@@ -52,7 +52,7 @@ namespace medicalclinic
                     }
                 }
 
-                List<Appointment> appointments = Appointment.GetAllAppointments("visits.id", "ASC");
+                List<Appointment> appointments = Appointment.GetAllAppointments("v.id", "ASC");
                 List<Appointment> appointment_details = new List<Appointment>();
                 foreach (Appointment a in appointments)
                 {

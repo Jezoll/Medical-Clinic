@@ -32,8 +32,8 @@
                 <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="false" ReadOnly="true" />
                 <asp:BoundField DataField="Duration" HeaderText="Duration"/>
                 <asp:BoundField DataField="Type" HeaderText="Type"/>
-                <asp:BoundField DataField="Id_employee" HeaderText="Employee ID"/>
-                <asp:BoundField DataField="Id_office" HeaderText="Office ID" />
+                <asp:BoundField DataField="Employee" HeaderText="Employee"/>
+                <asp:BoundField DataField="Office_number" HeaderText="Office number" />
                 <asp:BoundField DataField="Date_of_appointment" HeaderText="Appointment date" DataFormatString="{0:yyyy/MM/dd}"/>
             </Columns>
             <AlternatingRowStyle BackColor="White" />
