@@ -4,7 +4,7 @@
     <asp:TextBox ID="TextBoxID" runat="server"></asp:TextBox>
     <br />
     <asp:Label ID="LabelNumberOfOffice" runat="server" Text="Number Of Office"></asp:Label>
-    <asp:TextBox ID="TextBoxNumberOfOffice" runat="server" AutoPostBack="true"></asp:TextBox>
+    <asp:TextBox ID="TextBoxNumberOfOffice" runat="server" AutoPostBack="true" OnTextChanged="TextBoxNumberOfOffice_TextChanged"></asp:TextBox>
     <br />
     <asp:Label ID="LabelAvailibility" runat="server" Text="Availibility"></asp:Label>
     <asp:CheckBox ID="CheckBoxAvailibility" runat="server" />

@@ -87,25 +87,32 @@ namespace medicalclinic
 
         protected void ButtonEdit_Click(object sender, EventArgs e)
         {
-            if (TextBoxNumberOfOffice.Text.Length == 0)
-            {
-                LabelNumberOfOffice.Text = "This field can not be empty";
-                return;
-            }
-            else 
-            {
-                foreach (char ch in TextBoxNumberOfOffice.Text)
-                {
-
-                     if (!char.IsDigit(ch))
-                    {
-                        LabelNumberOfOffice.Text = "Number of office must contain digits only";
-                        return;
-                    }
-                }
-            }
             Office.EditOfficesData(Convert.ToInt32(TextBoxID.Text), TextBoxNumberOfOffice.Text, CheckBoxAvailibility.Checked, DropDownListRoles.SelectedValue, DropDownListSpecializations.SelectedValue);
             Response.Redirect("OfficesManagement.aspx");
         }
+
+        protected void TextBoxNumberOfOffice_TextChanged(object sender, EventArgs e)
+        {
+            foreach (char ch in TextBoxNumberOfOffice.Text)
+            {
+                if (!char.IsDigit(ch))
+                {
+                    TextBoxNumberOfOffice.Text = "";
+                }
+            }
+            valuesPicked();
+        }
+
+        private void valuesPicked()
+        {
+            if (TextBoxNumberOfOffice.Text == "" || DropDownListSpecializations.SelectedValue == null || DropDownListRoles.SelectedValue == null)
+            {
+                ButtonEdit.Enabled = false;
+                return;
+            }
+            ButtonEdit.Enabled = true;
+
+        }
+
     }
 }

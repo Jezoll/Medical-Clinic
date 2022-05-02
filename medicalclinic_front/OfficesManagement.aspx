@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OfficesManagement.aspx.cs" Inherits="medicalclinic.OfficesManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+        
+
+
             <asp:GridView
             ID="OfficesGridView"
             runat="server"
@@ -18,6 +21,47 @@
                         <asp:LinkButton ID="OfficeEditButton" OnClick="OfficeEditButton_Click" runat="server" Text='Edit data'
                         CommandArgument='<%# Eval("Id") %>'>
                         </asp:LinkButton>
+                     </ItemTemplate>
+                    </asp:TemplateField>
+                 <asp:TemplateField>
+                      <ItemTemplate>
+                        <asp:LinkButton ID="OfficeDeleteButton" runat="server" Text='Delete Office'
+                        CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+                          <ajaxToolkit:ModalPopupExtender ID="PopupDeleteOffice" runat="server" PopupControlID="Panel1" TargetControlID="OfficeDeleteButton"  
+    CancelControlID="ButtonCancel" BackgroundCssClass="Background">  
+</ajaxToolkit:ModalPopupExtender>  
+<asp:Panel ID="Panel1" runat="server" CssClass="Popup" align="center" style = "display:none">  
+    <iframe style=" width: 200px; height: 200px;" id="irm1" src="PopupConfirmOfficeDeletion.aspx" runat="server"></iframe>  
+   <br/>  
+        <asp:Button ID="ButtonCancel" runat="server" Text="Cancel" /> 
+
+</asp:Panel>
+                          <style type="text/css">  
+        .Background  
+        {  
+            background-color: Black;  
+            filter: alpha(opacity=90);  
+            opacity: 0.8;  
+        }  
+        .Popup  
+        {  
+            background-color: #FFFFFF;  
+            border-width: 3px;  
+            border-style: solid;  
+            border-color: black;  
+            padding-top: 10px;  
+            padding-left: 10px;  
+            width: 300px;  
+            height: 250px;  
+        }  
+        .lbl  
+        {  
+            font-size:16px;  
+            font-style:italic;  
+            font-weight:bold;  
+        }  
+    </style>  
                      </ItemTemplate>
                 </asp:TemplateField>
                 </Columns>
