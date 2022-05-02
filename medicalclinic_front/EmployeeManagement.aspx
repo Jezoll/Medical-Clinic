@@ -52,47 +52,19 @@
                                 CommandArgument='<%# Eval("Id") %>'>
                             </asp:LinkButton>
                             <ajaxToolkit:ModalPopupExtender ID="PopupAdminPassword" runat="server" PopupControlID="Panl1" TargetControlID="IsActiveChange"
-                                CancelControlID="ButtonOK" BackgroundCssClass="Background">
+                                CancelControlID="ButtonOK" BackgroundCssClass="popout-background">
                             </ajaxToolkit:ModalPopupExtender>
-                            <asp:Panel ID="Panl1" runat="server" CssClass="Popup" align="center" Style="display: none">
+                            <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center" Style="display: none">
                                 <iframe style="width: 250px; height: 250px;" id="irm1" src="PopupAdminPassword.aspx" runat="server"></iframe>
                                 <br />
                                 <asp:Button ID="ButtonOK" runat="server" Text="OK" />
                             </asp:Panel>
-
-                            <style type="text/css">
-                                .Background {
-                                    background-color: Black;
-                                    filter: alpha(opacity=90);
-                                    opacity: 0.8;
-                                }
-
-                                .Popup {
-                                    background-color: #FFFFFF;
-                                    border-width: 3px;
-                                    border-style: solid;
-                                    border-color: black;
-                                    padding-top: 10px;
-                                    padding-left: 10px;
-                                    width: 300px;
-                                    height: 300px;
-                                }
-
-                                .lbl {
-                                    font-size: 16px;
-                                    font-style: italic;
-                                    font-weight: bold;
-                                }
-                            </style>
                         </ItemTemplate>
                     </asp:TemplateField>
-
-
-
                 </Columns>
             </asp:GridView>
         </div>
-        <div class="filters-container ">
+        <div class="filters-container">
             <div class="filters-container__element">
                 <asp:Label ID="LabelRoles" CssClass="filter-label-employee" runat="server" Text="Roles"></asp:Label>
                 <asp:DropDownList ID="DropDownListRoles" runat="server"></asp:DropDownList>

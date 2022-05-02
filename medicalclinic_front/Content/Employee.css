@@ -1,20 +1,24 @@
-﻿.table-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    margin-top: 10px;
-}
-
-.table-content {
-    overflow: scroll;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    max-height: 400px
-}
-
-.btn-employee-add {
+﻿.btn-employee-add {
     width: 20%;
+}
+
+@media screen and (max-width: 768px) {
+    .filters-container {
+        margin-left: 10px;
+        max-width: 75%;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .filters-container {
+        max-width: 45%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .filters-container {
+        max-width: 25%;
+    }
 }
 
 .filters-container {
@@ -22,7 +26,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
-    max-width: 20%;
 }
 
 .filters-container__element {
@@ -59,13 +62,30 @@
 .employee-show {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
-    width: 25%;
+    margin: 20px auto 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    padding: 5px;
 }
-    .employee-show > input[type="submit"] {
-        width: 30%;
-        align-self: flex-end;
+
+@media screen and (max-width: 768px) {
+    .employee-show {
+        min-width: 50%;
+        max-width: 75%;
     }
+}
+
+@media screen and (min-width: 769px) {
+    .employee-show {
+        min-width: 25%;
+        max-width: 35%;
+    }
+}
+
+.employee-show > input[type="submit"] {
+    width: 30%;
+    align-self: flex-end;
+}
 
 .employee-show__item {
     display: flex;

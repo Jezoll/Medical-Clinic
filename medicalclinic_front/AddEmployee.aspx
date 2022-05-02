@@ -7,12 +7,10 @@
         <asp:TextBox ID="TextBoxPESEL" placeholder="PESEL*" runat="server" MaxLength="11" OnTextChanged="TextBoxPESEL_TextChanged" AutoPostBack="True"></asp:TextBox>
         <asp:TextBox ID="CalendarTextBox" runat="server"></asp:TextBox>
         <ajaxToolkit:CalendarExtender ID="CalendarBirthDate" PopupButtonID="imgPopup" runat="server" TargetControlID="CalendarTextBox" Format="yyyy-MM-dd"></ajaxToolkit:CalendarExtender>
-
         <asp:DropDownList ID="DropDownListRole" runat="server" OnSelectedIndexChanged="DropDownListRole_SelectedIndexChanged" AutoPostBack="True">
         </asp:DropDownList>
         <asp:DropDownList ID="DropDownListSpecialization" runat="server" Visible="False">
         </asp:DropDownList>
-
         <asp:Panel ID="AddressPanel" runat="server" CssClass="employee-show__address">
             <asp:TextBox ID="TextBoxCountry" placeholder="Country" runat="server"></asp:TextBox>
             <asp:TextBox ID="TextBoxState" placeholder="State" runat="server"></asp:TextBox>
