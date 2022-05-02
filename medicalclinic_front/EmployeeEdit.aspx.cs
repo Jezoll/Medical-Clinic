@@ -23,6 +23,7 @@ namespace medicalclinic
                 int id = int.Parse(Request.QueryString[0]);
                 List<Employee> employees = Employee.getAllEmployees();
 
+
                 foreach (Employee emp in employees)
                 {
                     if (id != emp.Id)
@@ -87,9 +88,12 @@ namespace medicalclinic
                     {
                         CheckBoxIsActive.Checked = false;
                     }
-
                     break;
                 }
+            }
+            else 
+            {
+                CalendarBirthDate.SelectedDate = DateTime.ParseExact(CalendarTextBox.Text, CalendarBirthDate.Format, null);
             }
             
         }
@@ -140,20 +144,20 @@ namespace medicalclinic
         {
             if (!Employee.validatePesel(TextBoxPESEL.Text, (DateTime)CalendarBirthDate.SelectedDate, DropDownListSex.SelectedValue))
             {
-                AlertBox("incorrect pesel number",false);
+                AlertBox("incorrect pesel number");
                 return;
             }
 
             
             if (!Employee.validatePeselUnique(TextBoxPESEL.Text) && TextBoxPESEL.Text!= ViewState["CurrentPesel"].ToString())
             {
-                AlertBox("This pesel is already in the database",false);
+                AlertBox("This pesel is already in the database");
                 return;
             }
 
             if (!AdressCheck())
             {
-                AlertBox("To add an address, all address fields must be completed",false);
+                AlertBox("To add an address, all address fields must be completed");
                 return;
             }
 
@@ -161,29 +165,30 @@ namespace medicalclinic
             {
                 if (!Employee.validateEmail(TextBoxEmail.Text))
                 {
-                    AlertBox("incorrect e-mail adress",false);
+                    AlertBox("incorrect e-mail adress");
                     return;
                 }
             }
 
             if (TextBoxPhoneNumber.Text != "" && TextBoxPhoneNumber.Text.Length != 9)
             {
-                AlertBox("incorrect phone number",false);
+                AlertBox("incorrect phone number");
                 return;
             }
 
             string sexLongName = DropDownListSex.SelectedValue.ToString();
-            string sex = "m";
+            string sex = "M";
 
             if (sexLongName == "Female")
             {
-                sex = "k";
+                sex = "F";
             }
 
             Employee.updateEmployee(TextBoxID.Text ,TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text);
             Address.updateAddress(HideFieldIDAddress.Value, TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
 
-            AlertBox("User has been edited", true);
+            AlertBox("User has been edited");
+            RedirectToEmployeeManagenement();
         }
 
         protected void TextBoxSurname_TextChanged(object sender, EventArgs e)
@@ -209,16 +214,18 @@ namespace medicalclinic
             DropDownListSpecialization.Visible = true;
         }
 
-        private void AlertBox(string AlertMessage, bool success)
+        private void AlertBox(string AlertMessage)
         {
             string alert = "alert('" + AlertMessage + "');";
-            if (success)
-            {
-                alert = "alert('" + AlertMessage + "'); window.open('EmployeeManagement.aspx', '_self');";
-            }
-
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
+
+        private void RedirectToEmployeeManagenement()
+        {
+            string window = "window.open('EmployeeManagement.aspx', '_self');";
+            ClientScript.RegisterStartupScript(this.GetType(), "openemployeemanagement", window, true);
+        }
+
 
         private bool AdressCheck()
         {

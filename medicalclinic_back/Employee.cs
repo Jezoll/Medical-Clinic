@@ -311,7 +311,7 @@ namespace medicalclinic_back
 
         public static bool validateEmail(string email)
         {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Regex regex = new Regex(@"^[^@]+@[^@]+\.[^@]+$");
             Match match = regex.Match(email);
 
             if(!match.Success)
