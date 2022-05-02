@@ -82,8 +82,26 @@ namespace medicalclinic
 
         protected void ButtonInsertOffice_Click(object sender, EventArgs e)
         {
+            if (!Office.ValidateNumberUnique(TextBoxNumberOfOffice.Text))
+            {
+                string message = "Two offices can not have the same number";
+                AlertBox(message);
+                ResetValues();
+                officesGridViewRefresh();
+                return;
+            }
+            
             Office.InsertNewOffice(TextBoxNumberOfOffice.Text, DropDownListSpecializations.SelectedValue, DropDownListOfficeRole.SelectedValue);
+            ResetValues();
             officesGridViewRefresh();
+        }
+
+        private void ResetValues()
+        {
+            TextBoxNumberOfOffice.Text = "";
+            DropDownListSpecializations.SelectedIndex = 0;
+            DropDownListOfficeRole.SelectedIndex = 0;
+            ButtonInsertOffice.Enabled = false;
         }
 
         protected void OfficeEditButton_Click(object sender, EventArgs e)
@@ -91,5 +109,12 @@ namespace medicalclinic
             LinkButton lnk = sender as LinkButton;
             Response.Redirect("EditOfficeData.aspx?id =" + lnk.CommandArgument);
         }
+
+        private void AlertBox(string AlertMessage)
+        {
+            string alert = "alert('" + AlertMessage + "');";
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
+        }
+
     }
 }

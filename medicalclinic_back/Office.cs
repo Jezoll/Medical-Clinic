@@ -145,5 +145,55 @@ namespace medicalclinic_back
             Database.closeConnection();
         }
 
+        public static bool CheckIfPlannedForFutureVisits(int officeID)
+        {
+            string query = "select count(*) from visits where date >= @data and id_office = @id";
+            Database.openConnection();
+
+            MySqlCommand command = Database.command(query);
+            command.Parameters.AddWithValue("@data", DateTime.Now.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@id", officeID);
+
+
+            Int32 futureVisits = (Int32)(long)command.ExecuteScalar();
+            Database.closeConnection();
+
+            if(futureVisits >= 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static void DeleteOffice(int officeID)
+        {
+            //czy usuwać to biuro z bazy danych?
+            //Wtedy będzie trzeba usunać wszystkie przeszłe wizyty, do których jest ono przypisane
+
+            string query = "update offices set avalibility = false where offices.id = @id";
+
+            Database.openConnection();
+
+            MySqlCommand command = Database.command(query);
+            command.Parameters.AddWithValue("@id", officeID);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+
+        }
+
+        public static bool ValidateNumberUnique(string numberOfOffice)
+        {
+            List<Office> offices = GetAllOffices();
+            foreach(Office off in offices)
+            {
+                if(off.Number_of_office == numberOfOffice)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
 }
