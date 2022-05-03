@@ -100,17 +100,6 @@ namespace medicalclinic
             Response.Redirect("OfficesManagement.aspx");
         }
 
-        protected void TextBoxNumberOfOffice_TextChanged(object sender, EventArgs e)
-        {
-            foreach (char ch in TextBoxNumberOfOffice.Text)
-            {
-                if (!char.IsDigit(ch))
-                {
-                    TextBoxNumberOfOffice.Text = "";
-                }
-            }
-            valuesPicked();
-        }
 
         private void valuesPicked()
         {
@@ -129,5 +118,16 @@ namespace medicalclinic
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
 
+        protected void TextBoxNumberOfOffice_TextChanged1(object sender, EventArgs e)
+        {
+            foreach (char ch in TextBoxNumberOfOffice.Text)
+            {
+                if (!char.IsDigit(ch))
+                {
+                    TextBoxNumberOfOffice.Text = "";
+                }
+            }
+            valuesPicked();
+        }
     }
 }

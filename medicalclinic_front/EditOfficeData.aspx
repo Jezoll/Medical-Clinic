@@ -8,7 +8,7 @@
         </div>
         <div class="office-show__item">
             <asp:Label ID="LabelNumberOfOffice" runat="server" Text="Number Of Office"></asp:Label>
-            <asp:TextBox ID="TextBoxNumberOfOffice" runat="server" AutoPostBack="true"></asp:TextBox>
+            <asp:TextBox ID="TextBoxNumberOfOffice" runat="server" AutoPostBack="true" OnTextChanged="TextBoxNumberOfOffice_TextChanged1"></asp:TextBox>
         </div>
         <div class="office-show__item">
             <asp:Label ID="LabelAvailibility" runat="server" Text="Availibility"></asp:Label>

@@ -187,6 +187,7 @@ namespace medicalclinic_back
             if(newNumberOfOffice != oldNumberOfOffice)
             {
                 List<Office> offices = GetAllOffices();
+
                 foreach (Office off in offices)
                 {
                     if (off.Number_of_office == newNumberOfOffice)
