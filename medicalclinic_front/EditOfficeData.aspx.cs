@@ -10,6 +10,7 @@ namespace medicalclinic
 {
     public partial class EditOfficeData : System.Web.UI.Page
     {
+        private static string oldOfficeNumber;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack) 
@@ -31,6 +32,7 @@ namespace medicalclinic
 
                     TextBoxID.Text = off.Id.ToString();
                     TextBoxNumberOfOffice.Text = off.Number_of_office;
+                    oldOfficeNumber = off.Number_of_office;
                     CheckBoxAvailibility.Checked = off.Avalibility;
                     //DropDownListSpecializations.SelectedIndex = off.Office_specialization.Id;
                     //DropDownListRoles.SelectedIndex = off.Office_role.Id;
@@ -87,6 +89,13 @@ namespace medicalclinic
 
         protected void ButtonEdit_Click(object sender, EventArgs e)
         {
+            if(!Office.ValidateNumberUnique(TextBoxNumberOfOffice.Text, oldOfficeNumber))
+            {
+                string message = "Two offices can not have the same number";
+                AlertBox(message);
+                ButtonEdit.Enabled = false;
+                return;
+            }
             Office.EditOfficesData(Convert.ToInt32(TextBoxID.Text), TextBoxNumberOfOffice.Text, CheckBoxAvailibility.Checked, DropDownListRoles.SelectedValue, DropDownListSpecializations.SelectedValue);
             Response.Redirect("OfficesManagement.aspx");
         }
@@ -112,6 +121,12 @@ namespace medicalclinic
             }
             ButtonEdit.Enabled = true;
 
+        }
+
+        private void AlertBox(string AlertMessage)
+        {
+            string alert = "alert('" + AlertMessage + "');";
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
 
     }

@@ -182,16 +182,20 @@ namespace medicalclinic_back
 
         }
 
-        public static bool ValidateNumberUnique(string numberOfOffice)
+        public static bool ValidateNumberUnique(string newNumberOfOffice, string oldNumberOfOffice = "-1")
         {
-            List<Office> offices = GetAllOffices();
-            foreach(Office off in offices)
+            if(newNumberOfOffice != oldNumberOfOffice)
             {
-                if(off.Number_of_office == numberOfOffice)
+                List<Office> offices = GetAllOffices();
+                foreach (Office off in offices)
                 {
-                    return false;
+                    if (off.Number_of_office == newNumberOfOffice)
+                    {
+                        return false;
+                    }
                 }
             }
+            
             return true;
         }
 
