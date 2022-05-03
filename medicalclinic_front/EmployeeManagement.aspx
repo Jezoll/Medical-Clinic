@@ -57,7 +57,7 @@
                             <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center" Style="display: none">
                                 <iframe style="width: 250px; height: 250px;" id="irm1" src="PopupAdminPassword.aspx" runat="server"></iframe>
                                 <br />
-                                <asp:Button ID="ButtonOK" runat="server" Text="OK" />
+                                <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="OK" />
                             </asp:Panel>
                         </ItemTemplate>
                     </asp:TemplateField>

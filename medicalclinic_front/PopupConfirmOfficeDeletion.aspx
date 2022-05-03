@@ -13,7 +13,7 @@
             <br />
             <br />
         </div>
-        <asp:Button ID="ButtonConfirm" runat="server" OnClick="ButtonConfirm_Click" Text="Confirm" />
-</form>
+        <asp:Button CssClass="btn btn-default" ID="ButtonConfirm" runat="server" OnClick="ButtonConfirm_Click" Text="Confirm" />
+    </form>
 </body>
 </html>
