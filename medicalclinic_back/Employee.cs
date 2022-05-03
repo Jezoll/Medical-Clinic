@@ -136,10 +136,10 @@ namespace medicalclinic_back
             return employees;
         }
 
-        public static void insertNewEmployee(string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth, string address_id = null) 
+        public static string insertNewEmployee(string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth, string address_id = null) 
         {
             Database.openConnection();
-            string query = "INSERT INTO employees (first_name, second_name, pesel, sex, phone_number, email, date_of_birth, id_address) VALUES (@first_name, @second_name, @pesel, @sex, @phone_number, @email, @date_of_birth, @address_value)";
+            string query = "INSERT INTO employees (first_name, second_name, pesel, sex, phone_number, email, date_of_birth, id_address) VALUES (@first_name, @second_name, @pesel, @sex, @phone_number, @email, @date_of_birth, @address_value); SELECT LAST_INSERT_ID();";
 
 
             MySqlCommand command = Database.command(query);
@@ -159,6 +159,23 @@ namespace medicalclinic_back
             command.Parameters.AddWithValue("@phone_number", phone_number);
             command.Parameters.AddWithValue("@email", email);
             command.Parameters.AddWithValue("@date_of_birth", date_of_birth);
+
+
+            string employee_id = command.ExecuteScalar().ToString();
+            Database.closeConnection();
+
+            return employee_id;
+        }
+
+        public static void createRelationToUser(string user_id, string employee_id)
+        {
+            Database.openConnection();
+            string query = "UPDATE employees SET id_credentials = @user_id WHERE id = @employee_id";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@user_id", user_id);
+            command.Parameters.AddWithValue("@employee_id", employee_id);
 
             command.ExecuteNonQuery();
             Database.closeConnection();
@@ -294,7 +311,7 @@ namespace medicalclinic_back
 
         public static bool validateEmail(string email)
         {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Regex regex = new Regex(@"^[^@]+@[^@]+\.[^@]+$");
             Match match = regex.Match(email);
 
             if(!match.Success)

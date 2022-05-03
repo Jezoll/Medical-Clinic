@@ -151,6 +151,8 @@
     <Content Include="Content\Employee.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\Default.css" />
+    <Content Include="Content\Office.css" />
+    <Content Include="Content\PopOut.css" />
     <Content Include="Default.aspx" />
     <Content Include="EditOfficeData.aspx" />
     <Content Include="EmployeeManagement.aspx" />

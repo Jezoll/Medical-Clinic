@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OfficesManagement.aspx.cs" Inherits="medicalclinic.OfficesManagement" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-        
-
-
+    <div class="table-container">
+        <div class="table-content">
             <asp:GridView
             ID="OfficesGridView"
             runat="server"
@@ -65,22 +65,24 @@
                      </ItemTemplate>
                 </asp:TemplateField>
                 </Columns>
-             </asp:GridView>
-            <asp:Label ID="LabelNumberOfOffice" runat="server" Text="Number Of Office"></asp:Label>
-            <br />
-            <asp:TextBox runat="server" ID="TextBoxNumberOfOffice" AutoPostBack="True" OnTextChanged="TextBoxNumberOfOffice_TextChanged" MaxLength="10" />
-             <br />
-            <asp:Label ID="LabelSpecialization" runat="server" Text="Office Specialization"></asp:Label>
-            <br />
-            <asp:DropDownList ID="DropDownListSpecializations" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListSpecializations_SelectedIndexChanged">
-            </asp:DropDownList>
-            <br />
-            <asp:Label ID="LabelRole" runat="server" Text="Role Of Office"></asp:Label>
-            <br />
-            <asp:DropDownList ID="DropDownListOfficeRole" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListOfficeRole_SelectedIndexChanged">
-            </asp:DropDownList>
-            <br />
-            <asp:Button ID="ButtonInsertOffice" runat="server" Text="Add New Office" OnClick="ButtonInsertOffice_Click" />
-            <br />
-
+            </asp:GridView>
+        </div>
+        <div class="office-add-container">
+            <div class="office-add__element">
+                <asp:Label ID="LabelNumberOfOffice" runat="server" Text="Number Of Office"></asp:Label>
+                <asp:TextBox runat="server" ID="TextBoxNumberOfOffice" AutoPostBack="True" OnTextChanged="TextBoxNumberOfOffice_TextChanged" MaxLength="10" />
+            </div>
+            <div class="office-add__element">
+                <asp:Label ID="LabelSpecialization" runat="server" Text="Office Specialization"></asp:Label>
+                <asp:DropDownList ID="DropDownListSpecializations" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListSpecializations_SelectedIndexChanged">
+                </asp:DropDownList>
+            </div>
+            <div class="office-add__element">
+                <asp:Label ID="LabelRole" runat="server" Text="Role Of Office"></asp:Label>
+                <asp:DropDownList ID="DropDownListOfficeRole" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListOfficeRole_SelectedIndexChanged">
+                </asp:DropDownList>
+            </div>
+            <asp:Button ID="ButtonInsertOffice" runat="server" Text="Add New Office" CssClass="btn btn-default btn-filter-office" OnClick="ButtonInsertOffice_Click" />
+        </div>
+    </div>
 </asp:Content>
