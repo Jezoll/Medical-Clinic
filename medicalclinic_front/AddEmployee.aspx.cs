@@ -34,20 +34,22 @@ namespace medicalclinic
         {
             List<UserRole> data = UserRole.getAllRoles();
             DropDownListRole.Items.Clear();
-            foreach (UserRole role in data)
-            {
-                DropDownListRole.Items.Add(role.Name);
-            }
+            DropDownListRole.DataSource = data;
+            DropDownListRole.DataBind();
+            DropDownListRole.DataTextField = "Name";
+            DropDownListRole.DataValueField = "Id";
+            DropDownListRole.DataBind();
         }
 
         private void ComboboxSpecializationFill()
         {
             List<MedicalSpecialization> data = MedicalSpecialization.getAllMedicalSpecialization();
             DropDownListSpecialization.Items.Clear();
-            foreach (MedicalSpecialization spec in data)
-            {
-                DropDownListSpecialization.Items.Add(spec.Name);
-            }
+            DropDownListSpecialization.DataSource = data;
+            DropDownListSpecialization.DataBind();
+            DropDownListSpecialization.DataTextField = "Name";
+            DropDownListSpecialization.DataValueField = "Id";
+            DropDownListSpecialization.DataBind();
         }
 
         protected void ButtonCancel_Click(object sender, EventArgs e)
@@ -128,7 +130,12 @@ namespace medicalclinic
                 sex = "F";
             }
 
-            string employee_id = Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, address_id);
+            string employee_id = Employee.insertNewEmployee(TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text, DropDownListRole.SelectedValue, address_id);
+
+            if (CheckIsDoctorRoleSelected())
+            {
+                Employee.setEmployeeSpecialization(employee_id, DropDownListSpecialization.SelectedValue);
+            }
 
             if (TextBoxEmail.Text.Length > 0)
             {
@@ -145,17 +152,25 @@ namespace medicalclinic
             AlertBox("New Employee has been added to database");
             OpenUserWindow(employee_id);
         }
+
+        private bool CheckIsDoctorRoleSelected() {
+            if (DropDownListRole.SelectedValue != "2")
+            {
+                return false;
+            }
+            else
+                return true;
+        }
         protected void DropDownListRole_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(DropDownListRole.SelectedValue!="Lekarz")
+            if (!CheckIsDoctorRoleSelected())
             {
                 DropDownListSpecialization.Visible = false;
-                return;
             }
-
-            DropDownListSpecialization.Visible = true;
-
-        
+            else
+            { 
+                DropDownListSpecialization.Visible = true;
+            }
         }
 
         private void AlertBox(string AlertMessage)

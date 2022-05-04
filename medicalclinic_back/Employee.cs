@@ -136,10 +136,12 @@ namespace medicalclinic_back
             return employees;
         }
 
-        public static string insertNewEmployee(string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth, string address_id = null) 
+        public static string insertNewEmployee(string first_name, string second_name, string pesel, string sex, string phone_number, string email, string date_of_birth, string id_role, string address_id = null) 
         {
+
+            Debug.WriteLine(id_role);
             Database.openConnection();
-            string query = "INSERT INTO employees (first_name, second_name, pesel, sex, phone_number, email, date_of_birth, id_address) VALUES (@first_name, @second_name, @pesel, @sex, @phone_number, @email, @date_of_birth, @address_value); SELECT LAST_INSERT_ID();";
+            string query = "INSERT INTO employees (first_name, second_name, pesel, sex, phone_number, email, date_of_birth, id_address, id_role) VALUES (@first_name, @second_name, @pesel, @sex, @phone_number, @email, @date_of_birth, @address_value, @id_role); SELECT LAST_INSERT_ID();";
 
 
             MySqlCommand command = Database.command(query);
@@ -159,6 +161,7 @@ namespace medicalclinic_back
             command.Parameters.AddWithValue("@phone_number", phone_number);
             command.Parameters.AddWithValue("@email", email);
             command.Parameters.AddWithValue("@date_of_birth", date_of_birth);
+            command.Parameters.AddWithValue("@id_role", id_role);
 
 
             string employee_id = command.ExecuteScalar().ToString();
@@ -176,6 +179,36 @@ namespace medicalclinic_back
 
             command.Parameters.AddWithValue("@user_id", user_id);
             command.Parameters.AddWithValue("@employee_id", employee_id);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
+        public static void setEmployeeSpecialization(string id, string id_specialization)
+        {
+            Database.openConnection();
+
+            string query = "UPDATE employees SET id_specialization = @id_specialization WHERE id = @id";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@id_specialization", id_specialization);
+            command.Parameters.AddWithValue("@id", id);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
+        public static void setEmployeeDepartment(string id, string id_department)
+        {
+            Database.openConnection();
+
+            string query = "UPDATE employees SET id_role = @id_department WHERE id = @id";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@id_department", id_department);
+            command.Parameters.AddWithValue("@id", id);
 
             command.ExecuteNonQuery();
             Database.closeConnection();
