@@ -15,10 +15,10 @@
         </div>
             <div style="border-style: solid; border-width: 1px; color: #000000; background-color: #FFFFFF; padding: 30px; display: inline-table; text-align: left; width: 320px;";>
 
-                <asp:Label ID="LabelName" runat="server" Text="First name:" Width="120px" ></asp:Label><asp:TextBox ID="TextBoxName" runat="server" placeholder="Patient name" Height="20px" Width="180px" Font-Bold="True"></asp:TextBox>
+                <asp:Label ID="LabelName" runat="server" Text="First name:" Width="120px" ></asp:Label><asp:TextBox ID="TextBoxName" runat="server" placeholder="Patient name" Height="20px" Width="180px" Font-Bold="False" MaxLength="30"></asp:TextBox>
                 <br />
                 <br />
-                <asp:Label ID="LabelSurname" runat="server" Text="Surname:" Width="120px"></asp:Label><asp:TextBox ID="TextBoxSurname" runat="server" placeholder="Patient surname" Height="20px" Width="180px"></asp:TextBox>
+                <asp:Label ID="LabelSurname" runat="server" Text="Surname:" Width="120px"></asp:Label><asp:TextBox ID="TextBoxSurname" runat="server" placeholder="Patient surname" Height="20px" Width="180px" MaxLength="30"></asp:TextBox>
                 <br />
                 <br />
                 <asp:Label ID="Label3" runat="server" Text="Sex:" Width="120px"></asp:Label><asp:DropDownList ID="DropDownListSex" runat="server" Width="180px">

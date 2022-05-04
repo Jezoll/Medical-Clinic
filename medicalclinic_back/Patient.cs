@@ -141,9 +141,10 @@ namespace medicalclinic_back
             command.ExecuteNonQuery();
             Database.closeConnection();
         }
+       
         public static bool ValidateName(string first_name)
         {
-            Regex regex = new Regex(@"^[A-Za-z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$");
+            Regex regex = new Regex(@"^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*(([,.] |[ '-])[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*)*(\.?)$");
             Match match = regex.Match(first_name);
 
             if (!match.Success)
@@ -155,7 +156,7 @@ namespace medicalclinic_back
         }
         public static bool ValidateSurname(string surname)
         {
-            Regex regex = new Regex(@"^[A-Za-z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$");
+            Regex regex = new Regex(@"^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*(([,.] |[ '-])[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*)*(\.?)$");
             Match match = regex.Match(surname);
 
             if (!match.Success)
@@ -179,7 +180,7 @@ namespace medicalclinic_back
         }
         public static bool ValidatePhoneNumber(string phonenumber)
         {
-            Regex regex = new Regex(@"^[0-9]{9}$");
+            Regex regex = new Regex(@"^([1-9]{1})[0-9]{8}$");
             Match match = regex.Match(phonenumber);
 
             if (!match.Success)

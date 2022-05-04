@@ -35,53 +35,61 @@ namespace medicalclinic
                 sex = "F";
             }
 
-            if (TextBoxName.Text.Equals("") || !Patient.ValidateName(TextBoxName.Text))
+            try
             {
-                AlertBox("Incorrect name field!", false);
-                return;
-            }
+                if (TextBoxName.Text.Equals("") || !Patient.ValidateName(TextBoxName.Text))
+                {
+                    AlertBox("Incorrect name!", false);
+                    return;
+                }
 
-            if (TextBoxSurname.Text.Equals("") || !Patient.ValidateSurname(TextBoxSurname.Text))
-            {
-                AlertBox("Incorrect surname field!", false);
-                return;
-            }
+                if (TextBoxSurname.Text.Equals("") || !Patient.ValidateSurname(TextBoxSurname.Text))
+                {
+                    AlertBox("Incorrect surname!", false);
+                    return;
+                }
 
-            if (TextBoxPesel.Text.Length < 11)
-            {
-                AlertBox("Empty or too short pesel number!", false);
-                return;
-            }
+                if (TextBoxPesel.Text.Length < 11)
+                {
+                    AlertBox("Empty or too short pesel number!", false);
+                    return;
+                }
 
-            if (TextBoxDateOfBirth.Text.Equals(""))
-            {
-                AlertBox("Empty date of birth field!", false);
-                return;
-            }
+                if (TextBoxDateOfBirth.Text.Equals(""))
+                {
+                    AlertBox("Empty date of birth field!", false);
+                    return;
+                }
 
-            if (TextBoxPhoneNumber.Text.Length < 9 || !Patient.ValidatePhoneNumber(TextBoxPhoneNumber.Text))
-            {
-                AlertBox("Incorrect phone number!", false);
-                return;
-            }
+                if (TextBoxPhoneNumber.Text.Length < 9 || !Patient.ValidatePhoneNumber(TextBoxPhoneNumber.Text))
+                {
+                    AlertBox("Incorrect phone number!", false);
+                    return;
+                }
 
-            if (TextBoxEmail.Text.Equals("") || !Patient.ValidateEmail(TextBoxEmail.Text))
-            {
-                AlertBox("Incorrect e-mail address!", false);
-                return;
-            }
+                if (TextBoxEmail.Text.Equals("") || !Patient.ValidateEmail(TextBoxEmail.Text))
+                {
+                    AlertBox("Incorrect e-mail address!", false);
+                    return;
+                }
 
-            if (!Patient.ValidatePesel(TextBoxPesel.Text, DateTime.Parse(TextBoxDateOfBirth.Text), sex))
-            {
-                AlertBox("Pesel does not match date of birth or gender!", false);
-                return;
-            }
-            if (!Patient.ValidatePeselUnique(TextBoxPesel.Text))
-            {
-                AlertBox("Patient with this pesel already exist in datebase!", false);
-                return;
-            }
+                if (!Patient.ValidatePesel(TextBoxPesel.Text, DateTime.Parse(TextBoxDateOfBirth.Text), sex))
+                {
+                    AlertBox("Pesel does not match date of birth or gender!", false);
+                    return;
+                }
 
+                if (!Patient.ValidatePeselUnique(TextBoxPesel.Text))
+                {
+                    AlertBox("Patient with this pesel already exist in datebase!", false);
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                AlertBox("Error!", false);
+                return;
+            }
 
             AlertBox("Patient has been added to the database!", true);
 
