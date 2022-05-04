@@ -103,13 +103,13 @@ namespace medicalclinic
             }
             if (TextBox_first_name.Text.Equals("") || !Patient.ValidateName(TextBox_first_name.Text))
             {
-                AlertBox("Incorrect name field!", false);
+                AlertBox("Incorrect name!", false);
                 return;
             }
 
             if (TextBox_surname.Text.Equals("") || !Patient.ValidateSurname(TextBox_surname.Text))
             {
-                AlertBox("Incorrect surname field!", false);
+                AlertBox("Incorrect surname!", false);
                 return;
             }
             if (TextBox_pesel.Text.Length < 11)
@@ -117,9 +117,9 @@ namespace medicalclinic
                 AlertBox("Empty or too short pesel number!", false);
                 return;
             }
-            if (TextBox_date_of_birth.Text.Equals(""))
+            if (TextBox_date_of_birth.Text.Equals("") || DateTime.Parse(TextBox_date_of_birth.Text) > DateTime.Now)
             {
-                AlertBox("Empty date of birth space!", false);
+                AlertBox("Empty or incorrect date of birth field!", false);
                 return;
             }
             if (TextBox_phone_number.Text.Length < 9 || !Patient.ValidatePhoneNumber(TextBox_phone_number.Text))

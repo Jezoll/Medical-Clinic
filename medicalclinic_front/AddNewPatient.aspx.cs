@@ -55,9 +55,9 @@ namespace medicalclinic
                     return;
                 }
 
-                if (TextBoxDateOfBirth.Text.Equals(""))
+                if (TextBoxDateOfBirth.Text.Equals("") || DateTime.Parse(TextBoxDateOfBirth.Text) > DateTime.Now)
                 {
-                    AlertBox("Empty date of birth field!", false);
+                    AlertBox("Empty or incorrect date of birth field!", false);
                     return;
                 }
 

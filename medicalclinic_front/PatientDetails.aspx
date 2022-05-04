@@ -96,11 +96,11 @@
 
     <div>
         <asp:Label ID="Label3" runat="server" Text="New first name: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
-        <asp:TextBox ID="TextBox_first_name" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBox_first_name" runat="server" MaxLength="30"></asp:TextBox>
     </div>
     <div>
         <asp:Label ID="Label5" runat="server" Text="New second name: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
-        <asp:TextBox ID="TextBox_surname" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBox_surname" runat="server" MaxLength="30"></asp:TextBox>
     </div>
     <div>
         <asp:Label ID="Label7" runat="server" Text="New sex:" Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
@@ -121,7 +121,7 @@
     </div>
     <div>
         <asp:Label ID="Label15" runat="server" Text="New email: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
-        <asp:TextBox ID="TextBox_email" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBox_email" runat="server" MaxLength="100"></asp:TextBox>
         
     </div>
     </div>

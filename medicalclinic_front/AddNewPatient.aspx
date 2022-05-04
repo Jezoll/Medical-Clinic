@@ -36,7 +36,7 @@
                 <asp:Label ID="LabelPhoneNumber" runat="server" Text="Phone number:" Width="120px"></asp:Label><asp:TextBox ID="TextBoxPhoneNumber" runat="server" placeholder="Patient phone number" Height="20px" Width="180px" MaxLength="9"></asp:TextBox>
                 <br />
                 <br />
-                <asp:Label ID="LabelEmail" runat="server" Text="Email address:" Width="120px"></asp:Label><asp:TextBox ID="TextBoxEmail" runat="server" placeholder="Patient e-mail address" Height="20px" Width="180px"></asp:TextBox>
+                <asp:Label ID="LabelEmail" runat="server" Text="Email address:" Width="120px"></asp:Label><asp:TextBox ID="TextBoxEmail" runat="server" placeholder="Patient e-mail address" Height="20px" Width="180px" MaxLength="100"></asp:TextBox>
                 <br />
                 
                 <br />
