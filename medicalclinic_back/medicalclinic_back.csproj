@@ -155,7 +155,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityEnum.cs" />
     <Compile Include="Address.cs" />
+    <Compile Include="Appointments.cs" />
     <Compile Include="Calendar.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseColumnName.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Office.cs" />
     <Compile Include="OfficeSpecialization.cs" />
     <Compile Include="OfficeUsedFor.cs" />
+    <Compile Include="Patient.cs" />
     <Compile Include="SexEnum.cs" />
     <Compile Include="UserDepartment.cs" />
     <Compile Include="Employee.cs" />

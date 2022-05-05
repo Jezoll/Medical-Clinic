@@ -159,6 +159,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ForgetPassword.aspx" />
+    <Content Include="AddNewPatient.aspx" />
+    <Content Include="PatientDetails.aspx" />
+    <Content Include="ListPatients.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -253,6 +256,27 @@
     </Compile>
     <Compile Include="ForgetPassword.aspx.designer.cs">
       <DependentUpon>ForgetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewPatient.aspx.cs">
+      <DependentUpon>AddNewPatient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddNewPatient.aspx.designer.cs">
+      <DependentUpon>AddNewPatient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PatientDetails.aspx.cs">
+      <DependentUpon>PatientDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PatientDetails.aspx.designer.cs">
+      <DependentUpon>PatientDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListPatients.aspx.cs">
+      <DependentUpon>ListPatients.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListPatients.aspx.designer.cs">
+      <DependentUpon>ListPatients.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
