@@ -13,7 +13,7 @@ namespace medicalclinic_back
         public static string genToken { get; set; }
         public static string hash { get; set; }
         static SHA256 sha256 = SHA256.Create();
-        public void generateToken(string token)
+        public static void generateToken(string token)
         {
             genToken = token;
             hash = GetHash(sha256, genToken);
@@ -63,6 +63,11 @@ namespace medicalclinic_back
             {
                 return false;
             }
+        }
+        public static void cleanToken()
+        {
+            genToken = "";
+            hash = "";
         }
     }
 

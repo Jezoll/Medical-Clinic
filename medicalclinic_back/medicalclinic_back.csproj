@@ -172,7 +172,6 @@
     <Compile Include="UserRole.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="RecoveryPassword.cs" />
-    <Compile Include="TimeBlock.cs" />
     <Compile Include="LoginUser.cs" />
     <Compile Include="Token.cs" />
   </ItemGroup>

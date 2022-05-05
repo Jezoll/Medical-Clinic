@@ -12,39 +12,41 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          
             if (Session["change_passw"] == null)
             {
                 Response.Redirect("Login.aspx");
             }
+            IncorrectDataLabel.Visible = false;
+            head_info.Text = "Zmiana hasła dla użytkownika: " + Session["change_passw_login"].ToString();
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button2_Click(object sender, EventArgs e)
         {
            
-            if(new_passw.Text == confirm_passw.Text)
-            {
-                if(RecoveryPassword.changePassword(email.Text,new_passw.Text))
-                {
-                    IncorrectDataLabel.Visible = true;
-                    IncorrectDataLabel.Text = "Hasło zostało pomyślnie zmienione";
-                }
-            }
-            else
+            if(new_passw.Text != confirm_passw.Text)
             {
                 IncorrectDataLabel.Visible = true;
                 IncorrectDataLabel.Text = "Podane hasła nie są identyczne. Spróbuj ponownie";
+                return;
             }
+            if(RecoveryPassword.passwordValidation(confirm_passw.Text) == false)
+            {
+                IncorrectDataLabel.Visible = true;
+                IncorrectDataLabel.Text = "Niepoprawny format. Hasło musi zawierać minimum jedną wielką i małą literę, przynajmniej jeden znak specjalny i cyfrę. Minimalna długość hasła to 8 znaków";
+                return ;
+            }
+            if (RecoveryPassword.changePassword(Session["change_passw_login"].ToString(), new_passw.Text))
+            {
+                IncorrectDataLabel.Visible = true;
+            }
+           
         }
 
         protected void returnBtn_Click(object sender, EventArgs e)
         {
             Session.Abandon();
-            email.Text = "";
             new_passw.Text = "";
             confirm_passw.Text = "";
-            Response.Redirect("HomePage.html");
-
         }
     }
 }

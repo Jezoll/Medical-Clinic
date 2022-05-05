@@ -116,4 +116,9 @@ a {
     cursor: auto;
 }
 
+.inputs #Button1.change-password {
+    background: black;
+}
+
+
 

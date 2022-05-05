@@ -17,18 +17,11 @@ namespace medicalclinic
             {
                 Response.Redirect("Login.aspx");
             }
-            
-                
-           //Token token = new Token();
-            
-           // if(token.unhashToken())
-           // { 
-           //     Label1.Text = Token.genToken;
-           // }
-           // else
-           // {
-           //     Label1.Text = "no i nie udało się";
-           // }
+
+
+           
+
+           
         }
     }
 }
