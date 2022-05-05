@@ -22,19 +22,21 @@ namespace medicalclinic
             try
             {
                 Session["reset"] = LoginUser.NumOfAttempt;
-                if (DateTime.Parse(Session["timer"].ToString()) != DateTime.Parse(DateTime.Now.ToString()) & (int)Session["reset"] < 1) //zmień ten warunek
-                {
-                    Button1.Enabled = false;
-                    TextBox1.Enabled = false;
-                    TextBox2.Enabled = false;
-                }
-                if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
-                {
-                    LabelSec.Visible = true;
-                    Button1.Enabled = false;
-                    TextBox1.Enabled = false;
-                    TextBox2.Enabled = false;
-                }
+                //brak zdefiniowanego Session timer, wyrzuca błąd przy uruchamianiu aplikacji
+
+                //if (DateTime.Parse(Session["timer"].ToString()) != DateTime.Parse(DateTime.Now.ToString()) & (int)Session["reset"] < 1) //zmień ten warunek
+                //{
+                //    Button1.Enabled = false;
+                //    TextBox1.Enabled = false;
+                //    TextBox2.Enabled = false;
+                //}
+                //if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
+                //{
+                //    LabelSec.Visible = true;
+                //    Button1.Enabled = false;
+                //    TextBox1.Enabled = false;
+                //    TextBox2.Enabled = false;
+                //}
 
 
 
@@ -103,25 +105,25 @@ namespace medicalclinic
             try
             {
 
-                if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
-                {
-                    LabelSec.Visible = true;
-                    LabelSec.Text = ((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalMinutes)
-                        .ToString() + ":" + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalSeconds));
-                    Button1.Enabled = false;
-                    TextBox1.Enabled = false;
-                    TextBox2.Enabled = false;
-                }
-                else if (DateTime.Parse(Session["timer"].ToString()) <= DateTime.Parse(DateTime.Now.ToString()))
-                {
+                //if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
+                //{
+                //    LabelSec.Visible = true;
+                //    LabelSec.Text = ((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalMinutes)
+                //        .ToString() + ":" + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalSeconds));
+                //    Button1.Enabled = false;
+                //    TextBox1.Enabled = false;
+                //    TextBox2.Enabled = false;
+                //}
+                //else if (DateTime.Parse(Session["timer"].ToString()) <= DateTime.Parse(DateTime.Now.ToString()))
+                //{
 
-                    Session["timer"] = null;
-                    Button1.Enabled = true;
-                    TextBox1.Enabled = true;
-                    TextBox2.Enabled = true;
-                    LoginUser.NumOfAttempt = 3;
-                    Response.Redirect("Login.aspx");
-                }
+                //    Session["timer"] = null;
+                //    Button1.Enabled = true;
+                //    TextBox1.Enabled = true;
+                //    TextBox2.Enabled = true;
+                //    LoginUser.NumOfAttempt = 3;
+                //    Response.Redirect("Login.aspx");
+                //}
 
 
 
