@@ -144,7 +144,7 @@ namespace medicalclinic_back
        
         public static bool ValidateName(string first_name)
         {
-            Regex regex = new Regex(@"^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*(([,.] |[ '-])[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*)*(\.?)$");
+            Regex regex = new Regex(@"^[\p{Lu}\p{Ll}][\p{Ll}]*(([,.] |[ '-])[\p{Lu}\p{Ll}][\p{Ll}]*)*(\.?)$");
             Match match = regex.Match(first_name);
 
             if (!match.Success)
@@ -156,7 +156,7 @@ namespace medicalclinic_back
         }
         public static bool ValidateSurname(string surname)
         {
-            Regex regex = new Regex(@"^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*(([,.] |[ '-])[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*)*(\.?)$");
+            Regex regex = new Regex(@"^[\p{Lu}\p{Ll}][\p{Ll}]*(([,.] |[ '-])[\p{Lu}\p{Ll}][\p{Ll}]*)*(\.?)$");
             Match match = regex.Match(surname);
 
             if (!match.Success)
