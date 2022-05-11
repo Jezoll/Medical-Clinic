@@ -22,8 +22,7 @@ namespace medicalclinic
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-           
-            if(new_passw.Text != confirm_passw.Text)
+            if (!RecoveryPassword.isPasswordTheSame(new_passw.Text, confirm_passw.Text))
             {
                 IncorrectDataLabel.Visible = true;
                 IncorrectDataLabel.Text = "Podane hasła nie są identyczne. Spróbuj ponownie";

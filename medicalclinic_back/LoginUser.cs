@@ -42,7 +42,6 @@ namespace medicalclinic_back
             {
                 IsLogged = true;
                 NumOfAttempt = 3;
-
             }
             sdr.Close();
             Database.closeConnection();

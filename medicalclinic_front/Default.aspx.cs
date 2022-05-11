@@ -16,12 +16,7 @@ namespace medicalclinic
             else
             {
                 Response.Redirect("Login.aspx");
-            }
-
-
-           
-
-           
+            }           
         }
     }
 }
