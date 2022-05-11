@@ -4,7 +4,7 @@ using System;
 
 namespace medicalclinic_tests
 {
-    public class Tests
+    public class Tests1
     {
         [SetUp]
         public void Setup()
