@@ -74,7 +74,7 @@ namespace medicalclinic
 
         private void IsEmpty()
         {
-            if(TextBoxName.Text=="" || TextBoxSurname.Text== "" || TextBoxPESEL.Text== "")
+            if(string.IsNullOrEmpty(TextBoxName.Text) || string.IsNullOrEmpty(TextBoxSurname.Text) || string.IsNullOrEmpty(TextBoxPESEL.Text))
             {
                 ButtonNext.Enabled = false;
                 return;
