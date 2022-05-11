@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace medicalclinic_tests
 {
     [TestClass]
-    public class EmailValidationTest
+    public class EmailValidationTests
     {
         [TestMethod]
         public void EmailWithoutAt()
@@ -15,7 +15,7 @@ namespace medicalclinic_tests
         }
 
         [TestMethod]
-        public void EmailWithAt()
+        public void EmailWithOneAt()
         {
             string email = "jan.kowalski@wp.pl";
 
