@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,8 +12,8 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            
+            int id = int.Parse(Request.QueryString[0]);
+            Debug.WriteLine(id);
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
