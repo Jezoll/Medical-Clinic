@@ -20,6 +20,7 @@ namespace medicalclinic_tests
             string email = "jan.kowalski@wp.pl";
 
             Assert.IsTrue(Employee.validateEmail(email), "Email nie posiada znaku @.");
+           
         }
 
         [TestMethod]
