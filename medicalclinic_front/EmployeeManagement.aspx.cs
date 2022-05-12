@@ -153,5 +153,14 @@ namespace medicalclinic
             Response.Redirect("OfficesManagement.aspx");
         }
 
+        protected void LinkButtonEmployeeActiveChange_Click(object sender, EventArgs e)
+        {
+            LinkButton lb = sender as LinkButton;
+            string id = lb.CommandArgument;
+
+            irm1.Attributes.Add("src", string.Format($"PopupAdminPassword.aspx?id={id}"));
+            PopupAdminPassword.Show();
+        }
+
     }
 }

@@ -357,16 +357,19 @@ namespace medicalclinic_back
 
         public static bool validatePeselUnique(string pesel)
         {
-            List<Employee> EmployeesList = getAllEmployees();
 
-            foreach (Employee emp in EmployeesList)
-            {
-                if(emp.Pesel==pesel)
-                {
-                    return false;
-                }
-            }
-            return true;
+            Database.openConnection();
+            string query = @"select case when exists (select 1 from employees where pesel=@pesel) then 1 else 0 end";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@pesel", pesel);
+
+            bool exists;
+
+            exists = Convert.ToBoolean(command.ExecuteScalar());
+
+            return !exists;
         }
     }
 }

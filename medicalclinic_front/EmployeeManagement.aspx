@@ -2,6 +2,20 @@
 
 <asp:Content ID="EmployeeManagementContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="table-container">
+        <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center">
+            <iframe style="width: 250px; height: 250px;" id="irm1" runat="server"></iframe>
+            <br />
+            <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="OK" />
+        </asp:Panel>
+        <asp:HiddenField ID="HiddenPopup" runat="server" />
+        <ajaxToolkit:ModalPopupExtender
+            ID="PopupAdminPassword"
+            runat="server"
+            PopupControlID="Panl1"
+            TargetControlID="HiddenPopup"
+            CancelControlID="ButtonOK"
+            BackgroundCssClass="popout-background">
+        </ajaxToolkit:ModalPopupExtender>
         <asp:Button ID="ButtonAdd" CssClass="btn btn-default btn-employee-add" runat="server" OnClick="ButtonAdd_Click" Text="Add New Employee" />
         <div class="table-content">
             <asp:GridView
@@ -34,31 +48,35 @@
                     <asp:BoundField DataField="Address.Number" HeaderText="Number" SortExpression="user_adresses.number" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:LinkButton ID="EmployeeReviewButton" OnClick="EmployeeReviewButton_Click" runat="server" Text='Review employee'
+                            <asp:LinkButton
+                                ID="EmployeeReviewButton"
+                                OnClick="EmployeeReviewButton_Click"
+                                runat="server"
+                                Text='Review employee'
                                 CommandArgument='<%# Eval("Id") %>'>
                             </asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:LinkButton ID="EmployeeEditButton" OnClick="EmployeeEditButton_Click" runat="server" Text='Edit employee'
+                            <asp:LinkButton
+                                ID="EmployeeEditButton"
+                                OnClick="EmployeeEditButton_Click"
+                                runat="server"
+                                Text='Edit employee'
                                 CommandArgument='<%# Eval("Id") %>'>
                             </asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:LinkButton ID="IsActiveChange" runat="server" Text='Deactivate/Reactivate Employee'
+                            <asp:LinkButton
+                                ID="IsActiveChange"
+                                OnClick="LinkButtonEmployeeActiveChange_Click"
+                                runat="server"
+                                Text='Deactivate/Reactivate Employee'
                                 CommandArgument='<%# Eval("Id") %>'>
                             </asp:LinkButton>
-                            <ajaxToolkit:ModalPopupExtender ID="PopupAdminPassword" runat="server" PopupControlID="Panl1" TargetControlID="IsActiveChange"
-                                CancelControlID="ButtonOK" BackgroundCssClass="popout-background">
-                            </ajaxToolkit:ModalPopupExtender>
-                            <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center" Style="display: none">
-                                <iframe style="width: 250px; height: 250px;" id="irm1" src="PopupAdminPassword.aspx" runat="server"></iframe>
-                                <br />
-                                <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="OK" />
-                            </asp:Panel>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
