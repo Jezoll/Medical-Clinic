@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="Label1" runat="server" Text="Please confirm that you want to delete this office"></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
             <br />
             <br />
         </div>

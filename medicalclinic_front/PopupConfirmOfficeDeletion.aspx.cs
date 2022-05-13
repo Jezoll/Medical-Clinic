@@ -12,23 +12,25 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Label1.Text = $"Do you want to delete office with ID: {Request.QueryString[0]}?";
         }
 
         protected void ButtonConfirm_Click(object sender, EventArgs e)
         {
-            int officeID = 5; //jak przesłać wartość z poprzedniego okna
+            int officeID = int.Parse(Request.QueryString[0]);
             string message;
 
             if (Office.CheckIfPlannedForFutureVisits(officeID))
             {
                 message = "This office is planned for future visits so it can not be deleted!";
                 AlertBox(message);
+                ButtonConfirm.Enabled = false;
                 return;
             }
 
             Office.DeleteOffice(officeID);
             message = "Office deleted successfully";
+            ButtonConfirm.Enabled = false;
             AlertBox(message);
         }
 

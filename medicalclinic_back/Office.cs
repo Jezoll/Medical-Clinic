@@ -182,22 +182,38 @@ namespace medicalclinic_back
 
         }
 
-        public static bool ValidateNumberUnique(string newNumberOfOffice, string oldNumberOfOffice = "-1")
+        public static bool ValidateNumberUnique(string numberOfOffice)
+        {
+            return checkIfNumberIsUnique(numberOfOffice);
+        }
+
+        public static bool ValidateNumberUnique(string newNumberOfOffice, string oldNumberOfOffice)
         {
             if(newNumberOfOffice != oldNumberOfOffice)
             {
-                List<Office> offices = GetAllOffices();
-
-                foreach (Office off in offices)
-                {
-                    if (off.Number_of_office == newNumberOfOffice)
-                    {
-                        return false;
-                    }
-                }
+                return checkIfNumberIsUnique(newNumberOfOffice);
             }
             
             return true;
+        }
+
+        private static bool checkIfNumberIsUnique(string numberOfOffice)
+        {
+            string query = "select count(*) from offices as o where o.number_of_office = @number";
+
+            Database.openConnection();
+
+            MySqlCommand command = Database.command(query);
+            command.Parameters.AddWithValue("@number", numberOfOffice);
+
+            Int32 offices = (Int32)(long)command.ExecuteScalar();
+            Database.closeConnection();
+
+            if(offices == 0)
+            {
+                return true;
+            }
+            return false;
         }
 
     }

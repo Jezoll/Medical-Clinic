@@ -2,6 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="table-container">
+        <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center">
+            <iframe style="width: 250px; height: 250px;" id="irm1" runat="server"></iframe>
+            <br />
+            <asp:Button CssClass="btn btn-default" ID="ButtonCancel" runat="server" Text="Cancel" />
+        </asp:Panel>
+        <asp:HiddenField ID="HiddenPopup" runat="server" />
+        <ajaxToolkit:ModalPopupExtender
+            ID="PopupConfirmOfficeDeletion"
+            runat="server"
+            PopupControlID="Panl1"
+            TargetControlID="HiddenPopup"
+            CancelControlID="ButtonCancel"
+            BackgroundCssClass="popout-background">
+        </ajaxToolkit:ModalPopupExtender>
         <div class="table-content">
             <asp:GridView
                 ID="OfficesGridView"
@@ -24,17 +38,13 @@
                     </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:LinkButton ID="OfficeDeleteButton" runat="server" Text='Delete Office'
+                            <asp:LinkButton
+                                ID="DeleteOffice"
+                                OnClick="LinkButtonDeleteOffice_Click"
+                                runat="server"
+                                Text='Delete Office'
                                 CommandArgument='<%# Eval("Id") %>'>
                             </asp:LinkButton>
-                            <ajaxToolkit:ModalPopupExtender ID="PopupDeleteOffice" runat="server" PopupControlID="Panel1" TargetControlID="OfficeDeleteButton"
-                                CancelControlID="ButtonCancel" BackgroundCssClass="popout-background">
-                            </ajaxToolkit:ModalPopupExtender>
-                            <asp:Panel ID="Panel1" runat="server" CssClass="popup" align="center" Style="display: none">
-                                <iframe style="width: 200px; height: 200px;" id="irm1" src="PopupConfirmOfficeDeletion.aspx" runat="server"></iframe>
-                                <br />
-                                <asp:Button CssClass="btn btn-default" ID="ButtonCancel" runat="server" Text="Cancel" />
-                            </asp:Panel>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

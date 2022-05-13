@@ -116,5 +116,13 @@ namespace medicalclinic
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
 
+        protected void LinkButtonDeleteOffice_Click(object sender, EventArgs e)
+        {
+            LinkButton lb = sender as LinkButton;
+            string id = lb.CommandArgument;
+
+            irm1.Attributes.Add("src", string.Format($"PopupConfirmOfficeDeletion.aspx?id={id}"));
+            PopupConfirmOfficeDeletion.Show();
+        }
     }
 }
