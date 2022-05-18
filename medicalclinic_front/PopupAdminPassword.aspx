@@ -11,7 +11,8 @@
     <center>
         <form id="form1" runat="server">
             <asp:Label ID="MessageLabel" runat="server" Text="Log in with your admin password to continue"></asp:Label><br />
-            <asp:TextBox ID="TextBoxPassword" type="password" runat="server" AutoPostBack="true" OnTextChanged="TextBoxPassword_TextChanged"></asp:TextBox><br />
+            <asp:TextBox ID="TextBoxLogin" placeholder="Login" runat="server" AutoPostBack="true" OnTextChanged="TextBoxLogin_TextChanged"></asp:TextBox><br />
+            <asp:TextBox ID="TextBoxPassword" placeholder="Password" type="password" runat="server" AutoPostBack="true" OnTextChanged="TextBoxPassword_TextChanged"></asp:TextBox><br />
             <asp:Button CssClass="btn btn-default" ID="ConfirmButton" runat="server" Text="Confirm" OnClick="ConfirmButton_Click" Enabled="False" /><br />
         </form>
 </body>

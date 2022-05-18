@@ -369,7 +369,36 @@ namespace medicalclinic_back
 
             exists = Convert.ToBoolean(command.ExecuteScalar());
 
+            Database.closeConnection();
             return !exists;
+        }
+
+        public static void ChangeActiveStatus(int id)
+        {
+            bool newstatus = !IsActive(id);
+
+            Database.openConnection();
+            string query = @"UPDATE employees SET is_active = @status WHERE employees.id = @id";
+
+            MySqlCommand command = Database.command(query);
+
+            command.Parameters.AddWithValue("@status", newstatus);
+            command.Parameters.AddWithValue("@id", id);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
+        public static bool IsActive(int id)
+        {
+            Database.openConnection();
+            string query = @"SELECT is_active from employees where id=@id";
+            MySqlCommand command = Database.command(query);
+            command.Parameters.AddWithValue("@id", id);
+
+            bool active = Convert.ToBoolean(command.ExecuteScalar());
+            Database.closeConnection();
+            return active;
         }
     }
 }
