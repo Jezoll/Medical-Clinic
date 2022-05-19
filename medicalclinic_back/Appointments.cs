@@ -35,11 +35,10 @@ namespace medicalclinic_back
             this.office_number = office_number;
             this.date_of_appointment = date_of_appointment;
         }
-
-        public static List<Appointment> GetAllAppointments(string sort_column = "v.id", string sort_direction = "ASC")
+        public static List<Appointment> GetThisPatientAppointments(int this_patient_id)
         {
             Database.openConnection();
-            string query = $"SELECT v.id, v.duration, v.confirmed, v.type, CONCAT(e.first_name, ' ', e.second_name) AS 'first_name and second_name', v.id_patient, o.number_of_office, v.date FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id ORDER BY {sort_column} {sort_direction};";
+            string query = $"SELECT v.id, v.duration, v.confirmed, v.type, CONCAT(e.first_name, ' ', e.second_name) AS 'first_name and second_name', v.id_patient, o.number_of_office, v.date FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id_patient LIKE {this_patient_id};";
             MySqlDataReader data = Database.dataReader(query);
 
             List<Appointment> appointments = new List<Appointment>();

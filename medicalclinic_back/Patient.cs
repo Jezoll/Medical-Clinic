@@ -75,6 +75,23 @@ namespace medicalclinic_back
             Database.closeConnection();
             return patients;
         }
+        public static List<Patient> GetThisPatient(int this_patient_id)
+        {
+            Database.openConnection();
+            string query = $"SELECT p.id, p.first_name, p.second_name, p.pesel, p.sex, p.phone_number, p.email, p.date_of_birth, p.is_active, IFNULL((SELECT MAX(v.date) FROM visits v WHERE p.id = v.id_patient), (SELECT 'no appointments')) as date FROM patients p WHERE p.id LIKE {this_patient_id}";
+            MySqlDataReader data = Database.dataReader(query);
+            List<Patient> patient = new List<Patient>();
+            while (data.Read())
+            {
+                Patient patient_data = new Patient(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), (SexEnum)Enum.Parse(typeof(SexEnum), data.GetString(4)), data.GetString(5), data.GetString(6), data.GetDateTime(7), (ActivityEnum)Enum.Parse(typeof(ActivityEnum), data.GetString(8)), data.GetString(9));
+
+                patient.Add(patient_data);
+            }
+
+            Database.closeConnection();
+            return patient;
+        }
+
         public static void DeletePatient(int Id)
         {
             Database.openConnection();
@@ -108,7 +125,7 @@ namespace medicalclinic_back
             command.ExecuteNonQuery();
             Database.closeConnection();
         }
-        public static void ChangePatientsActivity(int id, string new_activity)
+        public static void ChangePatientsActivity(int id, ActivityEnum new_activity)
         {
             Database.openConnection();
             string query = $"UPDATE patients SET is_active = @NewActivity WHERE id = @Id;";
@@ -116,7 +133,7 @@ namespace medicalclinic_back
             MySqlCommand command = Database.command(query);
 
             command.Parameters.AddWithValue("@Id", id);
-            command.Parameters.AddWithValue("@NewActivity", new_activity);
+            command.Parameters.AddWithValue("@NewActivity", new_activity.ToString());
 
             command.ExecuteNonQuery();
             Database.closeConnection();
