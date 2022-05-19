@@ -15,31 +15,22 @@ namespace medicalclinic
     {
 
         /// <summary>
-        /// Kontrolka PatientsDetailsGridView.
+        /// Kontrolka LabelMessage.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PatientsDetailsGridView;
+        protected global::System.Web.UI.WebControls.Label LabelMessage;
 
         /// <summary>
-        /// Kontrolka PatientsVisitsGridView.
+        /// Kontrolka PatientsGridView.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PatientsVisitsGridView;
-
-        /// <summary>
-        /// Kontrolka ButtonAddNewPatient.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAddNewPatient;
+        protected global::System.Web.UI.WebControls.GridView PatientsGridView;
 
         /// <summary>
         /// Kontrolka LabelFilterMethod.
@@ -141,6 +132,24 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Button ButtonReset;
 
         /// <summary>
+        /// Kontrolka Label1.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// Kontrolka ButtonAddNewPatient.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAddNewPatient;
+
+        /// <summary>
         /// Kontrolka ButtonBack.
         /// </summary>
         /// <remarks>
@@ -148,23 +157,5 @@ namespace medicalclinic
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonBack;
-
-        /// <summary>
-        /// Kontrolka PatientsGridView.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PatientsGridView;
-
-        /// <summary>
-        /// Kontrolka LabelMessage.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelMessage;
     }
 }
