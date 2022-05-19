@@ -11,11 +11,14 @@ namespace medicalclinic
         {
             if (!this.IsPostBack)
             {
+                //Gets this patient's ID
                 int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
+                //Gets this patient's data
                 List<Patient> patient = Patient.GetThisPatient(selected_patient_id);
                 Label_id_value.Text = patient[0].Id.ToString();
 
-                if (patient[0].Activity == ActivityEnum.Y) //Checking if patient is active
+                //Checks if this patient is active and changes activity status
+                if (patient[0].Activity == ActivityEnum.Y)
                 {
                     Label_activity_value.Text = "Active";
                     Button_activity.Text = "Deactivate Patient";
@@ -49,14 +52,15 @@ namespace medicalclinic
                 GridViewAppointments.DataBind();
             }
         }
-
+        //Close the details of this patient
         protected void Button_close_Click(object sender, EventArgs e)
         {
             Response.Redirect("ListPatients.aspx");
         }
-
+        //Delete this patient
         protected void Button_Delete_Click(object sender, EventArgs e)
         {
+            //Gets this patient's ID
             int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
             string confirm_value = ConfirmMessageResponseDelete.Value;
             if (confirm_value == "Yes")
@@ -75,9 +79,11 @@ namespace medicalclinic
 
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
+        //Modify this patient's data
         protected void Button_Modify_Click(object sender, EventArgs e)
         {
             SexEnum sex = SexEnum.M;
+            //Gets this patient's ID
             int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
             string confirm_value = ConfirmMessageResponseModify.Value;
             if (RadioButton_sex_female.Checked)
@@ -132,6 +138,7 @@ namespace medicalclinic
             if (confirm_value == "Yes")
             {
                 Patient.ModifyPatient(selected_patient_id, TextBox_first_name.Text, TextBox_surname.Text, TextBox_pesel.Text, sex.ToString(), TextBox_phone_number.Text, TextBox_email.Text, TextBox_date_of_birth.Text);
+                //Reload this page
                 Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
             }
         }
@@ -139,7 +146,9 @@ namespace medicalclinic
         //Change this patient activity status
         protected void Button_activity_Click(object sender, EventArgs e)
         {
+            //Gets this patient's ID
             int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
+            //Gets this patient's data
             List<Patient> patient = Patient.GetThisPatient(selected_patient_id);
             ActivityEnum activity = patient[0].Activity;
             if (activity == ActivityEnum.Y)
@@ -150,6 +159,7 @@ namespace medicalclinic
             {
                 Patient.ChangePatientsActivity(selected_patient_id, ActivityEnum.Y);
             }
+            //Reload this page
             Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
         }
     }
