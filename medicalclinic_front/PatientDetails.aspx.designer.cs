@@ -15,22 +15,13 @@ namespace medicalclinic
     {
 
         /// <summary>
-        /// Kontrolka Label_appointments.
+        /// Kontrolka LabelMessage.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_appointments;
-
-        /// <summary>
-        /// Kontrolka GridViewAppointments.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAppointments;
+        protected global::System.Web.UI.WebControls.Label LabelMessage;
 
         /// <summary>
         /// Kontrolka Label_paient.
@@ -204,6 +195,24 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label Label_activity_value;
 
         /// <summary>
+        /// Kontrolka Label_appointments.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_appointments;
+
+        /// <summary>
+        /// Kontrolka GridViewAppointments.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewAppointments;
+
+        /// <summary>
         /// Kontrolka Label_modify.
         /// </summary>
         /// <remarks>
@@ -348,24 +357,6 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBox_email;
 
         /// <summary>
-        /// Kontrolka Button_delete.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_delete;
-
-        /// <summary>
-        /// Kontrolka ConfirmMessageResponseDelete.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseDelete;
-
-        /// <summary>
         /// Kontrolka Button_modify.
         /// </summary>
         /// <remarks>
@@ -382,6 +373,33 @@ namespace medicalclinic
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseModify;
+
+        /// <summary>
+        /// Kontrolka Label1.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// Kontrolka Button_delete.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_delete;
+
+        /// <summary>
+        /// Kontrolka ConfirmMessageResponseDelete.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseDelete;
 
         /// <summary>
         /// Kontrolka Button_activity.
