@@ -161,9 +161,9 @@ namespace medicalclinic_back
        
         public static bool ValidateName(string first_name)
         {
-            Regex regex = new Regex(@"^[\p{Lu}\p{Ll}][\p{Ll}]*(([,.] |[ '-])[\p{Lu}\p{Ll}][\p{Ll}]*)*(\.?)$");
+            Regex regex = new Regex(@"^[\p{Lu}\p{Ll}][\p{Ll}]*(([,.] |[ '-])[\p{Lu}\p{Ll}][\p{Ll}]*)*(\.?){1,30}$");
             Match match = regex.Match(first_name);
-
+           
             if (!match.Success)
             {
                 return false;
@@ -173,7 +173,7 @@ namespace medicalclinic_back
         }
         public static bool ValidateSurname(string surname)
         {
-            Regex regex = new Regex(@"^[\p{Lu}\p{Ll}][\p{Ll}]*(([,.] |[ '-])[\p{Lu}\p{Ll}][\p{Ll}]*)*(\.?)$");
+            Regex regex = new Regex(@"^[\p{Lu}\p{Ll}][\p{Ll}]*(([,.] |[ '-])[\p{Lu}\p{Ll}][\p{Ll}]*)*(\.?){1,30}$");
             Match match = regex.Match(surname);
 
             if (!match.Success)
@@ -185,7 +185,7 @@ namespace medicalclinic_back
         }
         public static bool ValidateEmail(string email)
         {
-            Regex regex = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+            Regex regex = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9]){1,100}?$");
             Match match = regex.Match(email);
 
             if (!match.Success)
@@ -207,111 +207,119 @@ namespace medicalclinic_back
 
             return true;
         }
-        public static bool ValidatePesel(string pesel, DateTime birth, string sex)
+        public static bool ValidatePesel(string pesel, DateTime birth, SexEnum sex)
         {
-            string dayOfBirth, monthOfBirth;
-            char gender;
             bool result = false;
 
-            int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
-
-            if (sex == "M")
+            if (birth < DateTime.Today && pesel.Length==11)
             {
-                gender = 'M';
-            }
-            else
-            {
-                gender = 'K';
-            }
+                string dayOfBirth, monthOfBirth;
+                char gender;
+                
 
+            
 
+                int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 }; //wagi poszczegolnych cyfr nr pesel
 
-            List<int> peselDigits = new List<int>(); //lista do przechowywania wszystkich cyfr podanego nr pesel
-            foreach (char digit in pesel)
-            {
-                if (char.IsDigit(digit))
+                if (sex.Equals(SexEnum.M))
                 {
-                    peselDigits.Add(Convert.ToInt32(digit.ToString()));
+                    gender = 'M';
                 }
                 else
                 {
-                    return result;
+                    gender = 'F';
+                }
+
+
+
+                List<int> peselDigits = new List<int>(); //lista do przechowywania wszystkich cyfr podanego nr pesel
+                foreach (char digit in pesel)
+                {
+                    if (char.IsDigit(digit))
+                    {
+                        peselDigits.Add(Convert.ToInt32(digit.ToString()));
+                    }
+                    else
+                    {
+                        return result;
+                    }
+                }
+
+                if (peselDigits.Count == 11)
+                {
+                    dayOfBirth = birth.Day.ToString("00");
+                    monthOfBirth = birth.Month.ToString("00");
+
+                    string thirdAndFourthDigit;
+
+                    if (birth.Year >= 2000 && birth.Year < 2400) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
+                    {
+
+                        int digitOfHundreds = (birth.Year - 2000) / 100; //pobiera cyfre setek z roku urodzenia >2000
+                        int toAddToMonth = 0;
+                        switch (digitOfHundreds)
+                        {
+                            case 0:
+                                toAddToMonth = 20;
+                                break;
+                            case 1:
+                                toAddToMonth = 40;
+                                break;
+                            case 2:
+                                toAddToMonth = 60;
+                                break;
+                            case 3:
+                                toAddToMonth = 80;
+                                break;
+
+                        }
+                        thirdAndFourthDigit = (Convert.ToInt32(monthOfBirth) + toAddToMonth).ToString();
+
+                    }
+                    else
+                    {
+                        thirdAndFourthDigit = monthOfBirth;
+                    }
+
+                    string yearAsString = birth.Year.ToString();
+                    string firstTwoDigits = yearAsString[2].ToString() + yearAsString[3].ToString(); //pierwsze dwie cyfry, ktore powinny byc w prawidlowym peselu
+
+                    string year = peselDigits[0].ToString() + peselDigits[1].ToString(); //rok ktory wynika z podanego peselu
+                    string month = peselDigits[2].ToString() + peselDigits[3].ToString(); // miesiac ktory wynika z podanego peselu
+                    string day = peselDigits[4].ToString() + peselDigits[5].ToString(); // dzien urodzenia ktory wynika z podanego peselu
+
+                    bool verifyYear = (firstTwoDigits == year);
+                    bool verifyMonth = (thirdAndFourthDigit == month);
+                    bool verifyDay = (dayOfBirth == day);
+                    bool verifyGenderIfMen = (peselDigits[9] % 2 == 1 && gender == 'M');
+                    bool verifyGenderIfWomen = (peselDigits[9] % 2 == 0 && gender == 'F');
+
+                    if (verifyYear && verifyMonth && verifyDay && (verifyGenderIfMen || verifyGenderIfWomen))
+                    {
+                        int checksum = 0;
+                        for (int i = 0; i <= weights.Length - 1; i++) //wyliczanie sumy kontrolnej
+                        {
+                            checksum += peselDigits[i] * weights[i];
+                        }
+                        checksum %= 10;
+
+                        if (checksum != 0)
+                        {
+                            checksum = 10 - checksum;
+                        }
+
+                        if (checksum.ToString() == peselDigits[10].ToString()) //sprawdzenie czy wpisana cyfra kontrolna jest rowna wyliczonej przez program
+                        {
+                            result = true;
+                        }
+                    }
+
+
                 }
             }
-
-            if (peselDigits.Count == 11)
-            {
-                dayOfBirth = birth.Day.ToString("00");
-                monthOfBirth = birth.Month.ToString("00");
-
-                string thirdAndFourthDigit;
-
-                if (birth.Year >= 2000 && birth.Year < 2400) //przypisywanie miesiaca urodzenia, ktory powinien byc w prawidlowym peselu
-                {
-
-                    int digitOfHundreds = (birth.Year - 2000) / 100; //pobiera cyfre setek z roku urodzenia >2000
-                    int toAddToMonth = 0;
-                    switch (digitOfHundreds)
-                    {
-                        case 0:
-                            toAddToMonth = 20;
-                            break;
-                        case 1:
-                            toAddToMonth = 40;
-                            break;
-                        case 2:
-                            toAddToMonth = 60;
-                            break;
-                        case 3:
-                            toAddToMonth = 80;
-                            break;
-
-                    }
-                    thirdAndFourthDigit = (Convert.ToInt32(monthOfBirth) + toAddToMonth).ToString();
-
-                }
-                else
-                {
-                    thirdAndFourthDigit = monthOfBirth;
-                }
-
-                string yearAsString = birth.Year.ToString();
-                string firstTwoDigits = yearAsString[2].ToString() + yearAsString[3].ToString(); //pierwsze dwie cyfry, ktore powinny byc w prawidlowym peselu
-
-                string year = peselDigits[0].ToString() + peselDigits[1].ToString(); //rok ktory wynika z podanego peselu
-                string month = peselDigits[2].ToString() + peselDigits[3].ToString(); // miesiac ktory wynika z podanego peselu
-                string day = peselDigits[4].ToString() + peselDigits[5].ToString(); // dzien urodzenia ktory wynika z podanego peselu
-
-                bool verifyYear = (firstTwoDigits == year);
-                bool verifyMonth = (thirdAndFourthDigit == month);
-                bool verifyDay = (dayOfBirth == day);
-                bool verifyGenderIfMen = (peselDigits[9] % 2 == 1 && gender == 'M');
-                bool verifyGenderIfWomen = (peselDigits[9] % 2 == 0 && gender == 'K');
-
-                if (verifyYear && verifyMonth && verifyDay && (verifyGenderIfMen || verifyGenderIfWomen))
-                {
-                    int checksum = 0;
-                    for (int i = 0; i <= weights.Length - 1; i++) //wyliczanie sumy kontrolnej
-                    {
-                        checksum += peselDigits[i] * weights[i];
-                    }
-                    checksum %= 10;
-
-                    if (checksum != 0)
-                    {
-                        checksum = 10 - checksum;
-                    }
-
-                    if (checksum.ToString() == peselDigits[10].ToString()) //sprawdzenie czy wpisana cyfra kontrolna jest rowna wyliczonej przez program
-                    {
-                        result = true;
-                    }
-                }
-
-            }
-
-
             return result;
+            
+           
         }
         public static bool ValidatePeselUnique(string pesel)
         {

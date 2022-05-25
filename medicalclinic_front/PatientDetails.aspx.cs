@@ -124,7 +124,7 @@ namespace medicalclinic
                 AlertBox("Incorrect e-mail adress!", false);
                 return;
             }
-            if (!Patient.ValidatePesel(TextBox_pesel.Text, DateTime.Parse(TextBox_date_of_birth.Text), sex.ToString()))
+            if (!Patient.ValidatePesel(TextBox_pesel.Text, DateTime.Parse(TextBox_date_of_birth.Text), sex))
             {
                 AlertBox("Pesel does not match date of birth or gender!", false);
                 return;
