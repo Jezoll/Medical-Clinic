@@ -11,16 +11,25 @@ namespace medicalclinic
 {
 
 
-    public partial class SiteMaster
+    public partial class UserManagment
     {
 
         /// <summary>
-        /// Kontrolka MainContent.
+        /// Kontrolka UserTable.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.GridView UserTable;
+
+        /// <summary>
+        /// Kontrolka Button1.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

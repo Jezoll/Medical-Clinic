@@ -1,0 +1,16 @@
+﻿#MainContent_UserTable {
+    cursor: pointer;
+}
+
+#MainContent_UserTable .th-sort-asc::after {
+    content: "\25b4";
+}
+
+#MainContent_UserTable .th-sort-desc::after {
+     content: "\25be";
+}
+
+#MainContent_UserTable .th-sort-asc::after,
+#MainContent_UserTable .th-sort-desc::after {
+    margin-right: 5px;
+}

@@ -35,7 +35,7 @@ namespace medicalclinic
                 //    LabelSec.Visible = true;
                 //    Button1.Enabled = false;
                 //    TextBox1.Enabled = false;
-                //    TextBox2.Enabled = false;
+                //    TextBox2.Enabled = false; 
                 //}
 
 

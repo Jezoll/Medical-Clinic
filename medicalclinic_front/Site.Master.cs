@@ -11,15 +11,16 @@ namespace medicalclinic
 
         }
 
+        protected void Users_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         protected void LogOut_Click(object sender, EventArgs e)
         {
             Session.RemoveAll();
             LoginUser.logOut();
-            Response.Redirect("Login.aspx");
-            
-            
-
-            
+            Response.Redirect("Login.aspx");                
         }
     }
 }
