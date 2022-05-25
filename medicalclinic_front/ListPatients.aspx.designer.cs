@@ -60,6 +60,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.CheckBox CheckBox_name;
 
         /// <summary>
+        /// Kontrolka LabelName.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelName;
+
+        /// <summary>
         /// Kontrolka TextBoxSurname.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace medicalclinic
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox CheckBox_surname;
+
+        /// <summary>
+        /// Kontrolka LabelSurname.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSurname;
 
         /// <summary>
         /// Kontrolka TextBoxPesel.
@@ -96,6 +114,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.CheckBox CheckBox_pesel;
 
         /// <summary>
+        /// Kontrolka LabelPesel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPesel;
+
+        /// <summary>
         /// Kontrolka TextBoxLastAppointmentDate.
         /// </summary>
         /// <remarks>
@@ -112,6 +139,15 @@ namespace medicalclinic
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox CheckBox_last_appointment_date;
+
+        /// <summary>
+        /// Kontrolka LabelLastAppointment.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelLastAppointment;
 
         /// <summary>
         /// Kontrolka ButtonFilter.

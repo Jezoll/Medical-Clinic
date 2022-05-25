@@ -39,23 +39,27 @@
         <div style="border: solid; border-color: #EDF1F9; width: 61.5%; float: left; height: 100%">
             <asp:Label CssClass="Label" ID="LabelFilterMethod" runat="server" Text="Filter values"></asp:Label>
             <br />
-            <div>
+            <div style="clear: both">
                 <asp:TextBox CssClass="TextBox" ID="TextBoxName" runat="server" placeholder ="Patient's name"></asp:TextBox>
-                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_name" runat="server" Text="Filter by name"/>
+                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_name" runat="server" Text=""/>
+                <asp:Label CssClass="LabelFilter" ID="LabelName" runat="server" Text="Filter by name"></asp:Label>
             </div>
-            <div>
+            <div style="clear: both">
                 <asp:TextBox CssClass="TextBox" ID="TextBoxSurname" runat="server" placeholder ="Patient's surname"></asp:TextBox>
-                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_surname" runat="server" Text="Filter by surname"/>
+                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_surname" runat="server" Text=""/>
+                <asp:Label CssClass="LabelFilter" ID="LabelSurname" runat="server" Text="Filter by surname"></asp:Label>
             </div>
-            <div>
+            <div style="clear: both">
                 <asp:TextBox CssClass="TextBox" ID="TextBoxPesel" runat="server" placeholder ="Patient's Pesel"></asp:TextBox>
-                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_pesel" runat="server" Text="Filter by Pesel number"/>
+                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_pesel" runat="server" Text=""/>
+                <asp:Label CssClass="LabelFilter" ID="LabelPesel" runat="server" Text="Filter by Pesel number"></asp:Label>
             </div>
-            <div>
+            <div style="clear: both">
                 <asp:TextBox CssClass="TextBox" ID="TextBoxLastAppointmentDate" runat="server" MaxLength="10" TextMode="Date"></asp:TextBox>
-                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_last_appointment_date" runat="server" Text="Filter by last appointment"/>
+                <asp:CheckBox CssClass="CheckBox" ID="CheckBox_last_appointment_date" runat="server" Text=""/>
+                <asp:Label CssClass="LabelFilter" ID="LabelLastAppointment" runat="server" Text="Filter by last appointment"></asp:Label>
             </div>
-            <div style="margin-left: 20%">
+            <div style="margin-left: 20%; display: inline-block; margin-top: 1vh">
                 <asp:Button CssClass="Button" ID="ButtonFilter" runat="server" OnClick="ButtonFilter_Click" Text="Filter"/>
                 <asp:Button CssClass="Button" ID="ButtonReset" runat="server" OnClick="ButtonReset_Click" Text="Reset"/>
             </div>
@@ -99,10 +103,13 @@
             border-color: #507CD1;
             border-radius: 3px;
             width: 12vw; 
-            font-size: 1.35vw;
+            font-size: 1.7vmin;
             color: white;
             font-weight: bold;
             margin: 0.2vmin;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
         }
         .Button:hover
         {
@@ -119,19 +126,35 @@
             float: right;
             margin: 5px;
         }
+        .LabelFilter
+        {
+            margin-left: 0.5vw;
+            float: left;
+            width: 15vw;
+            font-size: 1.7vmin;
+            font-weight: lighter;
+            height: 2.9vmin;
+            margin-top: 0.5vh;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow: ellipsis;
+        }
         .TextBox
         {
+            margin-left: 2vw;
+            float: left;
             width: 50%;
-            font-size: 1.35vw;
+            font-size: 1.7vmin;
             margin-top: 0.5vh;
-            height: 2.8vh;
+            height: 2.9vmin;
+            text-overflow: ellipsis;
             
         }
         .CheckBox
         {
-            font-weight: lighter;
-            font-size: 1.35vw;
-            font-weight: lighter;
+            margin-top: 0.5vh;
+            margin-left: 0.5vw;
+            float: left;
         }
         input[type=checkbox]
         {
@@ -142,8 +165,6 @@
         {
             width: 1.5vmin;
             height: 1.5vmin;
-        }
-        
-        
+        }    
     </style> 
 </asp:Content>

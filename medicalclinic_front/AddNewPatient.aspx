@@ -21,14 +21,14 @@
                 </asp:DropDownList>
             </div>
             <div style="clear: both">
-                <asp:Label CssClass="Label" ID="LabelPesel" runat="server" Text="Pesel number"></asp:Label>
+                <asp:Label CssClass="Label" ID="LabelPesel" runat="server" Text="Pesel number:"></asp:Label>
                 <asp:TextBox CssClass="TextBox" ID="TextBoxPesel" runat="server" placeholder="Patient pesel number" MaxLength="11"></asp:TextBox>
             </div>
             <div style="clear: both">
                 <asp:Label CssClass="Label" ID="LabelDate" runat="server" Text="Date of birth:"></asp:Label>
                 <asp:TextBox CssClass="TextBox" ID="TextBoxDateOfBirth" runat="server" TextMode="Date"></asp:TextBox>
             </div>
-            <div style="clear: both">
+            <div style="clear: both;">
                 <asp:Label CssClass="Label" ID="LabelPhoneNumber" runat="server" Text="Phone number:"></asp:Label>
                 <asp:TextBox CssClass="TextBox" ID="TextBoxPhoneNumber" runat="server" placeholder="Patient phone number" MaxLength="9"></asp:TextBox>
             </div>
@@ -62,12 +62,13 @@
             border-color: #507CD1;
             border-radius: 3px;
             width: 12vw;
-            font-size: 1.35vw;
+            font-size: 1.7vmin;
             color: white;
             font-weight: bold;
             margin: 0.2vmin;
             margin-top: 0.7vh;
             margin-bottom: 0.7vh;
+            text-overflow: ellipsis;
         }
         .Button:hover
         {
@@ -76,36 +77,40 @@
         }
         .Label
         {
-            font-size: 1.35vw;
+            font-size: 1.7vmin;
             font-weight: lighter;
             float: left;
             margin-left: 2vw;
             margin-top: 0.8vh;
             display: block;
             width: 10vw;
-            height: 2.8vh;
+            height: 2.9vmin;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
         }
         .TextBox
         {
-            font-size: 1.35vw;
+            font-size: 1.7vmin;
             font-weight: lighter;
             float: right;
             margin-right: 2vw;
             margin-top: 0.8vh;
             display: block;
             width: 15vw;
-            height: 2.8vh;
+            height: 2.9vmin;
+            text-overflow: ellipsis;
         }
         .DropDownList
         {
-            height: 2.8vh;
             width: 15vw;
             float: right;
             margin-right: 2vw;
             margin-top: 0.8vh;
             display: block;
-            font-size: 1.35vw;
+            font-size: 1.7vmin;
             font-weight: lighter;
+            height: 2.9vmin;
         }      
 </style>
 </asp:Content>

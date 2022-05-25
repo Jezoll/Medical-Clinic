@@ -47,7 +47,7 @@
 
         <div style="border: solid; border-color: #EDF1F9; width: 61.5%; float: left; height: 100%;">
             <asp:Label CssClass="LabelHead" ID="Label_appointments" runat="server" Text="Patient appointments"></asp:Label>
-            <asp:Panel runat="server" Height="220px" Width="100%" ScrollBars="Vertical">
+            <asp:Panel runat="server" Height="260px" Width="100%" ScrollBars="Vertical">
                 <asp:GridView CssClass="GridView" ID="GridViewAppointments" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" HeaderStyle ="position:absolute">
                     <Columns>
                         <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="false" ReadOnly="true" >
@@ -83,32 +83,32 @@
             <div>
                 <asp:Label CssClass="LabelHead" ID="Label_modify" runat="server" Text="Modify patient"></asp:Label>
 
-                <div>
+                <div style="clear: both">
                     <asp:Label CssClass="Label" ID="Label3" runat="server" Text="New first name: "></asp:Label>
                     <asp:TextBox CssClass="TextBox" ID="TextBox_first_name" runat="server" MaxLength="30"></asp:TextBox>
                 </div>
-                <div>
+                <div style="clear: both">
                     <asp:Label CssClass="Label" ID="Label5" runat="server" Text="New second name: "></asp:Label>
                     <asp:TextBox CssClass="TextBox" ID="TextBox_surname" runat="server" MaxLength="30"></asp:TextBox>
                 </div>
-                <div style="margin-top: 0.5vh;">
+                <div style="clear: both; display: inline-block;">
                     <asp:Label CssClass="Label" ID="Label7" runat="server" Text="New sex:"></asp:Label>
                     <asp:RadioButton CssClass="RadioButton" ID="RadioButton_sex_male" Text="Male" GroupName="sex" runat="server" />
                     <asp:RadioButton CssClass="RadioButton" ID="RadioButton_sex_female" Text="Female" GroupName="sex" runat="server"/>
                 </div>
-                <div>
+                <div style="clear: both">
                     <asp:Label CssClass="Label" ID="Label9" runat="server" Text="New date of birth: "></asp:Label>
                     <asp:TextBox CssClass="TextBox" ID="TextBox_date_of_birth" runat="server" MaxLength="10" TextMode="Date"></asp:TextBox>
                 </div>
-                <div>
+                <div style="clear: both">
                     <asp:Label CssClass="Label" ID="Label11" runat="server" Text="New Pesel: "></asp:Label>
                     <asp:TextBox CssClass="TextBox" ID="TextBox_pesel" runat="server" MaxLength="11"></asp:TextBox>
                 </div>
-                <div>
+                <div style="clear: both">
                     <asp:Label CssClass="Label" ID="Label13" runat="server" Text="New phone number: "></asp:Label>
                     <asp:TextBox CssClass="TextBox" ID="TextBox_phone_number" runat="server" MaxLength="9"></asp:TextBox>
                 </div>
-                <div>
+                <div style="clear: both">
                     <asp:Label CssClass="Label" ID="Label15" runat="server" Text="New email: "></asp:Label>
                     <asp:TextBox CssClass="TextBox" ID="TextBox_email" runat="server" MaxLength="100"></asp:TextBox>        
                 </div>
@@ -122,14 +122,14 @@
             <asp:Label CssClass="LabelHead" ID="Label1" runat="server" Text="Other options"></asp:Label>
             <br />
             <div style="width: 37%; margin-left: 25%; margin-top: 15%">
-                <div style="margin-top: 5%">
+                <div>
                     <asp:Button CssClass="Button" ID="Button_delete" runat="server" OnClick="Button_Delete_Click" OnClientClick ="return DeleteAlertFunction()" Text="Delete" />
                     <asp:HiddenField ID="ConfirmMessageResponseDelete" runat="server" ClientIDMode="Static" />
                 </div>
-                <div style="margin-top: 5%">
-                    <asp:Button CssClass="Button" ID="Button_activity" runat="server" Text="Activate Patient" OnClick="Button_activity_Click" style="font-size: 1.2vw;"/>
+                <div>
+                    <asp:Button CssClass="Button" ID="Button_activity" runat="server" Text="Activate Patient" OnClick="Button_activity_Click"/>
                 </div>
-                <div style="margin-top: 5%">
+                <div>
                     <asp:Button CssClass="Button" ID="Button_close" runat="server" OnClick="Button_close_Click" Text="Close" />
                 </div>               
             </div>
@@ -158,11 +158,17 @@
             border: 2px solid;
             border-color: #507CD1;
             border-radius: 3px;
-            width: 12vw; 
-            font-size: 1.35vw;
+            width: 12vw;
+            font-size: 1.7vmin;
             color: white;
             font-weight: bold;
             margin: 0.2vmin;
+            margin-top: 0.7vh;
+            margin-bottom: 0.7vh;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
+            
         }
         .Button:hover
         {
@@ -182,37 +188,61 @@
         .TextBox
         {
             width: 50%;
-            font-size: 1.35vw;
-            margin-top: 0.5vh;
+            font-size: 1.7vmin;
+            font-weight: lighter;
+            float: right;
+            margin-right: 2vw;
+            margin-top: 0.8vh;
+            display: block;
+            height: 2.9vmin;
+            text-overflow: ellipsis;
         }
         .Value
         {
             width: 50%;
-            font-size: 1.2vw;
+            font-size: 1.7vmin;
+            float: left;
             margin-top: 0.5vh;
+            margin-left: 0.5vw;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
         }
         .Label
         {
-            font-size: 1.35vw;
+            font-size: 1.7vmin;
             font-weight: lighter;
             float: left;
+            margin-left: 2vw;
+            margin-top: 0.8vh;
             display: block;
             width: 15vw;
-            margin-top: 0.5vh;
+            height: 2.9vmin;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
         }
         .LabelDetails
         {
-            font-size: 1.2vw;
+            font-size: 1.7vmin;
             font-weight: lighter;
             float: left;
             display: block;
+            margin-top: 0.5vh;
+            margin-left: 0.5vw;
             width: 8.5vw;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
         }
         .RadioButton
         {
-            font-size: 1.35vw;
+            float: right;
+            margin-left: 4.5vw;
+            display: block;
+            font-size: 1.7vmin;
             font-weight: lighter;
-            margin-top: 0.5vh;
+            margin-top: 0.8vh;
         }
         input[type=radio]
         {
