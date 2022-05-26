@@ -1,5 +1,15 @@
 ﻿const table = document.querySelector("#MainContent_UserTable")
 const headerCells = document.querySelectorAll("#MainContent_UserTable tbody tr th")
+const searchInput = document.querySelector("#search-input")
+const checkBoxes = document.getElementsByClassName("check-box")
+const firstNameFilter = document.querySelector("#cb-firstname")
+const surNameFilter = document.querySelector("#cb-secondname")
+
+const rows = [];
+
+for (let i = 1; i < table.tBodies[0].children.length; i++)
+    rows.push(table.tBodies[0].children[i])
+
 
 function sortTableByColumn(table, column, asc = true) {
     const dirModifier = asc ? 1 : -1;
@@ -39,4 +49,42 @@ headerCells.forEach(headerCell => {
     })
 })
 
+function checkFiltering() {
 
+
+    if (firstNameFilter.checked)
+        return 'td:nth-child(3)';
+    else if (surNameFilter.checked)
+        return 'td:nth-child(4)'
+    
+}
+
+searchInput.addEventListener('keyup', e => {
+    console.log(rows);
+    rows.forEach(row => {
+        if (firstNameFilter.checked && surNameFilter.checked) {
+
+            const name = row.querySelector('td:nth-child(3)').textContent.toLowerCase()
+            const surname = row.querySelector('td:nth-child(4)').textContent.toLowerCase()
+
+            const word = name + ' ' + surname;
+
+            word.indexOf(e.target.value) !== -1
+                ? (row.style.display = 'table-row')
+                : (row.style.display = 'none')
+        }
+
+        else if (firstNameFilter.checked) {
+            row.querySelector('td:nth-child(3)').textContent.toLowerCase().indexOf(e.target.value) !== -1
+                ? (row.style.display = 'table-row')
+                : (row.style.display = 'none')
+        }
+
+        else if (surNameFilter.checked) {
+            row.querySelector('td:nth-child(4)').textContent.toLowerCase().indexOf(e.target.value) !== -1
+                ? (row.style.display = 'table-row')
+                : (row.style.display = 'none')
+        }
+
+    })
+})

@@ -11,9 +11,20 @@
         </Columns>
     </asp:GridView>
 
+    <fieldset>
+        <legend>Filtry</legend>
+
+        <input type="text" value="" id="search-input" />
+
+        <input type="checkbox" id="cb-firstname" class="check-box" checked />
+        <label for="cb-firstname">Po imieniu</label>
+
+        <input type="checkbox" id="cb-secondname" class="check-box" />
+        <label for="cb-secondname">Po nazwisku</label>
+
+    </fieldset>
+
     <asp:Button ID="Button1" runat="server" Text="Nowy użytkownik" OnClick="Button1_Click" OnClientClick="target ='_blank';"/>
-
-
 
     <script src="./Scripts/TableSort.js"></script>
 </asp:Content>
