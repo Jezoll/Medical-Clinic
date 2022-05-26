@@ -2,20 +2,23 @@
 
 <asp:Content ID="EmployeeManagementContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="table-container">
-        <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center">
-            <iframe style="width: 250px; height: 250px;" id="irm1" runat="server"></iframe>
-            <br />
-            <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="OK" />
-        </asp:Panel>
-        <asp:HiddenField ID="HiddenPopup" runat="server" />
+        <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />
         <ajaxToolkit:ModalPopupExtender
-            ID="PopupAdminPassword"
+            ID="PopUpModalExtender"
             runat="server"
             PopupControlID="Panl1"
-            TargetControlID="HiddenPopup"
+            TargetControlID="btnShowPopup"
             CancelControlID="ButtonOK"
             BackgroundCssClass="popout-background">
         </ajaxToolkit:ModalPopupExtender>
+        <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center" Style="display: none">
+            <asp:Label ID="MessageLabel" runat="server" Text="Log in with your admin password to continue"></asp:Label><br />
+            <asp:TextBox ID="TextBoxLogin" placeholder="Login" runat="server" AutoPostBack="false"></asp:TextBox><br />
+            <asp:TextBox ID="TextBoxPassword" placeholder="Password" type="password" runat="server" AutoPostBack="false"></asp:TextBox><br />
+            <asp:Button CssClass="btn btn-default" ID="ConfirmButton" runat="server" Text="Confirm" OnClick="ConfirmButton_Click" Enabled="True" /><br />
+            <br />
+            <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="Cancel" />
+        </asp:Panel>
         <asp:Button ID="ButtonAdd" CssClass="btn btn-default btn-employee-add" runat="server" OnClick="ButtonAdd_Click" Text="Add New Employee" />
         <div class="table-content">
             <asp:GridView

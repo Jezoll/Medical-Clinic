@@ -156,10 +156,32 @@ namespace medicalclinic
         protected void LinkButtonEmployeeActiveChange_Click(object sender, EventArgs e)
         {
             LinkButton lb = sender as LinkButton;
-            string id = lb.CommandArgument;
+            ViewState["employee_id"] = lb.CommandArgument;
+            PopUpModalExtender.Show();
+        }
 
-            irm1.Attributes.Add("src", string.Format($"PopupAdminPassword.aspx?id={id}"));
-            PopupAdminPassword.Show();
+        protected void ConfirmButton_Click(object sender, EventArgs e)
+        {
+
+            if (!UserCredentials.IsLoginDataCorrect(TextBoxLogin.Text, TextBoxPassword.Text))
+            {
+                AlertBox("Incorrect login data!");
+                return;
+            }
+
+            if (!UserCredentials.IsActiveAdmin(TextBoxLogin.Text))
+            {
+                AlertBox("No administrator permissions!");
+                return;
+            }
+            Employee.ChangeActiveStatus(ViewState["employee_id"].ToString());
+            AlertBox("Employee status has been changed");
+        }
+
+        private void AlertBox(string AlertMessage)
+        {
+            string script = "alert('" + AlertMessage + "'); window.location.href='EmployeeManagement.aspx';";
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", script, true);
         }
 
     }

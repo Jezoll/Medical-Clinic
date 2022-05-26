@@ -373,7 +373,7 @@ namespace medicalclinic_back
             return !exists;
         }
 
-        public static void ChangeActiveStatus(int id)
+        public static void ChangeActiveStatus(string id)
         {
             bool newstatus = !IsActive(id);
 
@@ -389,7 +389,7 @@ namespace medicalclinic_back
             Database.closeConnection();
         }
 
-        public static bool IsActive(int id)
+        public static bool IsActive(string id)
         {
             Database.openConnection();
             string query = @"SELECT is_active from employees where id=@id";
