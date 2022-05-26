@@ -167,10 +167,23 @@ namespace medicalclinic_back
 
         public static void DeleteOffice(int officeID)
         {
-            //czy usuwać to biuro z bazy danych?
-            //Wtedy będzie trzeba usunać wszystkie przeszłe wizyty, do których jest ono przypisane
 
-            string query = "update offices set avalibility = false where offices.id = @id";
+            deleteVisitsForTheOffice(officeID);
+            string query = "delete from offices where id = @id";
+
+            Database.openConnection();
+
+            MySqlCommand command = Database.command(query);
+            command.Parameters.AddWithValue("@id", officeID);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+
+        }
+
+        private static void deleteVisitsForTheOffice(int officeID)
+        {
+            string query = "delete from visits where id_office = @id";
 
             Database.openConnection();
 
