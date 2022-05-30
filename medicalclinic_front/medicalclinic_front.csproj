@@ -160,6 +160,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ForgetPassword.aspx" />
     <Content Include="AddNewPatient.aspx" />
+    <Content Include="AppointmentManagement.aspx" />
+    <Content Include="ListAppointments.aspx" />
     <Content Include="PatientDetails.aspx" />
     <Content Include="ListPatients.aspx" />
     <Content Include="Global.asax" />
@@ -263,6 +265,20 @@
     </Compile>
     <Compile Include="AddNewPatient.aspx.designer.cs">
       <DependentUpon>AddNewPatient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentManagement.aspx.cs">
+      <DependentUpon>AppointmentManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppointmentManagement.aspx.designer.cs">
+      <DependentUpon>AppointmentManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListAppointments.aspx.cs">
+      <DependentUpon>ListAppointments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListAppointments.aspx.designer.cs">
+      <DependentUpon>ListAppointments.aspx</DependentUpon>
     </Compile>
     <Compile Include="PatientDetails.aspx.cs">
       <DependentUpon>PatientDetails.aspx</DependentUpon>
