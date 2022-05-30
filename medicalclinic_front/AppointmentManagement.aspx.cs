@@ -37,10 +37,6 @@ namespace medicalclinic
                     DropDownList_office.Items.Add(new ListItem(office.Number_of_office, office.Id.ToString()));
                 }
                 DropDownList_office.DataBind();
-                //Fills DropDownList_status
-                DropDownList_status.Items.Add(new ListItem("All", 0.ToString()));
-                DropDownList_status.Items.Add(new ListItem("Outdate and Past", 1.ToString()));
-                DropDownList_status.Items.Add(new ListItem("Future", 2.ToString()));
             }
 
         }
@@ -50,9 +46,8 @@ namespace medicalclinic
             int employee_id = int.Parse(DropDownList_doctor.SelectedValue);
             int patient_id = int.Parse(DropDownList_patient.SelectedValue);
             int office_id = int.Parse(DropDownList_office.SelectedValue);
-            int status_id = int.Parse(DropDownList_status.SelectedValue);
 
-            List<Appointment> appointments = Appointment.GetAppointments(employee_id, patient_id, office_id, status_id);
+            List<Appointment> appointments = Appointment.GetAppointments(employee_id, patient_id, office_id);
             foreach (Appointment appointment in appointments)
             {
                 if (e.Day.Date.Equals(appointment.Date_of_appointment))
@@ -69,13 +64,12 @@ namespace medicalclinic
 
         protected void Calendar_appointments_SelectionChanged(object sender, EventArgs e)
         {
-            DateTime selected_date = Calendar_appointments.SelectedDate;
+            string selected_date = Calendar_appointments.SelectedDate.ToString("yyyy-MM-dd");
             int employee_id = int.Parse(DropDownList_doctor.SelectedValue);
             int patient_id = int.Parse(DropDownList_patient.SelectedValue);
             int office_id = int.Parse(DropDownList_office.SelectedValue);
-            int status_id = int.Parse(DropDownList_status.SelectedValue);
 
-            Response.Redirect(string.Format("~/ListAppointments.aspx?selected_date={0}&employee_id={1}&patient_id={2}&office_id={3}&status_id={4}", selected_date, employee_id, patient_id, office_id, status_id));
+            Response.Redirect(string.Format("~/ListAppointments.aspx?selected_date={0}&employee_id={1}&patient_id={2}&office_id={3}", selected_date, employee_id, patient_id, office_id));
         }
     }
 }

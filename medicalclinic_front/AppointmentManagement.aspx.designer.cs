@@ -78,24 +78,6 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.DropDownList DropDownList_office;
 
         /// <summary>
-        /// Kontrolka Label_Status.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_Status;
-
-        /// <summary>
-        /// Kontrolka DropDownList_status.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList_status;
-
-        /// <summary>
         /// Kontrolka LabelTest.
         /// </summary>
         /// <remarks>

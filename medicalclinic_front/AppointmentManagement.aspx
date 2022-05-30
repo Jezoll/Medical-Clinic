@@ -30,15 +30,8 @@
                     <asp:DropDownList ID="DropDownList_office" runat="server">
                     </asp:DropDownList>
                 </div>
-                <div>
-                    <asp:Label ID="Label_Status" runat="server" Text="Status: "></asp:Label>
-                    <asp:DropDownList ID="DropDownList_status" runat="server">
-                    </asp:DropDownList>
-                </div>
                 <asp:Label ID="LabelTest" runat="server" Text="Wartość DDL: "></asp:Label>
-                <asp:Button ID="ButtonFilter" runat="server" Text="Filter" OnClick="ButtonFilter_Click" />
-                
-                
+                <asp:Button ID="ButtonFilter" runat="server" Text="Filter" OnClick="ButtonFilter_Click" />                     
                 
             </center>
         </div>

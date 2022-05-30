@@ -35,11 +35,12 @@ namespace medicalclinic_back
             this.office_number = office_number;
             this.date_of_appointment = date_of_appointment;
         }
-        public static List<Appointment> GetAppointments(int employee_id, int patient_id, int office_id, int status_id)
+        public static List<Appointment> GetAppointments(int employee_id, int patient_id, int office_id, string selected_date = "all")
         {
             string e_id = "'%'";
             string p_id = "'%'";
             string o_id = "'%'";
+            string appointment_date = "'%'";
             if(employee_id != 0)
             {
                 e_id = employee_id.ToString();
@@ -52,25 +53,13 @@ namespace medicalclinic_back
             {
                 o_id = office_id.ToString();
             }
-
+            if(selected_date != "all")
+            {
+                appointment_date ="'" + selected_date + "'";
+            }
 
             Database.openConnection();
-            string query = $"SELECT v.id, v.duration, v.confirmed, v.type, CONCAT(e.first_name, ' ', e.second_name) AS 'first_name and second_name', v.id_patient, o.number_of_office, v.date FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id_employee LIKE {e_id} AND v.id_patient LIKE {p_id} AND v.id_office LIKE {o_id}";
-            if (status_id == 1)
-            {
-                string now = DateTime.Now.ToString("yyyy-MM-dd");
-                query = query + $" AND v.date < '{now}';";
-            }
-            if (status_id == 2)
-            {
-                string now = DateTime.Now.ToString("yyyy-MM-dd");
-                query = query + $" AND v.date >= '{now}';";
-            }
-            else
-            {   
-                query = query + $";";
-            }
-
+            string query = $"SELECT v.id, v.duration, v.confirmed, v.type, CONCAT(e.first_name, ' ', e.second_name) AS 'first_name and second_name', v.id_patient, o.number_of_office, v.date FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id_employee LIKE {e_id} AND v.id_patient LIKE {p_id} AND v.id_office LIKE {o_id} AND v.date LIKE {appointment_date};";
             MySqlDataReader data = Database.dataReader(query);
             List<Appointment> appointments = new List<Appointment>();
             while (data.Read())
