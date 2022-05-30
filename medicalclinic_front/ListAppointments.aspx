@@ -8,4 +8,5 @@
             <asp:BoundField DataField="Date_of_appointment" HeaderText="Appointment Date" DataFormatString="{0:yyyy/MM/dd}"/>
         </Columns>
     </asp:GridView>
+    <asp:Label ID="Label1" runat="server" Text="Label: "></asp:Label>
 </asp:Content>

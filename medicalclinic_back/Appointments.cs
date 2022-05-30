@@ -43,15 +43,15 @@ namespace medicalclinic_back
             string appointment_date = "'%'";
             if(employee_id != 0)
             {
-                e_id = employee_id.ToString();
+                e_id = "'" + employee_id.ToString() + "'";
             }
             if(patient_id != 0)
             {
-                p_id = patient_id.ToString();
+                p_id ="'" + patient_id.ToString() + "'";
             }
             if(office_id != 0)
             {
-                o_id = office_id.ToString();
+                o_id ="'" + office_id.ToString() + "'";
             }
             if(selected_date != "all")
             {

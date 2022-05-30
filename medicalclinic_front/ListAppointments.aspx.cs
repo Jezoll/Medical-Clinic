@@ -15,7 +15,7 @@ namespace medicalclinic
             int employee_id = Int32.Parse(Request.QueryString["employee_id"]);
             int patient_id = Int32.Parse(Request.QueryString["patient_id"]);
             int office_id = Int32.Parse(Request.QueryString["office_id"]);
- 
+
             List<Appointment> appointments = Appointment.GetAppointments(employee_id, patient_id, office_id, selected_date);
             GridViewAppointments.DataSource = appointments;
             GridViewAppointments.DataBind();
