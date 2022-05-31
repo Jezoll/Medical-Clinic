@@ -53,15 +53,15 @@
         <asp:Label ID="Label_description_value" runat="server" Text="Label"></asp:Label>
     </div>
     <div>
-        <asp:Label ID="Label_doctor" runat="server" Text="Doctor ID: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
+        <asp:Label ID="Label_doctor" runat="server" Text="Doctor: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
         <asp:Label ID="Label_doctor_value" runat="server" Text="Label"></asp:Label>
     </div>
      <div>
-        <asp:Label ID="Label_patient" runat="server" Text="Patient ID: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
+        <asp:Label ID="Label_patient" runat="server" Text="Patient: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
         <asp:Label ID="Label_patient_value" runat="server" Text="Label"></asp:Label>
     </div>
     <div>
-        <asp:Label ID="Label_office" runat="server" Text="Office_ID: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
+        <asp:Label ID="Label_office" runat="server" Text="Office number: " Font-Names="Arial" Font-Size="12pt" width="110pt"></asp:Label>
         <asp:Label ID="Label_office_value" runat="server" Text="Label"></asp:Label>
     </div>
      <div>

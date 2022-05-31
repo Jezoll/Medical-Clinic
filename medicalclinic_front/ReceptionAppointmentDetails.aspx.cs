@@ -23,8 +23,8 @@ namespace medicalclinic
                 TextBox_ndate.Text = appointment[0].Date_of_appointment.ToString("yyyy-MM-dd");
                 TextBox_ntime_value.Text = appointment[0].Time_of_appointment.ToString();
                 Label_duration_value.Text = appointment[0].Duration.ToString();
-                Label_doctor_value.Text = appointment[0].Id_employee.ToString();
-                Label_patient_value.Text = appointment[0].Id_patient.ToString();
+                Label_doctor_value.Text = appointment[0].Employee.ToString();
+                Label_patient_value.Text = appointment[0].Patient.ToString();
                 Label_office_value.Text = appointment[0].Office_number.ToString();
                 Label_description_value.Text = appointment[0].Description;
                 Label_payment_value.Text = appointment[0].Payment.ToString();
