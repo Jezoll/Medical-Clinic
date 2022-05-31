@@ -167,6 +167,7 @@
     <Compile Include="OfficeUsedFor.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="SexEnum.cs" />
+    <Compile Include="StatusEnum.cs" />
     <Compile Include="UserDepartment.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="UserCredentials.cs" />

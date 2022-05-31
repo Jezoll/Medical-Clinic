@@ -11,6 +11,9 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DropDownList_doctor.AutoPostBack = true;
+            DropDownList_patient.AutoPostBack = true;
+            DropDownList_office.AutoPostBack = true;
             if (!IsPostBack)
             {
                 DropDownList_doctor.Items.Add(new ListItem("All", 0.ToString()));
@@ -71,5 +74,6 @@ namespace medicalclinic
 
             Response.Redirect(string.Format("~/ListAppointments.aspx?selected_date={0}&employee_id={1}&patient_id={2}&office_id={3}", selected_date, employee_id, patient_id, office_id));
         }
+
     }
 }
