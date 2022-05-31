@@ -106,5 +106,46 @@ namespace medicalclinic_back
             Database.closeConnection();
             return appointments;
         }
+
+        public static List<Appointment> GetThisAppointment(int this_appointment_id)
+        {
+            Database.openConnection();
+            string query = $"SELECT v.id, v.duration, v.status, v.description, v.id_employee, CONCAT(e.first_name, ' ', e.second_name) AS 'doctor', v.id_patient, (SELECT CONCAT(p.first_name, ' ',p.second_name) FROM patients p WHERE p.id = v.id_patient) AS 'patient', v.id_office, o.number_of_office, v.date, v.time, v.payments FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id = {this_appointment_id};";
+            MySqlDataReader data = Database.dataReader(query);
+            List<Appointment> appointment = new List<Appointment>();
+            while (data.Read())
+            {
+                Appointment appointment_data = new Appointment(data.GetInt32(0), data.GetInt32(1), (StatusEnum)Enum.Parse(typeof(StatusEnum), data.GetString(2)), data.GetString(3), data.GetInt32(4), data.GetString(5), data.GetInt32(6), data.GetString(7), data.GetInt32(8), data.GetInt32(9), data.GetDateTime(10), data.GetTimeSpan(11), data.GetDouble(12));
+
+                appointment.Add(appointment_data);
+            }
+
+            Database.closeConnection();
+            return appointment;
+        }
+
+        public static void CanceletionAppointment(int Id)
+        {
+            Database.openConnection();
+            string query = $"UPDATE visits SET status = 'Canceled' WHERE @Id = id";
+            MySqlCommand command = Database.command(query);
+            command.Parameters.AddWithValue("@Id", Id);
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
+        public static void ModifyAppointment(int id, string ndate, string ntime)
+        {
+            Database.openConnection();
+            string query = $"UPDATE visits SET date = @Date, time = @Time WHERE id = @Id";
+
+            MySqlCommand command = Database.command(query);
+            command.Parameters.AddWithValue("@Id", id);
+            command.Parameters.AddWithValue("@Date", ndate);
+            command.Parameters.AddWithValue("@Time", ntime);
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+
+        }
     }
 }

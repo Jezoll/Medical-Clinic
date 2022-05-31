@@ -161,6 +161,7 @@
     <Content Include="ForgetPassword.aspx" />
     <Content Include="AddNewPatient.aspx" />
     <Content Include="AppointmentManagement.aspx" />
+    <Content Include="ReceptionAppointmentDetails.aspx" />
     <Content Include="ListAppointments.aspx" />
     <Content Include="PatientDetails.aspx" />
     <Content Include="ListPatients.aspx" />
@@ -272,6 +273,13 @@
     </Compile>
     <Compile Include="AppointmentManagement.aspx.designer.cs">
       <DependentUpon>AppointmentManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceptionAppointmentDetails.aspx.cs">
+      <DependentUpon>ReceptionAppointmentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceptionAppointmentDetails.aspx.designer.cs">
+      <DependentUpon>ReceptionAppointmentDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListAppointments.aspx.cs">
       <DependentUpon>ListAppointments.aspx</DependentUpon>
