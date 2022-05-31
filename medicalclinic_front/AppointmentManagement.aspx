@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AppointmentManagement.aspx.cs" Inherits="medicalclinic.AppointmentManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-        
+    
         <div>                
             <center>
                 <asp:Calendar ID="Calendar_appointments" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellPadding="1" CellSpacing="5" Font-Names="MS UI Gothic" Font-Size="Large" ForeColor="Black" Height="900px" Width="1200px" OnDayRender="Calendar_appointments_DayRender" OnSelectionChanged="Calendar_appointments_SelectionChanged">
@@ -30,9 +29,8 @@
                     <asp:DropDownList ID="DropDownList_office" runat="server">
                     </asp:DropDownList>
                 </div>
-                <asp:Label ID="LabelTest" runat="server" Text="Wartość DDL: "></asp:Label>
-                <asp:Button ID="ButtonFilter" runat="server" Text="Filter" OnClick="ButtonFilter_Click" />                     
-                
+                <asp:TextBox ID="TextBox_date" runat="server" MaxLength="10" TextMode="Date"></asp:TextBox>
+                <asp:Button ID="Button_change_date" runat="server" Text="Change date" OnClick="Button_change_date_Click"/>
             </center>
         </div>
 

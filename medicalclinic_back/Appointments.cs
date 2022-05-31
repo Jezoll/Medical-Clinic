@@ -106,7 +106,5 @@ namespace medicalclinic_back
             Database.closeConnection();
             return appointments;
         }
-
-
     }
 }

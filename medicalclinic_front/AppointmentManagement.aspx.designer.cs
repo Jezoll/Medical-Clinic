@@ -78,21 +78,21 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.DropDownList DropDownList_office;
 
         /// <summary>
-        /// Kontrolka LabelTest.
+        /// Kontrolka TextBox_date.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelTest;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_date;
 
         /// <summary>
-        /// Kontrolka ButtonFilter.
+        /// Kontrolka Button_change_date.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonFilter;
+        protected global::System.Web.UI.WebControls.Button Button_change_date;
     }
 }

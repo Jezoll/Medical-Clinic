@@ -41,9 +41,8 @@ namespace medicalclinic
                 }
                 DropDownList_office.DataBind();
             }
-
         }
-
+        
         protected void Calendar_appointments_DayRender(object sender, DayRenderEventArgs e)
         {
             int employee_id = int.Parse(DropDownList_doctor.SelectedValue);
@@ -59,12 +58,7 @@ namespace medicalclinic
                 }
             }
         }
-
-        protected void ButtonFilter_Click(object sender, EventArgs e)
-        {
-            //Generalnie to nic nie robi, ale robi tak, że strona się aktualizuje xD
-        }
-
+        //Redirects to ListAppointments to view the appointment list for the selected date
         protected void Calendar_appointments_SelectionChanged(object sender, EventArgs e)
         {
             string selected_date = Calendar_appointments.SelectedDate.ToString("yyyy-MM-dd");
@@ -75,5 +69,10 @@ namespace medicalclinic
             Response.Redirect(string.Format("~/ListAppointments.aspx?selected_date={0}&employee_id={1}&patient_id={2}&office_id={3}", selected_date, employee_id, patient_id, office_id));
         }
 
+        //Changes date in Calendar_appointments on selected by user
+        protected void Button_change_date_Click(object sender, EventArgs e)
+        {
+            Calendar_appointments.VisibleDate = DateTime.Parse(TextBox_date.Text);
+        }
     }
 }

@@ -20,5 +20,17 @@ namespace medicalclinic
             GridViewAppointments.DataSource = appointments;
             GridViewAppointments.DataBind();
         }
+
+        protected void GridViewAppointments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = GridViewAppointments.SelectedRow;
+            string selected_appointment_id = row.Cells[1].Text;
+            Response.Redirect(string.Format("~/ReceptionAppointmentDetails.aspx?selected_appointment_id={0}", selected_appointment_id));
+        }
+
+        protected void Button_close_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AppointmentManagement.aspx");
+        }
     }
 }
