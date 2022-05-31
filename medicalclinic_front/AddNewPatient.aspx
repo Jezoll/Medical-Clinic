@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddNewPatient.aspx.cs" Inherits="medicalclinic.AddNewPatient" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="height: 92.4vh; width: 80vw; margin-left: 5vw; border: 5px solid #507CD1; border-top-color: white; border-bottom-color: white">
+    <center>
+    <div style="height: 92.4vh; width: 80vw; border: 5px solid #507CD1; border-top-color: white; border-bottom-color: white">
         <div style="margin-left: 5vw; margin-top: 5vh">
             <asp:Label CssClass="Title" ID="LabelTitle" runat="server" Text="Add New Patient"></asp:Label>
         </div>  
@@ -36,12 +37,13 @@
                 <asp:Label CssClass="Label" ID="LabelEmail" runat="server" Text="Email address:"></asp:Label>
                 <asp:TextBox CssClass="TextBox" ID="TextBoxEmail" runat="server" placeholder="Patient e-mail address" MaxLength="100"></asp:TextBox>
             </div>
-            <div style="margin-left: 3.5vw; margin-top: 2vh">
+            <div style="margin-top: 2vh">
                 <asp:Button CssClass="Button" ID="ButtonAddNewPatient" runat="server" Text="Add" OnClick="ButtonAddNewPatient_Click"/>
                 <asp:Button CssClass="Button" ID="ButtonCancel" runat="server" Text="Cancel" OnClick="ButtonCancel_Click"/>
             </div>
         </div>
     </div>
+    </center>
     
 
 <style type="text/css">
@@ -77,6 +79,7 @@
         }
         .Label
         {
+            text-align: left;
             font-size: 1.7vmin;
             font-weight: lighter;
             float: left;

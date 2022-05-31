@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListPatients.aspx.cs" Inherits="medicalclinic.ListPatients" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<div style="height: 92.4vh; width: 80vw; margin-left: 5vw; border: 5px solid #507CD1; border-top-color: white; border-bottom-color: white">
-    <div style="margin-left: 5vw; margin-top: 5vh">
+<center>
+<div style="height: 92.4vh; width: 80vw; border: 5px solid #507CD1; border-top-color: white; border-bottom-color: white">
+    <div style="margin-top: 5vh">
         <asp:Label CssClass="Title" ID="LabelMessage" runat="server" Text="Patients Management"></asp:Label>
         <br />
-        <asp:Panel runat="server" Height="300px" Width="92%"  ScrollBars="Vertical">
+        <asp:Panel runat="server" Height="300px" Width="85%"  ScrollBars="Vertical">
             <asp:GridView
                 CssClass="GridView"
                 ID="PatientsGridView"
@@ -35,7 +36,7 @@
          </asp:Panel>
     </div>
     
-    <div style="margin-left: 5vw; width: 86.2%; display: flex">
+    <div style="width: 85%; display: flex">
         <div style="border: solid; border-color: #EDF1F9; width: 61.5%; float: left; height: 100%">
             <asp:Label CssClass="Label" ID="LabelFilterMethod" runat="server" Text="Filter values"></asp:Label>
             <br />
@@ -59,7 +60,7 @@
                 <asp:CheckBox CssClass="CheckBox" ID="CheckBox_last_appointment_date" runat="server" Text=""/>
                 <asp:Label CssClass="LabelFilter" ID="LabelLastAppointment" runat="server" Text="Filter by last appointment"></asp:Label>
             </div>
-            <div style="margin-left: 20%; display: inline-block; margin-top: 1vh">
+            <div style="display: inline-block; margin-top: 1vh">
                 <asp:Button CssClass="Button" ID="ButtonFilter" runat="server" OnClick="ButtonFilter_Click" Text="Filter"/>
                 <asp:Button CssClass="Button" ID="ButtonReset" runat="server" OnClick="ButtonReset_Click" Text="Reset"/>
             </div>
@@ -70,7 +71,7 @@
         <div style="border: solid; border-color: #EDF1F9; width: 20%; float: left; flex: 1">
             <asp:Label CssClass="Label" ID="Label1" runat="server" Text="Other options"></asp:Label>
             <br />
-            <div style="width: 37%; margin-left: 25%; margin-top: 15%">
+            <div style="width: 50%; margin-top: 15%">
                 <div style="margin-top: 5%">
                     <asp:Button CssClass="Button" ID="ButtonAddNewPatient" runat="server" OnClick="ButtonAddNewPatient_Click"  Text="Add a patient"/>
                 </div>
@@ -81,6 +82,7 @@
         </div>
     </div>
 </div>
+</center>
     <style type="text/css">
         .Title
         {
@@ -129,6 +131,7 @@
         .LabelFilter
         {
             margin-left: 0.5vw;
+            text-align: left;
             float: left;
             width: 15vw;
             font-size: 1.7vmin;

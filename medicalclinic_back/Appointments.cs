@@ -92,7 +92,7 @@ namespace medicalclinic_back
         public static List<Appointment> GetThisPatientAppointments(int this_patient_id)
         {
             Database.openConnection();
-            string query = $"SELECT v.id, v.duration, v.status, v.description, CONCAT(e.first_name, ' ', e.second_name) AS 'first_name and second_name', v.id_patient, o.number_of_office, v.date FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id_patient LIKE {this_patient_id};";
+            string query = $"SELECT v.id, v.duration, v.status, v.description, v.id_employee, CONCAT(e.first_name, ' ', e.second_name) AS 'doctor', v.id_patient, (SELECT CONCAT(p.first_name, ' ',p.second_name) FROM patients p WHERE p.id = v.id_patient) AS 'patient', v.id_office, o.number_of_office, v.date, v.time, v.payments FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id_patient LIKE {this_patient_id};";
             MySqlDataReader data = Database.dataReader(query);
 
             List<Appointment> appointments = new List<Appointment>();
