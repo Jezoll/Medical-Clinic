@@ -150,6 +150,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label Label_doctor_value;
 
         /// <summary>
+        /// Kontrolka Label_doctor_id.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_doctor_id;
+
+        /// <summary>
         /// Kontrolka Label_patient.
         /// </summary>
         /// <remarks>
@@ -168,6 +177,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label Label_patient_value;
 
         /// <summary>
+        /// Kontrolka Label_patient_id.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_patient_id;
+
+        /// <summary>
         /// Kontrolka Label_office.
         /// </summary>
         /// <remarks>
@@ -184,6 +202,15 @@ namespace medicalclinic
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label_office_value;
+
+        /// <summary>
+        /// Kontrolka Label_office_id.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_office_id;
 
         /// <summary>
         /// Kontrolka Label_payment.

@@ -28,6 +28,9 @@ namespace medicalclinic
                 Label_office_value.Text = appointment[0].Office_number.ToString();
                 Label_description_value.Text = appointment[0].Description;
                 Label_payment_value.Text = appointment[0].Payment.ToString();
+                Label_doctor_id.Text = appointment[0].Id_employee.ToString();
+                Label_patient_id.Text = appointment[0].Id_patient.ToString();
+                Label_office_id.Text = appointment[0].Id_office.ToString();
 
                 if (appointment[0].Confirmed == StatusEnum.Canceled)
                 {
@@ -54,8 +57,47 @@ namespace medicalclinic
             }
         }
 
+
+        private void AlertBox(string AlertMessage, bool success)
+        {
+            string alert = "alert('" + AlertMessage + "');";
+            if (success)
+            {
+                alert = "alert('" + AlertMessage + "'); window.open('AppointmentsManagement.aspx', '_self');";
+            }
+
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
+        }
+
         protected void Button_Reshedule_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                if (!Appointment.ValidateDateOfVisit(DateTime.Parse(TextBox_ndate.Text)))
+                {
+                    AlertBox("Oudated termin!", false);
+                    return;
+                }
+
+                if (!Appointment.ValidateTimeOfVisit(TimeSpan.Parse(TextBox_ntime_value.Text), DateTime.Parse(TextBox_ndate.Text)))
+                {
+                    AlertBox("Incorrect time!", false);
+                    return;
+                }
+                if (!Appointment.ValidateVisitHour(DateTime.Parse(TextBox_ndate.Text), TimeSpan.Parse(TextBox_ntime_value.Text), int.Parse(Label_duration_value.Text), Label_doctor_id.Text, Label_patient_id.Text, Label_office_id.Text))
+                {
+                    AlertBox("There is a appointment in thouse hours!", false);
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                AlertBox("Correct empty fields", false);
+                return;
+            }
+
+
             int selected_appointment_id = Int32.Parse(Request.QueryString["selected_appointment_id"]);
             string confirm_value = ConfirmMessageResponseModify.Value;
 

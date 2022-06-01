@@ -147,7 +147,7 @@ namespace medicalclinic
         //Close Patient Management page
         protected void ButtonClose_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Reception.aspx");
         }
         //Transition to selected patient's details 
         protected void PatientsGridView_SelectedIndexChanged(object sender, EventArgs e)
