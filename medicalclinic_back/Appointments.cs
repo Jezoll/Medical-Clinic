@@ -147,5 +147,60 @@ namespace medicalclinic_back
             Database.closeConnection();
 
         }
+
+        public static void AddNewAppointment(int duration, string description, int id_employee, int id_patient, int id_office, DateTime date, TimeSpan time, double payment)
+        {
+            Database.openConnection();
+            string query = $"INSERT INTO visits ( id, date, time, duration, status, description, id_employee, id_patient, id_office, payments) VALUES (DEFAULT,@Date,@Time,@Duration,DEFAULT,@Description,@IdEmployee,@IdPatient,@IdOffice,@Payment); ";
+
+
+            MySqlCommand command = Database.command(query);
+
+
+            command.Parameters.AddWithValue("@Date", date);
+            command.Parameters.AddWithValue("@Time", time);
+            command.Parameters.AddWithValue("@Duration", duration);
+            command.Parameters.AddWithValue("@Description", description);
+            command.Parameters.AddWithValue("@IdEmployee", id_employee);
+            command.Parameters.AddWithValue("@IdPatient", id_patient);
+            command.Parameters.AddWithValue("@IdOffice", id_office);
+            command.Parameters.AddWithValue("@Payment", payment);
+
+            command.ExecuteNonQuery();
+            Database.closeConnection();
+        }
+
+
+        public static bool ValidateDate(DateTime date)
+        {
+            if (date.Equals(" ") || date >= DateTime.Today)
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
+        public static bool ValidateVisitTime(TimeSpan time)
+        {
+            TimeSpan actual_time = DateTime.Now.TimeOfDay;
+
+            if (time >= actual_time)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
+        public static bool ValidateDuration(int duration)
+        {
+            if (duration >= 0)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
