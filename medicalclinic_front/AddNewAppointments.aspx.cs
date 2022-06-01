@@ -105,17 +105,16 @@ namespace medicalclinic
                     AlertBox("There is a appointment in thouse hours!", false);
                     return;
                 }
+
+                Appointment.AddNewAppointment(int.Parse(TextBox_Duration.Text), TextBox_Description.Text, int.Parse(DropDownList_Doctor.SelectedValue.ToString()), int.Parse(DropDownList_Patient.SelectedValue.ToString()), int.Parse(DropDownList_Office.SelectedValue.ToString()), DateTime.Parse(TextBox_Date.Text), TimeSpan.Parse(TextBox_Time.Text), double.Parse(TextBox_Payment.Text));
+                AlertBox("New appointment has been added", true);
+
             }
             catch (Exception)
             {
                 AlertBox("Correct empty fields", false);
                 return;
-            }
-            
-               
-            AlertBox("New appointment has been added", true);
-
-            Appointment.AddNewAppointment(int.Parse(TextBox_Duration.Text),TextBox_Description.Text,int.Parse(DropDownList_Doctor.SelectedValue.ToString()),int.Parse(DropDownList_Patient.SelectedValue.ToString()),int.Parse(DropDownList_Office.SelectedValue.ToString()),DateTime.Parse(TextBox_Date.Text),TimeSpan.Parse(TextBox_Time.Text),double.Parse(TextBox_Payment.Text));
+            }            
         }
 
         protected void Button_Cancel_Click(object sender, EventArgs e)
