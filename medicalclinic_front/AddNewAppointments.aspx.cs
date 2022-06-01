@@ -35,6 +35,9 @@ namespace medicalclinic
                 DropDownList_Office.AutoPostBack = true;
 
             }
+
+
+
         }
 
         private void AlertBox(string AlertMessage, bool success)
@@ -81,25 +84,28 @@ namespace medicalclinic
         protected void Button_AddNewAppointment_Click(object sender, EventArgs e)
         {
 
-            
-
             try
             {
-                if (Appointment.ValidateDate(DateTime.Parse(TextBox_Date.Text)))
+                if (!Appointment.ValidateDate(DateTime.Parse(TextBox_Date.Text)))
                 {
                     AlertBox("Outdate termin!", false);
                     return;
                 }
 
-                if (Appointment.ValidateVisitTime(TimeSpan.Parse(TextBox_Time.Text)))
+                if (!Appointment.ValidateVisitTime(TimeSpan.Parse(TextBox_Time.Text), DateTime.Parse(TextBox_Date.Text)))
                 {
                     AlertBox("Wrong time!", false);
                     return;
                 }
 
-                if (Appointment.ValidateDuration(int.Parse(TextBox_Duration.Text)))
+                if (!Appointment.ValidateDuration(int.Parse(TextBox_Duration.Text)))
                 {
                     AlertBox("Duration of the visit cannot equal 0!", false);
+                    return;
+                }
+                if (!Appointment.ValidateVisitHour(DateTime.Parse(TextBox_Date.Text), TimeSpan.Parse(TextBox_Time.Text), int.Parse(TextBox_Duration.Text), DropDownList_Doctor.SelectedValue, DropDownList_Patient.SelectedValue, DropDownList_Office.SelectedValue))
+                {
+                    AlertBox("There is a appointment in thouse hours!", false);
                     return;
                 }
             }
@@ -108,8 +114,6 @@ namespace medicalclinic
                 AlertBox("Error!", false);
                 return;
             }
-
-            
 
             Appointment.AddNewAppointment(int.Parse(TextBox_Duration.Text),TextBox_Description.Text,int.Parse(DropDownList_Doctor.SelectedValue.ToString()),int.Parse(DropDownList_Patient.SelectedValue.ToString()),int.Parse(DropDownList_Office.SelectedValue.ToString()),DateTime.Parse(TextBox_Date.Text),TimeSpan.Parse(TextBox_Time.Text),double.Parse(TextBox_Payment.Text));
         }

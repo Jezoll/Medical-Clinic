@@ -173,7 +173,7 @@ namespace medicalclinic_back
 
         public static bool ValidateDate(DateTime date)
         {
-            if (date.Equals(" ") || date >= DateTime.Today)
+            if (date.Equals(" ") || date < DateTime.Today)
             {
                 return false;
             }
@@ -182,13 +182,16 @@ namespace medicalclinic_back
 
         }
 
-        public static bool ValidateVisitTime(TimeSpan time)
+        public static bool ValidateVisitTime(TimeSpan time, DateTime date)
         {
-            TimeSpan actual_time = DateTime.Now.TimeOfDay;
-
-            if (time >= actual_time)
+            if(date == DateTime.Now)
             {
-                return false;
+                TimeSpan actual_time = DateTime.Now.TimeOfDay;
+
+                if (time <= actual_time)
+                {
+                    return false;
+                }
             }
             return true;
 
@@ -198,9 +201,40 @@ namespace medicalclinic_back
         {
             if (duration >= 0)
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
+        public static bool ValidateVisitHour(DateTime this_date, TimeSpan this_time, int this_duration, string id_employee, string id_patient, string id_office)
+        {
+            string date = "'" + this_date.ToString("yyyy-MM-dd") + "'";
+            string start_time = "'" + this_time.ToString() + "'";
+            string end_time = "'" + (TimeSpan.FromMinutes(this_duration) + this_time).ToString() + "'";
+            string id_e = "'" + id_employee + "'";
+            string id_p = "'" + id_patient + "'";
+            string id_o = "'" + id_office + "'";
+            Database.openConnection();
+
+            //Gets last previous appointment
+            string query = $"SELECT v.id, v.duration, v.status, v.description, v.id_employee, CONCAT(e.first_name, ' ', e.second_name) AS 'doctor', v.id_patient, (SELECT CONCAT(p.first_name, ' ',p.second_name) FROM patients p WHERE p.id = v.id_patient) AS 'patient', v.id_office, o.number_of_office, v.date, v.time, v.payments FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.date LIKE {date} and (v.time BETWEEN {start_time} and {end_time} OR ADDTIME(v.time, SEC_TO_TIME(v.duration*60)) BETWEEN {start_time} and {end_time}) AND (v.id_employee LIKE {id_e} OR v.id_patient LIKE {id_p} OR v.id_office LIKE {id_o});";
+            MySqlDataReader data = Database.dataReader(query);
+            List<Appointment> searched_appointments = new List<Appointment>();
+            while (data.Read())
+            {
+                Appointment searched_appointment = new Appointment(data.GetInt32(0), data.GetInt32(1), (StatusEnum)Enum.Parse(typeof(StatusEnum), data.GetString(2)), data.GetString(3), data.GetInt32(4), data.GetString(5), data.GetInt32(6), data.GetString(7), data.GetInt32(8), data.GetInt32(9), data.GetDateTime(10), data.GetTimeSpan(11), data.GetDouble(12));
+
+                searched_appointments.Add(searched_appointment);
+            }
+            Database.closeConnection();
+
+            if(searched_appointments.Count == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
     }
 }
