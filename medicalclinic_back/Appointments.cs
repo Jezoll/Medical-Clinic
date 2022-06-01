@@ -182,7 +182,7 @@ namespace medicalclinic_back
         }
         public static bool ValidateTimeOfVisit(TimeSpan time, DateTime date)
         {
-            if(date == DateTime.Now)
+            if (date.Date == DateTime.Now.Date)
             {
                 TimeSpan actual_time = DateTime.Now.TimeOfDay;
 
@@ -192,11 +192,10 @@ namespace medicalclinic_back
                 }
             }
             return true;
-
         }
         public static bool ValidateDurationOfVisit(int duration)
         {
-            if (duration >= 0)
+            if (duration > 0)
             {
                 return true;
             }

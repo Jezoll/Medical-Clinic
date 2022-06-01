@@ -31,10 +31,7 @@ namespace medicalclinic
                     DropDownList_Specialization.Items.Add(new ListItem(specialization.Name,specialization.Id.ToString()));
                 }
                 DropDownList_Specialization.DataBind();
-
-
                 DropDownList_Specialization.AutoPostBack = true;
-
                 DropDownList_Office.AutoPostBack = true;
             }
         }
@@ -77,7 +74,6 @@ namespace medicalclinic
 
         protected void Button_AddNewAppointment_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (!Appointment.ValidateDateOfVisit(DateTime.Parse(TextBox_Date.Text)))
