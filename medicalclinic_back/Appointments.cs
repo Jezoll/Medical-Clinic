@@ -75,7 +75,7 @@ namespace medicalclinic_back
             }
 
             Database.openConnection();
-            string query = $"SELECT v.id, v.duration, v.status, v.description, v.id_employee, CONCAT(e.first_name, ' ', e.second_name) AS 'doctor', v.id_patient, (SELECT CONCAT(p.first_name, ' ',p.second_name) FROM patients p WHERE p.id = v.id_patient) AS 'patient', v.id_office, o.number_of_office, v.date, v.time, v.payments FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id_employee LIKE {e_id} AND v.id_patient LIKE {p_id} AND v.id_office LIKE {o_id} AND v.date LIKE {appointment_date};";
+            string query = $"SELECT v.id, v.duration, v.status, v.description, v.id_employee, CONCAT(e.first_name, ' ', e.second_name) AS 'doctor', v.id_patient, (SELECT CONCAT(p.first_name, ' ',p.second_name) FROM patients p WHERE p.id = v.id_patient) AS 'patient', v.id_office, o.number_of_office, v.date, v.time, v.payments FROM employees e INNER JOIN visits v ON e.id = v.id_employee INNER JOIN offices o ON v.id_office = o.id WHERE v.id_employee LIKE {e_id} AND v.id_patient LIKE {p_id} AND v.id_office LIKE {o_id} AND v.date LIKE {appointment_date} AND v.status LIKE 'Pending';";
 
             MySqlDataReader data = Database.dataReader(query);
             List<Appointment> appointments = new List<Appointment>();

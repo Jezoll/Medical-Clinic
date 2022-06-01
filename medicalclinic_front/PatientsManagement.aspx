@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListPatients.aspx.cs" Inherits="medicalclinic.ListPatients" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PatientsManagement.aspx.cs" Inherits="medicalclinic.ListPatients" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <center>
 <div style="height: 92.4vh; width: 80vw; border: 5px solid #507CD1; border-top-color: white; border-bottom-color: white">

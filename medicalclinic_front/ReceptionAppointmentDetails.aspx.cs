@@ -70,7 +70,7 @@ namespace medicalclinic
 
         protected void Button_close_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ListAppointments.aspx");
+            Response.Redirect("AppointmentsManagement.aspx");
         }
 
     }

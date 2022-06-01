@@ -55,7 +55,7 @@ namespace medicalclinic
         //Close the details of this patient
         protected void Button_close_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ListPatients.aspx");
+            Response.Redirect("PatientsManagement.aspx");
         }
         //Delete this patient
         protected void Button_Delete_Click(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace medicalclinic
             if (confirm_value == "Yes")
             {
                 Patient.DeletePatient(selected_patient_id);
-                Response.Redirect("ListPatients.aspx");
+                Response.Redirect("PatientsManagement.aspx");
             }
         }
         private void AlertBox(string AlertMessage, bool success)
