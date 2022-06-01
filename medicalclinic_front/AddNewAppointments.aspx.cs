@@ -14,6 +14,9 @@ namespace medicalclinic
         {
             if (!IsPostBack)
             {
+                TextBox_Date.Text = Request.QueryString["selected_date"];
+                TextBox_Time.Text = DateTime.Now.ToString("HH:mm");
+
                 List<Patient> patients = Patient.GetPatients(null, null, null, null).OrderBy(patient => patient.First_name).ThenBy(patient => patient.Second_name).ToList();
                 foreach (Patient patient in patients)
                 {
@@ -33,11 +36,7 @@ namespace medicalclinic
                 DropDownList_Specialization.AutoPostBack = true;
 
                 DropDownList_Office.AutoPostBack = true;
-
             }
-
-
-
         }
 
         private void AlertBox(string AlertMessage, bool success)
@@ -45,7 +44,7 @@ namespace medicalclinic
             string alert = "alert('" + AlertMessage + "');";
             if (success)
             {
-                alert = "alert('" + AlertMessage + "'); window.open('AppointmentManagement.aspx', '_self');";
+                alert = "alert('" + AlertMessage + "'); window.open('AppointmentsManagement.aspx', '_self');";
             }
 
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
@@ -76,33 +75,35 @@ namespace medicalclinic
             
         }
 
-        protected void DropDownList_Doctor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         protected void Button_AddNewAppointment_Click(object sender, EventArgs e)
         {
 
             try
             {
-                if (!Appointment.ValidateDate(DateTime.Parse(TextBox_Date.Text)))
+                if (!Appointment.ValidateDateOfVisit(DateTime.Parse(TextBox_Date.Text)))
                 {
-                    AlertBox("Outdate termin!", false);
+                    AlertBox("Oudated termin!", false);
                     return;
                 }
 
-                if (!Appointment.ValidateVisitTime(TimeSpan.Parse(TextBox_Time.Text), DateTime.Parse(TextBox_Date.Text)))
+                if (!Appointment.ValidateTimeOfVisit(TimeSpan.Parse(TextBox_Time.Text), DateTime.Parse(TextBox_Date.Text)))
                 {
-                    AlertBox("Wrong time!", false);
+                    AlertBox("Incorrect time!", false);
                     return;
                 }
 
-                if (!Appointment.ValidateDuration(int.Parse(TextBox_Duration.Text)))
+                if (!Appointment.ValidateDurationOfVisit(int.Parse(TextBox_Duration.Text)))
                 {
                     AlertBox("Duration of the visit cannot equal 0!", false);
                     return;
                 }
+
+                if (!Appointment.ValidatePayment(double.Parse(TextBox_Payment.Text)))
+                {
+                    AlertBox("Duration of the visit cannot equal 0!", false);
+                    return;
+                }
+
                 if (!Appointment.ValidateVisitHour(DateTime.Parse(TextBox_Date.Text), TimeSpan.Parse(TextBox_Time.Text), int.Parse(TextBox_Duration.Text), DropDownList_Doctor.SelectedValue, DropDownList_Patient.SelectedValue, DropDownList_Office.SelectedValue))
                 {
                     AlertBox("There is a appointment in thouse hours!", false);
@@ -111,11 +112,20 @@ namespace medicalclinic
             }
             catch (Exception)
             {
-                AlertBox("Error!", false);
+                AlertBox("Correct empty fields", false);
                 return;
             }
+            
+               
+            AlertBox("New appointment has been added", true);
 
             Appointment.AddNewAppointment(int.Parse(TextBox_Duration.Text),TextBox_Description.Text,int.Parse(DropDownList_Doctor.SelectedValue.ToString()),int.Parse(DropDownList_Patient.SelectedValue.ToString()),int.Parse(DropDownList_Office.SelectedValue.ToString()),DateTime.Parse(TextBox_Date.Text),TimeSpan.Parse(TextBox_Time.Text),double.Parse(TextBox_Payment.Text));
         }
+
+        protected void Button_Cancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AppointmentsManagement.aspx");
+        }
+
     }
 }

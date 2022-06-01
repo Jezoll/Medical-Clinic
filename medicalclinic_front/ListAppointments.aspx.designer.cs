@@ -24,6 +24,15 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.GridView GridViewAppointments;
 
         /// <summary>
+        /// Kontrolka Button_addnewappointment.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_addnewappointment;
+
+        /// <summary>
         /// Kontrolka Button_close.
         /// </summary>
         /// <remarks>

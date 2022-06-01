@@ -24,5 +24,6 @@
                 <RowStyle BackColor="#EFF3FB" />
             </asp:GridView>
          </asp:Panel>
+    <asp:Button ID="Button_addnewappointment" runat="server" Text="Add new appointment" OnClick="Button_addnewappointment_Click" />
     <asp:Button ID="Button_close" runat="server" Text="Close" OnClick="Button_close_Click" />
 </asp:Content>

@@ -32,5 +32,11 @@ namespace medicalclinic
         {
             Response.Redirect("AppointmentsManagement.aspx");
         }
+
+        protected void Button_addnewappointment_Click(object sender, EventArgs e)
+        {
+            string selected_date = Request.QueryString["selected_date"];
+            Response.Redirect(string.Format("~/AddNewAppointments.aspx?selected_date={0}", selected_date));
+        }
     }
 }

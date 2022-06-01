@@ -13,21 +13,21 @@
                 <br />
                 <asp:DropDownList ID="DropDownList_Specialization" runat="server" width="500px" OnSelectedIndexChanged="DropDownList_Specialization_SelectedIndexChanged"></asp:DropDownList>
                 <br />
-                <asp:DropDownList ID="DropDownList_Doctor" runat="server" width="500px" OnSelectedIndexChanged="DropDownList_Doctor_SelectedIndexChanged"></asp:DropDownList>
+                <asp:DropDownList ID="DropDownList_Doctor" runat="server" width="500px"></asp:DropDownList>
                 <br />
                 <asp:DropDownList ID="DropDownList_Office" runat="server"></asp:DropDownList>
                 <br />
-                 <asp:TextBox ID="TextBox_Duration" TextMode="Number" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox_Duration" TextMode="Number" runat="server" min="1"></asp:TextBox>
                 <br />
                 <asp:TextBox ID="TextBox_Payment" runat="server"></asp:TextBox>
                 <br />
                 <asp:TextBox ID="TextBox_Description" runat="server" Height="150px" Width="250px"></asp:TextBox>
                 <br />
-                <asp:Button ID="Button_AddNewAppointment" runat="server" Text="Button" width="250px" OnClick="Button_AddNewAppointment_Click"/>
+                <asp:Button ID="Button_AddNewAppointment" runat="server" Text="Add an appointment" width="250px" OnClick="Button_AddNewAppointment_Click"/>
                 <br />
-                <asp:Button ID="Button_Cancel" runat="server" Text="Button" width="250px"/>
+                <asp:Button ID="Button_Cancel" runat="server" Text="Cancel" width="250px" OnClick="Button_Cancel_Click"/>
                 <br />
-                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                
                 
           </div>
           <div>

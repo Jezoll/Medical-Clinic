@@ -170,10 +170,9 @@ namespace medicalclinic_back
             Database.closeConnection();
         }
 
-
-        public static bool ValidateDate(DateTime date)
+        public static bool ValidateDateOfVisit(DateTime date)
         {
-            if (date.Equals(" ") || date < DateTime.Today)
+            if (date < DateTime.Today || date.Date.Equals(null))
             {
                 return false;
             }
@@ -181,8 +180,7 @@ namespace medicalclinic_back
             return true;
 
         }
-
-        public static bool ValidateVisitTime(TimeSpan time, DateTime date)
+        public static bool ValidateTimeOfVisit(TimeSpan time, DateTime date)
         {
             if(date == DateTime.Now)
             {
@@ -196,8 +194,7 @@ namespace medicalclinic_back
             return true;
 
         }
-
-        public static bool ValidateDuration(int duration)
+        public static bool ValidateDurationOfVisit(int duration)
         {
             if (duration >= 0)
             {
@@ -205,6 +202,15 @@ namespace medicalclinic_back
             }
             return false;
         }
+        public static bool ValidatePayment(double payment)
+        {
+            if (payment > -1)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public static bool ValidateVisitHour(DateTime this_date, TimeSpan this_time, int this_duration, string id_employee, string id_patient, string id_office)
         {
             string date = "'" + this_date.ToString("yyyy-MM-dd") + "'";
