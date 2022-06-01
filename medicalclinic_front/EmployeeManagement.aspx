@@ -8,7 +8,7 @@
             runat="server"
             PopupControlID="Panl1"
             TargetControlID="btnShowPopup"
-            CancelControlID="ButtonOK"
+            CancelControlID="HiddenButton"
             BackgroundCssClass="popout-background">
         </ajaxToolkit:ModalPopupExtender>
         <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center" Style="display: none">
@@ -17,7 +17,8 @@
             <asp:TextBox ID="TextBoxPassword" placeholder="Password" type="password" runat="server" AutoPostBack="false"></asp:TextBox><br />
             <asp:Button CssClass="btn btn-default" ID="ConfirmButton" runat="server" Text="Confirm" OnClick="ConfirmButton_Click" Enabled="True" /><br />
             <br />
-            <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="Cancel" />
+            <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="Cancel" OnClick="CancelButton_Click"/>
+            <asp:Button CssClass="btn btn-default" ID="HiddenButton" runat="server" Style="display: none"/>
         </asp:Panel>
         <asp:Button ID="ButtonAdd" CssClass="btn btn-default btn-employee-add" runat="server" OnClick="ButtonAdd_Click" Text="Add New Employee" />
         <div class="table-content">

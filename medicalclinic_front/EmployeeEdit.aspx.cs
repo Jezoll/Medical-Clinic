@@ -12,8 +12,10 @@ namespace medicalclinic
     
     public partial class WebForm5 : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             CalendarTextBox.Attributes.Add("readonly", "readonly");
             if (!Page.IsPostBack)
             {
@@ -79,6 +81,7 @@ namespace medicalclinic
                     {
                         DropDownListSex.SelectedIndex = 1;
                     }
+                    ViewState["StartStatus"] = emp.Is_active;
 
                     if (emp.Is_active)
                     {
@@ -184,6 +187,12 @@ namespace medicalclinic
                 sex = "F";
             }
 
+            if (CheckBoxIsActive.Checked!=(bool)ViewState["StartStatus"])
+            {
+                Employee.ChangeActiveStatus(TextBoxID.Text);
+            }
+            
+
             Employee.updateEmployee(TextBoxID.Text ,TextBoxName.Text, TextBoxSurname.Text, TextBoxPESEL.Text, sex, TextBoxPhoneNumber.Text, TextBoxEmail.Text, CalendarTextBox.Text);
             Address.updateAddress(HideFieldIDAddress.Value, TextBoxCountry.Text, TextBoxState.Text, TextBoxCity.Text, TextBoxPostalCode.Text, TextBoxStreet.Text, TextBoxHouseNumber.Text);
 
@@ -257,6 +266,31 @@ namespace medicalclinic
             }
 
             return true;
+        }
+
+        protected void ConfirmButton_Click(object sender, EventArgs e)
+        {
+            if (!UserCredentials.IsLoginDataCorrect(TextBoxLogin.Text, TextBoxPassword.Text))
+            {
+                AlertBox("Incorrect login data!");
+                return;
+            }
+
+            if (!UserCredentials.IsActiveAdmin(TextBoxLogin.Text))
+            {
+                AlertBox("No administrator permissions!");
+                return;
+            }
+            CheckBoxIsActive.Checked= !CheckBoxIsActive.Checked;
+            PopUpModalExtender.Hide();
+        }
+
+
+        protected void ButtonChangeActiveStatus_Click(object sender, EventArgs e)
+        {
+            TextBoxLogin.Text = string.Empty;
+            TextBoxPassword.Text = string.Empty;
+            PopUpModalExtender.Show();
         }
     }
 }

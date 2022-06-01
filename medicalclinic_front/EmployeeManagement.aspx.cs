@@ -178,6 +178,11 @@ namespace medicalclinic
             AlertBox("Employee status has been changed");
         }
 
+        protected void CancelButton_Click(object sender, EventArgs e)
+        {
+            PopUpModalExtender.Hide();
+        }
+
         private void AlertBox(string AlertMessage)
         {
             string script = "alert('" + AlertMessage + "'); window.location.href='EmployeeManagement.aspx';";
