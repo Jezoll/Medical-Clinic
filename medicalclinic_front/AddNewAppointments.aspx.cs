@@ -96,7 +96,7 @@ namespace medicalclinic
 
                 if (!Appointment.ValidatePayment(double.Parse(TextBox_Payment.Text)))
                 {
-                    AlertBox("Duration of the visit cannot equal 0!", false);
+                    AlertBox("Payment cannot be negative!", false);
                     return;
                 }
 

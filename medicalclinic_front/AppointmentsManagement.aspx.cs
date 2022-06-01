@@ -49,12 +49,17 @@ namespace medicalclinic
             int patient_id = int.Parse(DropDownList_patient.SelectedValue);
             int office_id = int.Parse(DropDownList_office.SelectedValue);
 
+            if (e.Day.Date.Equals(DateTime.Now.Date))
+            {
+                e.Cell.Controls.Add(new LiteralControl(" <div style='height: 2px; font-size: 1vw'>Today</div>"));
+            }
+
             List<Appointment> appointments = Appointment.GetAppointments(employee_id, patient_id, office_id);
             foreach (Appointment appointment in appointments)
             {
                 if (e.Day.Date.Equals(appointment.Date_of_appointment))
                 {
-                    e.Cell.BackColor = System.Drawing.Color.Yellow;
+                    e.Cell.BackColor = System.Drawing.ColorTranslator.FromHtml("#82A3E0");
                 }
             }
         }
@@ -73,6 +78,11 @@ namespace medicalclinic
         protected void Button_change_date_Click(object sender, EventArgs e)
         {
             Calendar_appointments.VisibleDate = DateTime.Parse(TextBox_date.Text);
+        }
+
+        protected void Button_close_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reception.aspx");
         }
     }
 }
