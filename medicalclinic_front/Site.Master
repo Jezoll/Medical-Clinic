@@ -21,6 +21,7 @@
     <link href="~/Content/Employee.css" type="text/css" rel="stylesheet" runat="server" />
     <link href="~/Content/Office.css" type="text/css" rel="stylesheet" runat="server" />
     <link href="~/Content/PopOut.css" type="text/css" rel="stylesheet" runat="server" />
+    <link href="./Content/UserManagment.css" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -62,17 +63,17 @@
                         <li><a runat="server" href="~/Reception">Reception</a></li>
                         <li><a runat="server" href="~/OfficesManagement">Offices</a></li>
                         <li><a runat="server" href="~/Calendar">Calendar</a></li>
-                        <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click" /></li>
+                        <li><asp:LinkButton Text="Users" runat="server" href="./UserManagment" OnClick="Users_Click"/></li>
+                        <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click"/></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container body-content" style="position: relative">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
+
             </asp:ContentPlaceHolder>
         </div>
-
-
     </form>
 
 </body>

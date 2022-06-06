@@ -70,5 +70,12 @@ namespace medicalclinic_back
                 return true;
             }
         }
+        public static bool isPasswordTheSame(string pass1, string pass2)
+        {
+            if (pass1 == pass2)
+                return true;
+
+            return false;
+        }
     }
 }

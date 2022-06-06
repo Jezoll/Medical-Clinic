@@ -9,19 +9,14 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["id"]!=null)
+            if (Session["id"]!=null)
             {
                 Label1.Text = Session["id"].ToString();
             }
             else
             {
                 Response.Redirect("Login.aspx");
-            }
-
-
-           
-
-           
+            }           
         }
     }
 }

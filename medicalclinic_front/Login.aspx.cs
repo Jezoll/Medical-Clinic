@@ -14,36 +14,20 @@ namespace medicalclinic
         protected void Page_Load(object sender, EventArgs e)
         {
             //Email.sendEmail("rerere", "rererer");
-            IncorrectDataLabel.Visible = false;
-            Session["reset"] = LoginUser.NumOfAttempt;
 
             LabelSec.Visible = false;
             IncorrectDataLabel.Visible = false;
-            try
+
+            if (Session["timer"] != null)
             {
-                Session["reset"] = LoginUser.NumOfAttempt;
-                //brak zdefiniowanego Session timer, wyrzuca błąd przy uruchamianiu aplikacji
-
-                //if (DateTime.Parse(Session["timer"].ToString()) != DateTime.Parse(DateTime.Now.ToString()) & (int)Session["reset"] < 1) //zmień ten warunek
-                //{
-                //    Button1.Enabled = false;
-                //    TextBox1.Enabled = false;
-                //    TextBox2.Enabled = false;
-                //}
-                //if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
-                //{
-                //    LabelSec.Visible = true;
-                //    Button1.Enabled = false;
-                //    TextBox1.Enabled = false;
-                //    TextBox2.Enabled = false;
-                //}
-
-
-
+                if ((DateTime)Session["timer"] > DateTime.Now)
+                {
+                    Button1.Enabled = false;
+                    TextBox1.Enabled = false;
+                    TextBox2.Enabled = false;
+                    LabelSec.Visible = true;
+                }
             }
-            catch (NullReferenceException)
-            { }
-
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -56,14 +40,15 @@ namespace medicalclinic
                 {
                     IncorrectDataLabel.Visible = true;
                     IncorrectDataLabel.Text = "Wprowadź dane!";
-                    
+
                 }
                 if (LoginUser.checkAttempt() & Session["timer"] == null)
                 {
-                    Session["timer"] = DateTime.Now.AddMinutes(1).ToString(); // nie rzutuj do stringa
+                    Session["timer"] = DateTime.Now.AddMinutes(1);
                     Button1.Enabled = false;
                     TextBox1.Enabled = false;
                     TextBox2.Enabled = false;
+
                 }
                 else
                 {
@@ -73,8 +58,8 @@ namespace medicalclinic
                         Session["id"] = TextBox1.Text;
                         //Random rd = new Random();
                         //int rand_num = rd.Next(5000, 9999);
-                       HiddenField1.Value = TextBox1.Text;
-                       Token.generateToken(HiddenField1.Value);
+                        HiddenField1.Value = TextBox1.Text;
+                        Token.generateToken(HiddenField1.Value);
                         Response.Redirect("Default.aspx");
                         //Session.RemoveAll();
                     }
@@ -85,7 +70,7 @@ namespace medicalclinic
                         TextBox1.Enabled = false;
                         TextBox2.Enabled = false;
                         Button1.Enabled = false;
-                        //TimeBlock.blockForm();
+
                     }
                     else
                     {
@@ -102,34 +87,27 @@ namespace medicalclinic
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            try
+            if (Session["timer"] != null)
             {
 
-                //if (DateTime.Parse(Session["timer"].ToString()) > DateTime.Parse(DateTime.Now.ToString()))
-                //{
-                //    LabelSec.Visible = true;
-                //    LabelSec.Text = ((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalMinutes)
-                //        .ToString() + ":" + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalSeconds));
-                //    Button1.Enabled = false;
-                //    TextBox1.Enabled = false;
-                //    TextBox2.Enabled = false;
-                //}
-                //else if (DateTime.Parse(Session["timer"].ToString()) <= DateTime.Parse(DateTime.Now.ToString()))
-                //{
+                if ((DateTime)Session["timer"] > DateTime.Now)
+                {
+                    LabelSec.Visible = true;
+                    LabelSec.Text = "Pozostało " + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalSeconds) + " sekund blokady");
+                    Button1.Enabled = false;
+                    TextBox1.Enabled = false;
+                    TextBox2.Enabled = false;
 
-                //    Session["timer"] = null;
-                //    Button1.Enabled = true;
-                //    TextBox1.Enabled = true;
-                //    TextBox2.Enabled = true;
-                //    LoginUser.NumOfAttempt = 3;
-                //    Response.Redirect("Login.aspx");
-                //}
-
-
-
-            }
-            catch (NullReferenceException)
-            {
+                }
+                else
+                {
+                    Session["timer"] = null;
+                    Button1.Enabled = true;
+                    TextBox1.Enabled = true;
+                    TextBox2.Enabled = true;
+                    LoginUser.NumOfAttempt = 3;
+                    Response.Redirect("Login.aspx");
+                }
 
             }
         }

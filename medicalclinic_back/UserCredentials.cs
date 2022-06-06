@@ -61,32 +61,14 @@ namespace medicalclinic_back
             var has_number = new Regex(@"[0-9]+");
             var has_upper_char = new Regex(@"[A-Z]+");
             var has_lower_char = new Regex(@"[a-z]+");
-            var min_max_size = new Regex(@".{8,15}");
             var has_symbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
-            if (!has_number.IsMatch(passw))
-            {
-                return false;
-            }
-            else if (!has_upper_char.IsMatch(passw))
-            {
-                return false;
-            }
-            else if (!has_lower_char.IsMatch(passw))
-            {
-                return false;
-            }
-            else if (!min_max_size.IsMatch(passw))
-            {
-                return false;
-            }
-            else if (!has_symbols.IsMatch(passw))
-            {
-                return false;
-            }
-            else
+
+
+            if (has_number.IsMatch(passw) & has_upper_char.IsMatch(passw) & has_lower_char.IsMatch(passw) & has_symbols.IsMatch(passw) & passw.Length > 7 & passw.Length < 16)
             {
                 return true;
             }
+            return false;
         }
 
         public static bool loginValidationUnique(string login)
