@@ -10,13 +10,14 @@ namespace medicalclinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Page.IsPostBack == false) //Checking if the page is loading for the first time
+            //Checks if the page is loading for the first time
+            if (Page.IsPostBack == false)
             {
                 PatientsGridRefresh();
             }
 
         }
+        //Loads GridView with Patients data
         private void PatientsGridRefresh(string sort_column = "p.id", string sort_direction = "ASC")
         {
             string p_name = null;
@@ -49,11 +50,12 @@ namespace medicalclinic
             PatientsGridView.DataBind();
 
         }
-
+        //Reloads the GridView with the filters
         protected void ButtonFilter_Click(object sender, EventArgs e)
         {
             PatientsGridRefresh();
         }
+        //Gets direction of sorting
         protected string GetSortDirection(string column)
         {
             string nextDir = "ASC";
@@ -68,7 +70,7 @@ namespace medicalclinic
             }
             return nextDir;
         }
-
+        //Sort data in GridView
         protected void PatientsGridView_Sorting(object sender, GridViewSortEventArgs e)
         {
             string sort_column;
@@ -129,6 +131,7 @@ namespace medicalclinic
             }
             PatientsGridRefresh(sort_column, sort_direction);
         }
+        //Resets GridView data and all filter options
         protected void ButtonReset_Click(object sender, EventArgs e)
         {
             TextBoxName.Text = "";
@@ -141,19 +144,19 @@ namespace medicalclinic
             CheckBox_last_appointment_date.Checked = false;
             PatientsGridRefresh();
         }
-
+        //Close Patient Management page
         protected void ButtonClose_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Reception.aspx");
         }
-
+        //Transition to selected patient's details 
         protected void PatientsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = PatientsGridView.SelectedRow;
             string selected_patient_id = row.Cells[1].Text;
             Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
         }
-
+        //Transition to adding a patient
         protected void ButtonAddNewPatient_Click(object sender, EventArgs e)
         {
             Response.Redirect("AddNewPatient.aspx");

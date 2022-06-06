@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddNewAppointments.aspx" />
     <Content Include="Calendar.aspx" />
     <Content Include="Calendar_AddAppointment.aspx" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
@@ -162,8 +163,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ForgetPassword.aspx" />
     <Content Include="AddNewPatient.aspx" />
+    <Content Include="AppointmentsManagement.aspx" />
+    <Content Include="Reception.aspx" />
+    <Content Include="ReceptionAppointmentDetails.aspx" />
+    <Content Include="ListAppointments.aspx" />
     <Content Include="PatientDetails.aspx" />
-    <Content Include="ListPatients.aspx" />
+    <Content Include="PatientsManagement.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -220,6 +225,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNewAppointments.aspx.cs">
+      <DependentUpon>AddNewAppointments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddNewAppointments.aspx.designer.cs">
+      <DependentUpon>AddNewAppointments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Calendar.aspx.cs">
@@ -271,6 +283,34 @@
     <Compile Include="AddNewPatient.aspx.designer.cs">
       <DependentUpon>AddNewPatient.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentsManagement.aspx.cs">
+      <DependentUpon>AppointmentsManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppointmentsManagement.aspx.designer.cs">
+      <DependentUpon>AppointmentsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reception.aspx.cs">
+      <DependentUpon>Reception.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reception.aspx.designer.cs">
+      <DependentUpon>Reception.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceptionAppointmentDetails.aspx.cs">
+      <DependentUpon>ReceptionAppointmentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceptionAppointmentDetails.aspx.designer.cs">
+      <DependentUpon>ReceptionAppointmentDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListAppointments.aspx.cs">
+      <DependentUpon>ListAppointments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListAppointments.aspx.designer.cs">
+      <DependentUpon>ListAppointments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PatientDetails.aspx.cs">
       <DependentUpon>PatientDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -278,12 +318,12 @@
     <Compile Include="PatientDetails.aspx.designer.cs">
       <DependentUpon>PatientDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ListPatients.aspx.cs">
-      <DependentUpon>ListPatients.aspx</DependentUpon>
+    <Compile Include="PatientsManagement.aspx.cs">
+      <DependentUpon>PatientsManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ListPatients.aspx.designer.cs">
-      <DependentUpon>ListPatients.aspx</DependentUpon>
+    <Compile Include="PatientsManagement.aspx.designer.cs">
+      <DependentUpon>PatientsManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

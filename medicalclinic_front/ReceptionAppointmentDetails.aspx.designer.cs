@@ -11,26 +11,17 @@ namespace medicalclinic
 {
 
 
-    public partial class PatientDetails
+    public partial class ReceptionAppointmentDetails
     {
 
         /// <summary>
-        /// Kontrolka LabelMessage.
+        /// Kontrolka Label_appointment.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelMessage;
-
-        /// <summary>
-        /// Kontrolka Label_paient.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_paient;
+        protected global::System.Web.UI.WebControls.Label Label_appointment;
 
         /// <summary>
         /// Kontrolka Label_id.
@@ -51,346 +42,247 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label Label_id_value;
 
         /// <summary>
-        /// Kontrolka Label_first_name.
+        /// Kontrolka Label_date.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_first_name;
+        protected global::System.Web.UI.WebControls.Label Label_date;
 
         /// <summary>
-        /// Kontrolka Label_first_name_value.
+        /// Kontrolka Label_date_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_first_name_value;
+        protected global::System.Web.UI.WebControls.Label Label_date_value;
 
         /// <summary>
-        /// Kontrolka Label_surname.
+        /// Kontrolka Label_time.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_surname;
+        protected global::System.Web.UI.WebControls.Label Label_time;
 
         /// <summary>
-        /// Kontrolka Label_surname_value.
+        /// Kontrolka Label_time_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_surname_value;
+        protected global::System.Web.UI.WebControls.Label Label_time_value;
 
         /// <summary>
-        /// Kontrolka Label_sex.
+        /// Kontrolka Label_duration.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_sex;
+        protected global::System.Web.UI.WebControls.Label Label_duration;
 
         /// <summary>
-        /// Kontrolka Label_sex_value.
+        /// Kontrolka Label_duration_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_sex_value;
+        protected global::System.Web.UI.WebControls.Label Label_duration_value;
 
         /// <summary>
-        /// Kontrolka Label_date_of_birth.
+        /// Kontrolka Label_status.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_date_of_birth;
+        protected global::System.Web.UI.WebControls.Label Label_status;
 
         /// <summary>
-        /// Kontrolka Label_date_of_birth_value.
+        /// Kontrolka Label_status_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_date_of_birth_value;
+        protected global::System.Web.UI.WebControls.Label Label_status_value;
 
         /// <summary>
-        /// Kontrolka Label_pesel.
+        /// Kontrolka Label_description.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_pesel;
+        protected global::System.Web.UI.WebControls.Label Label_description;
 
         /// <summary>
-        /// Kontrolka Label_pesel_value.
+        /// Kontrolka Label_description_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_pesel_value;
+        protected global::System.Web.UI.WebControls.Label Label_description_value;
 
         /// <summary>
-        /// Kontrolka Label_phone_number.
+        /// Kontrolka Label_doctor.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_phone_number;
+        protected global::System.Web.UI.WebControls.Label Label_doctor;
 
         /// <summary>
-        /// Kontrolka Label_phone_number_value.
+        /// Kontrolka Label_doctor_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_phone_number_value;
+        protected global::System.Web.UI.WebControls.Label Label_doctor_value;
 
         /// <summary>
-        /// Kontrolka Label_email.
+        /// Kontrolka Label_doctor_id.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_email;
+        protected global::System.Web.UI.WebControls.Label Label_doctor_id;
 
         /// <summary>
-        /// Kontrolka Label_email_value.
+        /// Kontrolka Label_patient.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_email_value;
+        protected global::System.Web.UI.WebControls.Label Label_patient;
 
         /// <summary>
-        /// Kontrolka Label_activity.
+        /// Kontrolka Label_patient_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_activity;
+        protected global::System.Web.UI.WebControls.Label Label_patient_value;
 
         /// <summary>
-        /// Kontrolka Label_activity_value.
+        /// Kontrolka Label_patient_id.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_activity_value;
+        protected global::System.Web.UI.WebControls.Label Label_patient_id;
 
         /// <summary>
-        /// Kontrolka Label_appointments.
+        /// Kontrolka Label_office.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_appointments;
+        protected global::System.Web.UI.WebControls.Label Label_office;
 
         /// <summary>
-        /// Kontrolka GridViewAppointments.
+        /// Kontrolka Label_office_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAppointments;
+        protected global::System.Web.UI.WebControls.Label Label_office_value;
 
         /// <summary>
-        /// Kontrolka Label_modify.
+        /// Kontrolka Label_office_id.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_modify;
+        protected global::System.Web.UI.WebControls.Label Label_office_id;
 
         /// <summary>
-        /// Kontrolka Label3.
+        /// Kontrolka Label_payment.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label Label_payment;
 
         /// <summary>
-        /// Kontrolka TextBox_first_name.
+        /// Kontrolka Label_payment_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_first_name;
+        protected global::System.Web.UI.WebControls.Label Label_payment_value;
 
         /// <summary>
-        /// Kontrolka Label5.
+        /// Kontrolka Label_reshedule.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label Label_reshedule;
 
         /// <summary>
-        /// Kontrolka TextBox_surname.
+        /// Kontrolka Label_ndate.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_surname;
+        protected global::System.Web.UI.WebControls.Label Label_ndate;
 
         /// <summary>
-        /// Kontrolka Label7.
+        /// Kontrolka TextBox_ndate.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_ndate;
 
         /// <summary>
-        /// Kontrolka RadioButton_sex_male.
+        /// Kontrolka Label_ntime.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton_sex_male;
+        protected global::System.Web.UI.WebControls.Label Label_ntime;
 
         /// <summary>
-        /// Kontrolka RadioButton_sex_female.
+        /// Kontrolka TextBox_ntime_value.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton_sex_female;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_ntime_value;
 
         /// <summary>
-        /// Kontrolka Label9.
+        /// Kontrolka Button_cancel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
-
-        /// <summary>
-        /// Kontrolka TextBox_date_of_birth.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_date_of_birth;
-
-        /// <summary>
-        /// Kontrolka Label11.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
-
-        /// <summary>
-        /// Kontrolka TextBox_pesel.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_pesel;
-
-        /// <summary>
-        /// Kontrolka Label13.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label13;
-
-        /// <summary>
-        /// Kontrolka TextBox_phone_number.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_phone_number;
-
-        /// <summary>
-        /// Kontrolka Label15.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
-
-        /// <summary>
-        /// Kontrolka TextBox_email.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_email;
-
-        /// <summary>
-        /// Kontrolka Button_modify.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_modify;
-
-        /// <summary>
-        /// Kontrolka ConfirmMessageResponseModify.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseModify;
-
-        /// <summary>
-        /// Kontrolka Label1.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// Kontrolka Button_delete.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_delete;
+        protected global::System.Web.UI.WebControls.Button Button_cancel;
 
         /// <summary>
         /// Kontrolka ConfirmMessageResponseDelete.
@@ -402,13 +294,22 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseDelete;
 
         /// <summary>
-        /// Kontrolka Button_activity.
+        /// Kontrolka Button_reshedule.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_activity;
+        protected global::System.Web.UI.WebControls.Button Button_reshedule;
+
+        /// <summary>
+        /// Kontrolka ConfirmMessageResponseModify.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ConfirmMessageResponseModify;
 
         /// <summary>
         /// Kontrolka Button_close.

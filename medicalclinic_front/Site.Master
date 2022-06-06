@@ -59,7 +59,7 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/EmployeeManagement">Employee</a></li>
-                        <li><a runat="server" href="~/ListPatients">Patient</a></li>
+                        <li><a runat="server" href="~/Reception">Reception</a></li>
                         <li><a runat="server" href="~/OfficesManagement">Offices</a></li>
                         <li><a runat="server" href="~/Calendar">Calendar</a></li>
                         <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click" /></li>

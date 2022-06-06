@@ -11,160 +11,196 @@ namespace medicalclinic
 {
 
 
-    public partial class ListPatients
+    public partial class Formularz_internetowy1
     {
 
         /// <summary>
-        /// Kontrolka PatientsDetailsGridView.
+        /// Kontrolka LabelTitle.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PatientsDetailsGridView;
+        protected global::System.Web.UI.WebControls.Label LabelTitle;
 
         /// <summary>
-        /// Kontrolka PatientsVisitsGridView.
+        /// Kontrolka LabelPatient.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PatientsVisitsGridView;
+        protected global::System.Web.UI.WebControls.Label LabelPatient;
 
         /// <summary>
-        /// Kontrolka ButtonAddNewPatient.
+        /// Kontrolka DropDownList_Patient.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAddNewPatient;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Patient;
 
         /// <summary>
-        /// Kontrolka LabelFilterMethod.
+        /// Kontrolka Label1.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelFilterMethod;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Kontrolka TextBoxName.
+        /// Kontrolka TextBox_Date.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxName;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Date;
 
         /// <summary>
-        /// Kontrolka CheckBox_name.
+        /// Kontrolka Label2.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox_name;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Kontrolka TextBoxSurname.
+        /// Kontrolka TextBox_Time.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSurname;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Time;
 
         /// <summary>
-        /// Kontrolka CheckBox_surname.
+        /// Kontrolka Label3.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox_surname;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// Kontrolka TextBoxPesel.
+        /// Kontrolka DropDownList_Specialization.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxPesel;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Specialization;
 
         /// <summary>
-        /// Kontrolka CheckBox_pesel.
+        /// Kontrolka Label4.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox_pesel;
+        protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// Kontrolka TextBoxLastAppointmentDate.
+        /// Kontrolka DropDownList_Doctor.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxLastAppointmentDate;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Doctor;
 
         /// <summary>
-        /// Kontrolka CheckBox_last_appointment_date.
+        /// Kontrolka Label5.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox_last_appointment_date;
+        protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// Kontrolka ButtonFilter.
+        /// Kontrolka DropDownList_Office.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonFilter;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Office;
 
         /// <summary>
-        /// Kontrolka ButtonReset.
+        /// Kontrolka Label6.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonReset;
+        protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// Kontrolka ButtonBack.
+        /// Kontrolka TextBox_Duration.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonBack;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Duration;
 
         /// <summary>
-        /// Kontrolka PatientsGridView.
+        /// Kontrolka Label7.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PatientsGridView;
+        protected global::System.Web.UI.WebControls.Label Label7;
 
         /// <summary>
-        /// Kontrolka LabelMessage.
+        /// Kontrolka TextBox_Payment.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelMessage;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Payment;
+
+        /// <summary>
+        /// Kontrolka Label8.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label8;
+
+        /// <summary>
+        /// Kontrolka TextBox_Description.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Description;
+
+        /// <summary>
+        /// Kontrolka Button_AddNewAppointment.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_AddNewAppointment;
+
+        /// <summary>
+        /// Kontrolka Button_Cancel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Cancel;
     }
 }
