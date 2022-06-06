@@ -5,7 +5,7 @@ using medicalclinic_back;
 namespace medicalclinic_tests
 {
     [TestClass]
-    public class UnitTest1
+    public class PasswordValidationTests
     {
         [TestMethod]
         public void passwordValidationIsCorrect()
