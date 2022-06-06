@@ -159,6 +159,7 @@
     <Compile Include="Address.cs" />
     <Compile Include="Appointments.cs" />
     <Compile Include="Calendar.cs" />
+    <Compile Include="Calendar_Appointments.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseColumnName.cs" />
     <Compile Include="FilterColumnEmployee.cs" />

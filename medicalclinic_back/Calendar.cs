@@ -16,11 +16,6 @@ namespace medicalclinic_back
         public string Date { get => date; set => date = value; }
         public string Time { get => time; set => time = value; }
 
-        public Calendar(int id, string date, string time)
-        {
-            this.id = id;
-            this.date = date;
-            this.time = time;
-        }
+
     }
 }
