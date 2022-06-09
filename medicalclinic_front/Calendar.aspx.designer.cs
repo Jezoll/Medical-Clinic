@@ -15,13 +15,58 @@ namespace medicalclinic
     {
 
         /// <summary>
-        /// Kontrolka Button_new_appointment.
+        /// Kontrolka Label9.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_new_appointment;
+        protected global::System.Web.UI.WebControls.Label Label9;
+
+        /// <summary>
+        /// Kontrolka GridView_raportMonthly.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView_raportMonthly;
+
+        /// <summary>
+        /// Kontrolka Button_Cancel_all.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Cancel_all;
+
+        /// <summary>
+        /// Kontrolka Label10.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label10;
+
+        /// <summary>
+        /// Kontrolka ImageButton_gocalendar.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton_gocalendar;
+
+        /// <summary>
+        /// Kontrolka Label8.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label8;
 
         /// <summary>
         /// Kontrolka ImageButton_refresh.
@@ -78,49 +123,13 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label Label7;
 
         /// <summary>
-        /// Kontrolka Label1.
+        /// Kontrolka Label11.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// Kontrolka Label2.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-
-        /// <summary>
-        /// Kontrolka Button_details.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_details;
-
-        /// <summary>
-        /// Kontrolka Panel1.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
-
-        /// <summary>
-        /// Kontrolka GridView_raportMonthly.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView_raportMonthly;
+        protected global::System.Web.UI.WebControls.Label Label11;
 
         /// <summary>
         /// Kontrolka Label3.
@@ -132,13 +141,13 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// Kontrolka CheckBox_name.
+        /// Kontrolka Label12.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox_name;
+        protected global::System.Web.UI.WebControls.Label Label12;
 
         /// <summary>
         /// Kontrolka TextBox_name_filter.
@@ -150,13 +159,13 @@ namespace medicalclinic
         protected global::System.Web.UI.WebControls.TextBox TextBox_name_filter;
 
         /// <summary>
-        /// Kontrolka CheckBox_surname.
+        /// Kontrolka Label13.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox_surname;
+        protected global::System.Web.UI.WebControls.Label Label13;
 
         /// <summary>
         /// Kontrolka TextBox_surname_filter.
@@ -166,6 +175,24 @@ namespace medicalclinic
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox_surname_filter;
+
+        /// <summary>
+        /// Kontrolka Label14.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label14;
+
+        /// <summary>
+        /// Kontrolka TextBox_pesel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_pesel;
 
         /// <summary>
         /// Kontrolka Button_filter.

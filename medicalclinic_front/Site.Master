@@ -62,7 +62,7 @@
                         <li><a runat="server" href="~/EmployeeManagement">Employee</a></li>
                         <li><a runat="server" href="~/Reception">Reception</a></li>
                         <li><a runat="server" href="~/OfficesManagement">Offices</a></li>
-                        <li><a runat="server" href="~/Calendar">Calendar</a></li>
+                        <li><a runat="server" href="~/MyAppointments">Calendar</a></li>
                         <li><asp:LinkButton Text="Users" runat="server" href="./UserManagment" OnClick="Users_Click"/></li>
                         <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click"/></li>
                     </ul>

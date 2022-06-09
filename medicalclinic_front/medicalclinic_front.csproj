@@ -153,7 +153,6 @@
   <ItemGroup>
     <Content Include="AddNewAppointments.aspx" />
     <Content Include="Calendar.aspx" />
-    <Content Include="Calendar_AddAppointment.aspx" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
@@ -176,6 +175,7 @@
     <Content Include="ForgetPassword.aspx" />
     <Content Include="AddNewPatient.aspx" />
     <Content Include="AppointmentsManagement.aspx" />
+    <Content Include="MyAppointments.aspx" />
     <Content Include="Reception.aspx" />
     <Content Include="ReceptionAppointmentDetails.aspx" />
     <Content Include="ListAppointments.aspx" />
@@ -262,13 +262,6 @@
     <Compile Include="CreateNewUser.aspx.designer.cs">
       <DependentUpon>CreateNewUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Calendar_AddAppointment.aspx.cs">
-      <DependentUpon>Calendar_AddAppointment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Calendar_AddAppointment.aspx.designer.cs">
-      <DependentUpon>Calendar_AddAppointment.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -310,6 +303,13 @@
     </Compile>
     <Compile Include="AppointmentsManagement.aspx.designer.cs">
       <DependentUpon>AppointmentsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyAppointments.aspx.cs">
+      <DependentUpon>MyAppointments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAppointments.aspx.designer.cs">
+      <DependentUpon>MyAppointments.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reception.aspx.cs">
       <DependentUpon>Reception.aspx</DependentUpon>

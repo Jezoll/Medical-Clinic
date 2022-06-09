@@ -10,7 +10,7 @@ namespace medicalclinic_back
 {
     public static class LoginUser
     {
-        static UserCredentials credentials;
+       
         private static int attempt = 3;
         private static bool islogged = false;
         public static int NumOfAttempt { get { return attempt; } set { attempt = value; } }
