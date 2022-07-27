@@ -34,6 +34,8 @@ namespace medicalclinic
                     TextBoxNumberOfOffice.Text = off.Number_of_office;
                     oldOfficeNumber = off.Number_of_office;
                     CheckBoxAvailibility.Checked = off.Avalibility;
+                    //DropDownListSpecializations.SelectedIndex = off.Office_specialization.Id;
+                    //DropDownListRoles.SelectedIndex = off.Office_role.Id;
 
                     int i = 0;
                     foreach (var item in DropDownListRoles.Items)

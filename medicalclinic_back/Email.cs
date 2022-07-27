@@ -14,17 +14,17 @@ namespace medicalclinic_back
         {
             try
             {
-                MailMessage message = new MailMessage("medicalclinic.ie@gmail.com", email);
+                MailMessage message = new MailMessage("tester@vfczjombdo.cfolks.pl", email);
                 message.Subject = subjcet;
                 message.Body = body;
                 message.IsBodyHtml = true;
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                SmtpClient smtpClient = new SmtpClient("vfczjombdo.cfolks.pl", 587);
                 smtpClient.Credentials = new System.Net.NetworkCredential()
                 {
-                    UserName = "medicalclinic.ie@gmail.com",
-                    Password = "1234rfvV"
+                    UserName = "tester@vfczjombdo.cfolks.pl",
+                    Password = "hF-.cozq6O3I@-Za"
                 };
-                smtpClient.EnableSsl = true;
+                //smtpClient.EnableSsl = true;
                 smtpClient.Send(message);
                 return "Wiadomość z linkiem do zmiany hasła została wysłana na email: " + email;
             }

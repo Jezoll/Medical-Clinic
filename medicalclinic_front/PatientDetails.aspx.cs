@@ -11,62 +11,75 @@ namespace medicalclinic
         {
             if (!this.IsPostBack)
             {
-                //Gets this patient's ID
                 int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
-                //Gets this patient's data
-                List<Patient> patient = Patient.GetThisPatient(selected_patient_id);
-                Label_id_value.Text = patient[0].Id.ToString();
+                string p_name = null;
+                string p_surname = null;
+                string p_pesel = null;
+                string last_apppointment_date = null;
+                List<Patient> patients = Patient.GetPatients(p_name, p_surname, p_pesel, last_apppointment_date);
+                Label_id_value.Text = selected_patient_id.ToString();
+                foreach (Patient p in patients)
+                {
+                    if (p.Id == selected_patient_id)
+                    {  
+                        if (p.Activity.ToString() == "Y") //Checking if patient is active
+                        {
+                            Label_activity_value.Text = "Active";
+                            Button_activity.Text = "Deactivate Patient";
+                        }
+                        Label_first_name_value.Text = p.First_name;
+                        TextBox_first_name.Text = p.First_name.ToString();
+                        Label_surname_value.Text = p.Second_name;
+                        TextBox_surname.Text = p.Second_name.ToString();
+                        if (p.Sex.ToString() == "M")
+                        {
+                            Label_sex_value.Text = "Male";
+                            RadioButton_sex_male.Checked = true;
+                        }
+                        else
+                        {
+                            Label_sex_value.Text = "Female";
+                            RadioButton_sex_female.Checked = true;
+                        }
+                        Label_date_of_birth_value.Text = p.Date_of_birth.ToString("yyyy-MM-dd");
+                        TextBox_date_of_birth.Text = p.Date_of_birth.ToString("yyyy-MM-dd");
+                        Label_pesel_value.Text = p.Pesel;
+                        TextBox_pesel.Text = p.Pesel.ToString();
+                        Label_phone_number_value.Text = p.Phone_number;
+                        TextBox_phone_number.Text = p.Phone_number.ToString();
+                        Label_email_value.Text = p.Email;
+                        TextBox_email.Text = p.Email.ToString();
+                    }
+                }
 
-                //Checks if this patient is active and changes activity status
-                if (patient[0].Activity == ActivityEnum.Y)
+                List<Appointment> appointments = Appointment.GetAllAppointments("v.id", "ASC");
+                List<Appointment> appointment_details = new List<Appointment>();
+                foreach (Appointment a in appointments)
                 {
-                    Label_activity_value.Text = "Active";
-                    Button_activity.Text = "Deactivate Patient";
-                }
-                Label_first_name_value.Text = patient[0].First_name;
-                TextBox_first_name.Text = patient[0].First_name;
-                Label_surname_value.Text = patient[0].Second_name;
-                TextBox_surname.Text = patient[0].Second_name;
-                if (patient[0].Sex == SexEnum.M)
-                {
-                    Label_sex_value.Text = "Male";
-                    RadioButton_sex_male.Checked = true;
-                }
-                else
-                {
-                    Label_sex_value.Text = "Female";
-                    RadioButton_sex_female.Checked = true;
-                }
-                Label_date_of_birth_value.Text = patient[0].Date_of_birth.ToString("yyyy-MM-dd");
-                TextBox_date_of_birth.Text = patient[0].Date_of_birth.ToString("yyyy-MM-dd");
-                Label_pesel_value.Text = patient[0].Pesel;
-                TextBox_pesel.Text = patient[0].Pesel;
-                Label_phone_number_value.Text = patient[0].Phone_number;
-                TextBox_phone_number.Text = patient[0].Phone_number;
-                Label_email_value.Text = patient[0].Email;
-                TextBox_email.Text = patient[0].Email;
+                    if (a.Id_patient == selected_patient_id)
+                    {
+                        appointment_details.Add(a);
+                    }
 
-                //Gets all appointments of this patient and adds to GridView
-                List<Appointment> this_patient_appointments = Appointment.GetThisPatientAppointments(selected_patient_id);
-                GridViewAppointments.DataSource = this_patient_appointments;
+                }
+                GridViewAppointments.DataSource = appointment_details;
                 GridViewAppointments.DataBind();
             }
         }
-        //Close the details of this patient
+
         protected void Button_close_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PatientsManagement.aspx");
+            Response.Redirect("ListPatients.aspx");
         }
-        //Delete this patient
+
         protected void Button_Delete_Click(object sender, EventArgs e)
         {
-            //Gets this patient's ID
             int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
             string confirm_value = ConfirmMessageResponseDelete.Value;
             if (confirm_value == "Yes")
             {
                 Patient.DeletePatient(selected_patient_id);
-                Response.Redirect("PatientsManagement.aspx");
+                Response.Redirect("ListPatients.aspx");
             }
         }
         private void AlertBox(string AlertMessage, bool success)
@@ -79,47 +92,42 @@ namespace medicalclinic
 
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
-        //Modify this patient's data
         protected void Button_Modify_Click(object sender, EventArgs e)
         {
-            SexEnum sex = SexEnum.M;
-            //Gets this patient's ID
+            string sex = "M";
             int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
             string confirm_value = ConfirmMessageResponseModify.Value;
             if (RadioButton_sex_female.Checked)
             {
-                sex = SexEnum.F;
+                sex = "F";
             }
-            if (!Patient.ValidateName(TextBox_first_name.Text))
+            if (TextBox_first_name.Text.Equals("") || !Patient.ValidateName(TextBox_first_name.Text))
             {
                 AlertBox("Incorrect name!", false);
                 return;
             }
 
-            if (!Patient.ValidateSurname(TextBox_surname.Text))
+            if (TextBox_surname.Text.Equals("") || !Patient.ValidateSurname(TextBox_surname.Text))
             {
                 AlertBox("Incorrect surname!", false);
                 return;
             }
-            try
+            if (TextBox_pesel.Text.Length < 11)
             {
-                if (DateTime.Parse(TextBox_date_of_birth.Text) > DateTime.Now)
-                {
-                    AlertBox("Incorrect date of birth field!", false);
-                    return;
-                }
-            }
-            catch
-            {
-                AlertBox("Empty date of birth field!", false);
+                AlertBox("Empty or too short pesel number!", false);
                 return;
             }
-            if (!Patient.ValidatePhoneNumber(TextBox_phone_number.Text))
+            if (TextBox_date_of_birth.Text.Equals("") || DateTime.Parse(TextBox_date_of_birth.Text) > DateTime.Now)
+            {
+                AlertBox("Empty or incorrect date of birth field!", false);
+                return;
+            }
+            if (TextBox_phone_number.Text.Length < 9 || !Patient.ValidatePhoneNumber(TextBox_phone_number.Text))
             {
                 AlertBox("Incorrect phone number!", false);
                 return;
             }
-            if (!Patient.ValidateEmail(TextBox_email.Text))
+            if (TextBox_email.Text.Equals("") || !Patient.ValidateEmail(TextBox_email.Text))
             {
                 AlertBox("Incorrect e-mail adress!", false);
                 return;
@@ -137,29 +145,36 @@ namespace medicalclinic
 
             if (confirm_value == "Yes")
             {
-                Patient.ModifyPatient(selected_patient_id, TextBox_first_name.Text, TextBox_surname.Text, TextBox_pesel.Text, sex.ToString(), TextBox_phone_number.Text, TextBox_email.Text, TextBox_date_of_birth.Text);
-                //Reload this page
+                Patient.ModifyPatient(selected_patient_id, TextBox_first_name.Text, TextBox_surname.Text, TextBox_pesel.Text, sex, TextBox_phone_number.Text, TextBox_email.Text, TextBox_date_of_birth.Text);
                 Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
             }
+
         }
 
-        //Change this patient activity status
         protected void Button_activity_Click(object sender, EventArgs e)
         {
-            //Gets this patient's ID
+            string activity = "";
+            string p_name = null;
+            string p_surname = null;
+            string p_pesel = null;
+            string last_apppointment_date = null;
             int selected_patient_id = Int32.Parse(Request.QueryString["selected_patient_id"]);
-            //Gets this patient's data
-            List<Patient> patient = Patient.GetThisPatient(selected_patient_id);
-            ActivityEnum activity = patient[0].Activity;
-            if (activity == ActivityEnum.Y)
+            List<Patient> patients = Patient.GetPatients(p_name, p_surname, p_pesel, last_apppointment_date);
+            foreach (Patient p in patients)
             {
-                Patient.ChangePatientsActivity(selected_patient_id, ActivityEnum.N);
+                if (p.Id == selected_patient_id)
+                {
+                    activity = p.Activity.ToString();
+                }
             }
-            if (activity == ActivityEnum.N)
+            if (activity == "Y")
             {
-                Patient.ChangePatientsActivity(selected_patient_id, ActivityEnum.Y);
+                Patient.ChangePatientsActivity(selected_patient_id, "N");
             }
-            //Reload this page
+            if (activity == "N")
+            {
+                Patient.ChangePatientsActivity(selected_patient_id, "Y");
+            }
             Response.Redirect(string.Format("~/PatientDetails.aspx?selected_patient_id={0}", selected_patient_id));
         }
     }

@@ -33,10 +33,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
-  <PropertyGroup />
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -161,18 +157,18 @@
   <ItemGroup>
     <Compile Include="ActivityEnum.cs" />
     <Compile Include="Address.cs" />
+    <Compile Include="AddUser.cs" />
     <Compile Include="Appointments.cs" />
     <Compile Include="Calendar.cs" />
-    <Compile Include="Calendar_Appointments.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseColumnName.cs" />
+    <Compile Include="EditUser.cs" />
     <Compile Include="FilterColumnEmployee.cs" />
     <Compile Include="Office.cs" />
     <Compile Include="OfficeSpecialization.cs" />
     <Compile Include="OfficeUsedFor.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="SexEnum.cs" />
-    <Compile Include="StatusEnum.cs" />
     <Compile Include="UserDepartment.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="UserCredentials.cs" />

@@ -22,6 +22,7 @@ namespace medicalclinic
             {
                 if ((DateTime)Session["timer"] > DateTime.Now)
                 {
+
                     Button1.Enabled = false;
                     TextBox1.Enabled = false;
                     TextBox2.Enabled = false;
@@ -31,37 +32,48 @@ namespace medicalclinic
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
+
             try
             {
-                Database.openConnection();
-                MySqlCommand command = Database.command("SELECT * FROM user_credentials where login = @username AND password = @password");
+
 
                 if (TextBox1.Text == "" || TextBox2.Text == "")
                 {
                     IncorrectDataLabel.Visible = true;
-                    IncorrectDataLabel.Text = "Wprowadź dane!";
+                    IncorrectDataLabel.Text = "Enter your login and password!";
 
                 }
                 if (LoginUser.checkAttempt() & Session["timer"] == null)
                 {
-                    Session["timer"] = DateTime.Now.AddMinutes(1);
+                    //Session["failures"] = Int32.Parse(Session["failures"]);
+
+                    //else if((Int32)Session["failures"] == 0)
+
+                    Session["timer"] = DateTime.Now.AddMinutes(LoginUser.setTime());
                     Button1.Enabled = false;
                     TextBox1.Enabled = false;
                     TextBox2.Enabled = false;
+
+
+
 
                 }
                 else
                 {
                     LoginUser.logIn(TextBox1.Text, TextBox2.Text);
+
                     if (LoginUser.checkIfLogged())
                     {
-                        Session["id"] = TextBox1.Text;
-                        //Random rd = new Random();
-                        //int rand_num = rd.Next(5000, 9999);
-                        HiddenField1.Value = TextBox1.Text;
-                        Token.generateToken(HiddenField1.Value);
+                        if (!LoginUser.checkIsActive())
+                        {
+                            IncorrectDataLabel.Visible = true;
+                            IncorrectDataLabel.Text = "Your account had been deactivated.";
+                            return;
+                        }
+                        Session["id"] = LoginUser.getUserId();
+                        Session["role"] = LoginUser.getRoleName(LoginUser.getUserId());
                         Response.Redirect("Default.aspx");
-                        //Session.RemoveAll();
+
                     }
                     IncorrectDataLabel.Visible = true;
                     if (LoginUser.checkAttempt())
@@ -72,6 +84,7 @@ namespace medicalclinic
                         Button1.Enabled = false;
 
                     }
+
                     else
                     {
                         IncorrectDataLabel.Text = LoginUser.wrongData();
@@ -81,7 +94,7 @@ namespace medicalclinic
             }
             catch
             {
-                IncorrectDataLabel.Text = "Błąd";
+                IncorrectDataLabel.Text = "Error";
             }
         }
 
@@ -93,7 +106,7 @@ namespace medicalclinic
                 if ((DateTime)Session["timer"] > DateTime.Now)
                 {
                     LabelSec.Visible = true;
-                    LabelSec.Text = "Pozostało " + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalSeconds) + " sekund blokady");
+                    LabelSec.Text = "Time left: " + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalMinutes) + " minutes ") + (((Int32)DateTime.Parse(Session["timer"].ToString()).Subtract(DateTime.Now).TotalSeconds) % 60 + " seconds");
                     Button1.Enabled = false;
                     TextBox1.Enabled = false;
                     TextBox2.Enabled = false;

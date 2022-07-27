@@ -1,7 +1,6 @@
 ﻿using medicalclinic_back;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -85,7 +84,10 @@ namespace medicalclinic
         {
             if (!Office.ValidateNumberUnique(TextBoxNumberOfOffice.Text))
             {
-                AlertBox("Two offices can not have the same number");
+                string message = "Two offices can not have the same number";
+                AlertBox(message);
+                ResetValues();
+                officesGridViewRefresh();
                 return;
             }
             
@@ -110,29 +112,9 @@ namespace medicalclinic
 
         private void AlertBox(string AlertMessage)
         {
-            string script = "alert('" + AlertMessage + "'); window.location.href='OfficesManagement.aspx';";
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", script, true);
+            string alert = "alert('" + AlertMessage + "');";
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", alert, true);
         }
 
-        protected void LinkButtonDeleteOffice_Click(object sender, EventArgs e)
-        {
-            LinkButton lb = sender as LinkButton;
-            ViewState["office_id"] = lb.CommandArgument;
-            PopupConfirmOfficeDeletion.Show();
-        }
-
-        protected void ButtonConfirm_Click(object sender, EventArgs e)
-        {
-            int officeID = int.Parse(ViewState["office_id"].ToString());
-
-            if (Office.CheckIfPlannedForFutureVisits(officeID))
-            {
-                AlertBox("This office is planned for future visits so it can not be deleted!");
-                return;
-            }
-
-            Office.DeleteOffice(officeID);
-            AlertBox("Office deleted successfully");
-        }
     }
 }

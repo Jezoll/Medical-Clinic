@@ -1,26 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="EmployeeEdit.aspx.cs" Inherits="medicalclinic.WebForm5" %>
 
- 
+
 <asp:Content ID="AddEmployee" ContentPlaceHolderID="MainContent" runat="server">
     <div class="employee-show">
-        <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />
-        <ajaxToolkit:ModalPopupExtender
-            ID="PopUpModalExtender"
-            runat="server"
-            PopupControlID="Panl1"
-            TargetControlID="btnShowPopup"
-            CancelControlID="HiddenButton"
-            BackgroundCssClass="popout-background">
-        </ajaxToolkit:ModalPopupExtender>
-        <asp:Panel ID="Panl1" runat="server" CssClass="popup" align="center" Style="display: none">
-            <asp:Label ID="MessageLabel" runat="server" Text="Log in with your admin password to continue"></asp:Label><br />
-            <asp:TextBox ID="TextBoxLogin" placeholder="Login" runat="server" AutoPostBack="false"></asp:TextBox><br />
-            <asp:TextBox ID="TextBoxPassword" placeholder="Password" type="password" runat="server" AutoPostBack="false"></asp:TextBox><br />
-            <asp:Button CssClass="btn btn-default" ID="ConfirmButton" runat="server" Text="Confirm" OnClick="ConfirmButton_Click" Enabled="True" /><br />
-            <br />
-            <asp:Button CssClass="btn btn-default" ID="ButtonOK" runat="server" Text="Cancel" />
-            <asp:Button CssClass="btn btn-default" ID="HiddenButton" runat="server" Style="display: none"/>
-        </asp:Panel>
         <div class="employee-show__item">
             <asp:Label ID="IdLabel" runat="server" Text="ID"></asp:Label>
             <asp:TextBox ID="TextBoxID" placeholder="ID" runat="server" Enabled="False"></asp:TextBox>
@@ -96,8 +78,7 @@
         </div>
         <div class="employee-show__item">
             <asp:Label ID="IsActiveStatusLabel" runat="server" Text="IsActive"></asp:Label>
-            <asp:CheckBox ID="CheckBoxIsActive" runat="server" Enabled="False" />
-            <asp:Button ID="ButtonChangeActiveStatus" CssClass="btn btn-default" runat="server" Text="Change" OnClick="ButtonChangeActiveStatus_Click" />
+            <asp:CheckBox ID="CheckBoxIsActive" runat="server" />
         </div>
         <asp:Button ID="ButtonConfirm" CssClass="btn btn-default" runat="server" Text="Confirm" OnClick="ButtonConfirm_Click" />
         <asp:Button ID="ButtonCancel" CssClass="btn btn-default" runat="server" Text="Cancel" OnClick="ButtonCancel_Click" />

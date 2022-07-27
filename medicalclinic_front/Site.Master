@@ -22,6 +22,7 @@
     <link href="~/Content/Office.css" type="text/css" rel="stylesheet" runat="server" />
     <link href="~/Content/PopOut.css" type="text/css" rel="stylesheet" runat="server" />
     <link href="./Content/UserManagment.css" rel="stylesheet" />
+    <link href="./Content/EditFormStyle.css" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -57,15 +58,45 @@
                     <a class="navbar-brand" runat="server" href="~/">Medical Clinic</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
+                <asp:Panel ID="AdminPanel" runat="server">
+                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/EmployeeManagement">Employee</a></li>
-                        <li><a runat="server" href="~/Reception">Reception</a></li>
+                         <li><a runat="server" href="~/EmployeeManagement">Employee</a></li>
+                        <li><a runat="server" href="~/ListPatients">Patient</a></li>
                         <li><a runat="server" href="~/OfficesManagement">Offices</a></li>
-                        <li><a runat="server" href="~/MyAppointments">Calendar</a></li>
+                        <li><a runat="server" href="~/Calendar">Calendar</a></li>
                         <li><asp:LinkButton Text="Users" runat="server" href="./UserManagment" OnClick="Users_Click"/></li>
                         <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click"/></li>
                     </ul>
+                </asp:Panel>
+                    <asp:Panel ID="SuperAdminPanel" runat="server">
+                     <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/EmployeeManagement">Employee</a></li>
+                        <li><a runat="server" href="~/ListPatients">Patient</a></li>
+                        <li><a runat="server" href="~/OfficesManagement">Offices</a></li>
+                        <li><a runat="server" href="~/Calendar">Calendar</a></li>
+                         <li><asp:LinkButton Text="Users" runat="server" href="./UserManagment" OnClick="Users_Click"/></li>
+                        <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click"/></li>
+                    </ul>
+                </asp:Panel>
+                     <asp:Panel ID="EmployeePanel" runat="server">
+                     <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/EmployeeManagement">Employee</a></li>
+                        <li><a runat="server" href="~/ListPatients">Patient</a></li>
+                        <li><a runat="server" href="~/OfficesManagement">Offices</a></li>
+                        <li><a runat="server" href="~/Calendar">Calendar</a></li>
+                        <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click"/></li>
+                    </ul>
+                </asp:Panel>
+                     <asp:Panel ID="DoctorPanel" runat="server">
+                     <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/Calendar">Calendar</a></li>
+                        <li><asp:LinkButton class="link-secondary" Text="Logout" runat="server" OnClick="LogOut_Click"/></li>
+                    </ul>
+                </asp:Panel>
                 </div>
             </div>
         </div>

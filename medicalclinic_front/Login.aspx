@@ -6,7 +6,7 @@
 
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Logowanie</title>
+    <title>LoginForm</title>
     <script src="https://kit.fontawesome.com/714b427abb.js" crossorigin="anonymous"></script>
     <link href="./Content/Login.css" rel="stylesheet" />
     <script type="text/javascript">
@@ -17,7 +17,7 @@
 
 <body>
     <div class="back-to-home">
-        <a href="./HomePage.html">powrót</a>
+        <a href="./HomePage.html">back</a>
     </div>
     <div class="aspNetHidden">
         <input type="hidden" name="reference" id="reference" runat="server" />
@@ -25,15 +25,15 @@
    <form id="form1" runat="server">
         <div class="container">
             <div class="text-section">
-                <h2>logowanie</h2>
+                <h2>Login form</h2>
                 <p>medical clinic</p>
             </div>
             <div class="inputs">
                 <asp:TextBox ID="TextBox1" runat="server" placeholder="Login"></asp:TextBox>
-                <asp:TextBox ID="TextBox2" runat="server" placeholder="Hasło" type="password"></asp:TextBox>
-                <asp:Button ID="Button1" runat="server" Text="Zaloguj się" OnClick="Button1_Click" />
-                <p class="forgot-pass"><a href="ForgetPassword.aspx">zapomniałeś hasła?</a></p>
-                <asp:Label ID="IncorrectDataLabel" runat="server" Text="Nieprawidłowe dane logowania"></asp:Label>
+                <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" type="password"></asp:TextBox>
+                <asp:Button ID="Button1" runat="server" Text="Sign In" OnClick="Button1_Click" />
+                <p class="forgot-pass"><a href="ForgetPassword.aspx">Forgot your password?</a></p>
+                <asp:Label ID="IncorrectDataLabel" runat="server" Text="Wrong credentials"></asp:Label>
                 <asp:HiddenField ID="HiddenField1" runat="server" />
                 <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="Timer1_Tick">
                 </asp:Timer>

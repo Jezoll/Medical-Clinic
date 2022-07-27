@@ -84,36 +84,7 @@ namespace medicalclinic_back
 
             exists = Convert.ToBoolean(command.ExecuteScalar());
 
-            Database.closeConnection();
             return !exists;
-        }
-
-        public static bool IsLoginDataCorrect(string login, string password)
-        {
-            Database.openConnection();
-            string query = @"select case when exists (SELECT 1 FROM user_credentials where BINARY login=@login AND BINARY password = @password) then 1 else 0 end";
-            MySqlCommand command = Database.command(query);
-            command.Parameters.AddWithValue("@login", login);
-            command.Parameters.AddWithValue("@password", password);
-
-            bool correct;
-            correct = Convert.ToBoolean(command.ExecuteScalar());
-
-            Database.closeConnection();
-            return correct;
-        }
-
-        public static bool IsActiveAdmin(string login)
-        {
-            string query = @"select case when exists (SELECT 1 FROM employees inner join user_credentials on user_credentials.id=employees.id_credentials inner join user_roles on employees.id_role=user_roles.id where BINARY user_credentials.login =@login AND user_roles.name='Administrator' and employees.is_active=1) then 1 else 0 end";
-            Database.openConnection();
-            MySqlCommand command = Database.command(query);
-            command.Parameters.AddWithValue("@login", login);
-
-            bool isActive;
-            isActive= Convert.ToBoolean(command.ExecuteScalar());
-            Database.closeConnection();
-            return isActive;
         }
 
     }

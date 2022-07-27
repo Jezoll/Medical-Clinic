@@ -153,41 +153,5 @@ namespace medicalclinic
             Response.Redirect("OfficesManagement.aspx");
         }
 
-        protected void LinkButtonEmployeeActiveChange_Click(object sender, EventArgs e)
-        {
-            LinkButton lb = sender as LinkButton;
-            ViewState["employee_id"] = lb.CommandArgument;
-            PopUpModalExtender.Show();
-        }
-
-        protected void ConfirmButton_Click(object sender, EventArgs e)
-        {
-
-            if (!UserCredentials.IsLoginDataCorrect(TextBoxLogin.Text, TextBoxPassword.Text))
-            {
-                AlertBox("Incorrect login data!");
-                return;
-            }
-
-            if (!UserCredentials.IsActiveAdmin(TextBoxLogin.Text))
-            {
-                AlertBox("No administrator permissions!");
-                return;
-            }
-            Employee.ChangeActiveStatus(ViewState["employee_id"].ToString());
-            AlertBox("Employee status has been changed");
-        }
-
-        protected void CancelButton_Click(object sender, EventArgs e)
-        {
-            PopUpModalExtender.Hide();
-        }
-
-        private void AlertBox(string AlertMessage)
-        {
-            string script = "alert('" + AlertMessage + "'); window.location.href='EmployeeManagement.aspx';";
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", script, true);
-        }
-
     }
 }

@@ -27,6 +27,7 @@ namespace medicalclinic
                 IncorrectDataLabel.Visible = true;
                 IncorrectDataLabel.Text = "Podane hasła nie są identyczne. Spróbuj ponownie";
                 return;
+              
             }
             if(RecoveryPassword.passwordValidation(confirm_passw.Text) == false)
             {
@@ -37,6 +38,7 @@ namespace medicalclinic
             if (RecoveryPassword.changePassword(Session["change_passw_login"].ToString(), new_passw.Text))
             {
                 IncorrectDataLabel.Visible = true;
+                IncorrectDataLabel.Text = "Hasło zostało pomyślnie zmienione!";
             }
            
         }

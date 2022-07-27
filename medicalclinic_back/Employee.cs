@@ -357,94 +357,16 @@ namespace medicalclinic_back
 
         public static bool validatePeselUnique(string pesel)
         {
+            List<Employee> EmployeesList = getAllEmployees();
 
-            Database.openConnection();
-            string query = @"select case when exists (select 1 from employees where pesel=@pesel) then 1 else 0 end";
-
-            MySqlCommand command = Database.command(query);
-
-            command.Parameters.AddWithValue("@pesel", pesel);
-
-            bool exists;
-
-            exists = Convert.ToBoolean(command.ExecuteScalar());
-
-            Database.closeConnection();
-            return !exists;
-        }
-
-        public static void ChangeActiveStatus(string id)
-        {
-            bool newstatus = !IsActive(id);
-
-            Database.openConnection();
-            string query = @"UPDATE employees SET is_active = @status WHERE employees.id = @id";
-
-            MySqlCommand command = Database.command(query);
-
-            command.Parameters.AddWithValue("@status", newstatus);
-            command.Parameters.AddWithValue("@id", id);
-
-            command.ExecuteNonQuery();
-            Database.closeConnection();
-        }
-
-        public static bool IsActive(string id)
-        {
-            Database.openConnection();
-            string query = @"SELECT is_active from employees where id=@id";
-            MySqlCommand command = Database.command(query);
-            command.Parameters.AddWithValue("@id", id);
-
-            bool active = Convert.ToBoolean(command.ExecuteScalar());
-            Database.closeConnection();
-            return active;
-        }
-
-        public static List<Employee> SelectedEmployee(int special)
-        {
-            string index = "'" + special.ToString() + "'";
-
-            Database.openConnection();
-
-            string query = $"SELECT employees.id, first_name, second_name, pesel, sex, phone_number, email, date_of_birth, is_active, medical_specializations.id, medical_specializations.name, user_addresses.id, user_addresses.country, user_addresses.state, user_addresses.city, user_addresses.postal_code, user_addresses.street, user_addresses.number, user_roles.id, user_roles.name, departments.id, departments.name FROM employees LEFT JOIN medical_specializations ON employees.id_specialization = medical_specializations.id LEFT JOIN user_addresses ON employees.id_address = user_addresses.id LEFT JOIN user_roles ON employees.id_role = user_roles.id LEFT JOIN departments ON employees.id_department = departments.id WHERE medical_specializations.id LIKE {index}";
-
-
-
-            MySqlCommand command = Database.command(query);
-            MySqlDataReader data = command.ExecuteReader();
-
-            List<Employee> employees = new List<Employee>();
-            while (data.Read())
+            foreach (Employee emp in EmployeesList)
             {
-                MedicalSpecialization specialization;
-                Address address;
-                UserRole role;
-                UserDepartment department;
-                if (data.GetValue(9) == DBNull.Value)
-                    specialization = new MedicalSpecialization(-1, string.Empty);
-                else
-                    specialization = new MedicalSpecialization(data.GetInt32(9), data.GetString(10));
-                if (data.GetValue(11) == DBNull.Value)
-                    address = new Address(-1, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
-                else
-                    address = new Address(data.GetInt32(11), data.GetString(12), data.GetString(13), data.GetString(14), data.GetString(15), data.GetString(16), data.GetString(17));
-                if (data.GetValue(18) == DBNull.Value)
-                    role = new UserRole(-1, string.Empty);
-                else
-                    role = new UserRole(data.GetInt32(18), data.GetString(19));
-                if (data.GetValue(20) == DBNull.Value)
-                    department = new UserDepartment(-1, string.Empty);
-                else
-                    department = new UserDepartment(data.GetInt32(20), data.GetString(21));
-
-                Employee employee = new Employee(data.GetInt32(0), data.GetString(1), data.GetString(2), data.GetString(3), (SexEnum)Enum.Parse(typeof(SexEnum), data.GetString(4)), data.GetString(5), data.GetString(6), data.GetDateTime(7), data.GetBoolean(8), specialization, address, role, department);
-
-                employees.Add(employee);
+                if(emp.Pesel==pesel)
+                {
+                    return false;
+                }
             }
-
-            Database.closeConnection();
-            return employees;
+            return true;
         }
     }
 }

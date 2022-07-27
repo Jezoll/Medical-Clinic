@@ -10,6 +10,24 @@ const rows = [];
 for (let i = 1; i < table.tBodies[0].children.length; i++)
     rows.push(table.tBodies[0].children[i])
 
+function checkIsActive() {
+
+    let state = false;
+    for (const el of table.tBodies[0].children) {
+        console.log(el.children[7])
+        if (el.children[5].textContent == 'True') {
+            el.children[7].firstElementChild.textContent = "Deactivate";
+            //state = true;
+        }
+            
+        if (el.children[5].textContent == 'False') {
+            el.children[7].firstElementChild.textContent = "Activate";  
+            //state = true
+        }                
+    }
+    //if(!state)
+        //window.location.reload(true);
+}
 
 function sortTableByColumn(table, column, asc = true) {
     const dirModifier = asc ? 1 : -1;
@@ -60,7 +78,6 @@ function checkFiltering() {
 }
 
 searchInput.addEventListener('keyup', e => {
-    console.log(rows);
     rows.forEach(row => {
         if (firstNameFilter.checked && surNameFilter.checked) {
 
@@ -88,3 +105,6 @@ searchInput.addEventListener('keyup', e => {
 
     })
 })
+
+checkIsActive()
+table.addEventListener('click', checkIsActive) 

@@ -11,11 +11,13 @@ namespace medicalclinic
         {
             if (Session["id"]!=null)
             {
-                Label1.Text = Session["id"].ToString();
+                Label1.Text = "";
             }
             else
             {
                 Response.Redirect("Login.aspx");
+                Session.Abandon();
+                
             }           
         }
     }

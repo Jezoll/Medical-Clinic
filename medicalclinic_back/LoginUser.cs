@@ -10,15 +10,23 @@ namespace medicalclinic_back
 {
     public static class LoginUser
     {
-       
+        static UserCredentials credentials;
         private static int attempt = 3;
+        private static int id;
         private static bool islogged = false;
+        private static bool isActive = false;
+        private static string role;
+        private static int time;
         public static int NumOfAttempt { get { return attempt; } set { attempt = value; } }
         public static bool IsLogged { get { return islogged; } set { islogged = value; } }
+        public static bool IsActive { get { return isActive; } set { isActive = value; } }
+        public static string Role { get { return role; } set { role = value; } }
+        public static int Id { get { return id; } set { id = value; } }
+        public static int Time { get { return time; } set { time = value; } }
         public static string wrongData()
         {
             NumOfAttempt--;
-            return "Nieprawidłowy login lub hasło! Pozostało " + NumOfAttempt + " próby.";
+            return "The given credentials are not correct! There are " + NumOfAttempt + " attempts left.";
         }
         public static bool checkAttempt()
         {
@@ -26,22 +34,35 @@ namespace medicalclinic_back
                 return true;
             return false;
         }
-
+        public static bool checkIsActive()
+        {
+            if (IsActive)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static string showInfo()
         {
-            return "Nie udało się zalogować po kilku próbach! Nałożono karę czasową";
+            return "The given credentials are not correct! Input has been blocked";
         }
         public static void logIn(string login, string passw)
         {
             Database.openConnection();
-            MySqlCommand cmd = Database.command("SELECT * FROM user_credentials where BINARY login =@login AND BINARY password = @password");
+            MySqlCommand cmd = Database.command("SELECT * FROM user_credentials where BINARY login=@login AND BINARY password = @password AND is_active=1");
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@password", passw);
             MySqlDataReader sdr = cmd.ExecuteReader();
             while (sdr.Read())
             {
                 IsLogged = true;
+                isActive = true;
+                Id = sdr.GetInt32(0);
                 NumOfAttempt = 3;
+
             }
             sdr.Close();
             Database.closeConnection();
@@ -55,6 +76,26 @@ namespace medicalclinic_back
         public static void logOut()
         {
             IsLogged = false;
+        }
+        public static string getRoleName(int id)
+        {
+            EditUser user = EditUser.getUser(Id);
+            return user.Role;
+        }
+        public static int getUserId()
+        {
+            return Id;
+        }
+        public static double setTime()
+        {
+
+            int czas = 0 + Time;
+            if (czas == 0)
+            {
+                Time = czas;
+                czas = 1;
+            }
+            return czas;
         }
     }
 }

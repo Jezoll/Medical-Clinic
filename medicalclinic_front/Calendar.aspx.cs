@@ -7,289 +7,176 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Diagnostics;
 
 namespace medicalclinic
 {
     public partial class Calendar : System.Web.UI.Page
     {
-        public string dropdownlist;
-       
-        
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) //bez tego nie ładuje poprzednich dat 
-            {
-                Calendar_main.VisibleDate = DateTime.Today;
-            }
             try
             {
                 Database.openConnection();
                 MySqlConnection dbconn = new MySqlConnection();
+
+
+
             }
             catch (Exception ex)
             {
                 Response.Write(ex.Message);
             }
-           Label9.Visible = false;
-            Label10.Visible = false;
-            ImageButton_gocalendar.Visible = false;
-           GridView_raportMonthly.Visible = false;
-
 
         }
-
-        //renderowanie na "kafelkach" w kalendarzu
-        protected void Calendar_main_DayRender(object sender, DayRenderEventArgs e)
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-            DataTable datatab = Dates;
-            DateTime eventDate;
-            DateTime today = DateTime.Today;
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.id,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id where day(date) = '" + Calendar1.SelectedDate.Day + "'");
+            
+                MySqlDataReader r = command.ExecuteReader();
 
-            for (int i = 0; i < datatab.Rows.Count; i++)
-            {
-                eventDate = Convert.ToDateTime(datatab.Rows[i]["date"]);
 
-                if (e.Day.Date == eventDate)
-                {
+                GridView1.DataSource = r;
+                GridView1.DataBind();
 
-                    e.Cell.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-                    e.Cell.BackColor = System.Drawing.Color.FromArgb(80, 124, 209);
-                    e.Cell.Controls.Add(new LiteralControl("<br/> An Appointment "));
 
-                   // e.Cell.Controls.Add(new LiteralControl(datatab.Rows[2]["date"].ToString()));
-                }
-
-            }
-        }
-
-        public DataTable Dates
-        {
-            get
-            {
-                Database.openConnection();
-                DataTable datatab = new DataTable();
-                MySqlCommand command = Database.command("SELECT vis.date AS Date, pat.first_name AS Name, pat.second_name AS Surname, pat.pesel AS PESEL, pat.sex as Sex, pat.date_of_birth AS Birth, pat.phone_number AS Phone, pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id");
-                MySqlDataAdapter mysqlDataAd = new MySqlDataAdapter(command);
-                mysqlDataAd.Fill(datatab);
                 Database.closeConnection();
-                return datatab;
-
-            }
-        }
-
-        protected void Calendar_main_SelectionChanged(object sender, EventArgs e)
-        {
-            int day = Calendar_main.SelectedDate.Day;
-            int month = Calendar_main.SelectedDate.Month;
-            //List<DayAppointment> SelectDay = new List<DayAppointment>();
-            Label8.Visible = false;
-            Calendar_main.Visible = false;
-            Label9.Visible = true;
-            GridView_raportMonthly.Visible = true;
-            GridView_Filter.Visible = false;
-            ImageButton_gocalendar.Visible = true;
-            Label10.Visible = true;
-            ImageButton_refresh.Visible = false;
-            Label4.Visible = false;
-            Label5.Visible = false;
-            Label6.Visible = false;
-            Label7.Visible = false;
-            Label11.Visible = false;
-            Label12.Visible = false;
-            Label13.Visible = false;
-            Label14.Visible = false;
-            Label3.Visible = false;
-            TextBox_name_filter.Visible = false ;
-            TextBox_pesel.Visible = false;
-            TextBox_surname_filter.Visible = false;
-            Button_filter.Visible = false;
-            Button_Cancel_all.Visible = true;
-
-            GridView_raportMonthly.Visible = true;
-
-
-            GridView_raportMonthly.DataSource = Calendar_Appointments.Calendar_sectionchanged(day, month);
-            GridView_raportMonthly.DataBind();
-            Database.closeConnection();
-
-            string selected = Calendar_main.SelectedDate.ToString();
-            List<string> Calendar_seleteddate = new List<string>();
-            Calendar_seleteddate.Add(selected);
-        }
-
-        protected void Button_filter_Click(object sender, EventArgs e)
-        {
-            GridView_Filter.DataBind();
-            string name = TextBox_name_filter.Text;
-            string surname = TextBox_surname_filter.Text;
-            string pesel = TextBox_pesel.Text;
-
-
-            if (TextBox_name_filter.Text.Length >= 1)
-            {
-                GridView_Filter.DataSource = Calendar_Appointments.Filtr_byname(name);
-                GridView_Filter.DataBind();
-            }
-            else if (TextBox_surname_filter.Text.Length >= 1)
-            {
-                GridView_Filter.DataSource = Calendar_Appointments.Filtr_bysurname(surname);
-                GridView_Filter.DataBind();
-            }
-            else if (TextBox_pesel.Text.Length >= 1)
-            {
-                GridView_Filter.DataSource = Calendar_Appointments.Filtr_bypesel(pesel);
-                GridView_Filter.DataBind();
-            }
-
-            if (TextBox_name_filter.Text.Length >= 1 & TextBox_surname_filter.Text.Length >= 1)
-            {
-                GridView_Filter.DataSource = Calendar_Appointments.Filtr_byname_and_surname(name, surname);
-                GridView_Filter.DataBind();
-            }
-           else if (TextBox_name_filter.Text.Length < 1 & TextBox_surname_filter.Text.Length < 1 & TextBox_pesel.Text.Length < 1)
-            {
-               Response.Write("<script>alert('Empty values')</script>");
-            }
-
-            TextBox_name_filter.Text = "";
-            TextBox_surname_filter.Text = "";
-            TextBox_pesel.Text = "";
-        }
-       
-        protected void ImageButton_refresh_Click(object sender, ImageClickEventArgs e)
-        {
             
-            Calendar_main.VisibleDate = DateTime.Today;
-            GridView_raportMonthly.Visible = false;
-        }
-
-        protected void ImageButton_gocalendar1_Click(object sender, ImageClickEventArgs e)
-        {
-            Calendar_main.Visible = true;
-            GridView_raportMonthly.Visible = false;
-            GridView_Filter.Visible = true;
-            Label8.Visible = true;
-            Label9.Visible = false;
-            Label10.Visible = false;
-            ImageButton_gocalendar.Visible = false;
-            ImageButton_refresh.Visible = true;
-            Label4.Visible = true;
-            Label5.Visible = true;
-            Label6.Visible = true;
-            Label7.Visible = true;
-            Label11.Visible = true;
-            Label12.Visible = true;
-            Label13.Visible = true;
-            Label14.Visible = true;
-            Label3.Visible = true;
-            TextBox_name_filter.Visible = true;
-            TextBox_pesel.Visible = true;
-            TextBox_surname_filter.Visible = true;
-            Button_filter.Visible = true;
-            Button_Cancel_all.Visible = false;
-            
-        }
-        //Potrzebne do wywołowania treści z gridview
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            DropDownList DropDownList_status = (e.Row.FindControl("DropDownList_status") as DropDownList);
-            dropdownlist = DropDownList_status.ToString();
-        }
-
-        //kontrolka
-        protected void AcceptButton_Click(object sender, EventArgs e)
-        {
-
-            int day = Calendar_main.SelectedDate.Day;
-            int month = Calendar_main.SelectedDate.Month;
-            GridView_raportMonthly.DataSource = Calendar_Appointments.Calendar_sectionchanged(day, month);
-            GridView_raportMonthly.DataBind();
-            Database.closeConnection();
-            Label8.Visible = false;
-            Calendar_main.Visible = false;
-            Label9.Visible = true;
-            GridView_raportMonthly.Visible = true;
-            ImageButton_gocalendar.Visible = true;
-            Label10.Visible = true;
-            ImageButton_refresh.Visible = false;
-            Label4.Visible = false;
-            Label5.Visible = false;
-            Label6.Visible = false;
-            Label7.Visible = false;
-            Label11.Visible = false;
-            Label12.Visible = false;
-            Label13.Visible = false;
-            Label14.Visible = false;
-            Label3.Visible = false;
-            TextBox_name_filter.Visible = false;
-            TextBox_pesel.Visible = false;
-            TextBox_surname_filter.Visible = false;
-            Button_filter.Visible = false;
-            Button_Cancel_all.Visible = true;
-            GridView_raportMonthly.Visible = true;
-
-
-
-           //pobieranie z tabelki
-            int rowind = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
-            string name = GridView_raportMonthly.Rows[rowind].Cells[2].Text;
-            string surname = GridView_raportMonthly.Rows[rowind].Cells[3].Text;
-           // string pesel = GridView_raportMonthly.Rows[rowind].Cells[4].Text;
-            string time = GridView_raportMonthly.Rows[rowind].Cells[6].Text;
-            DateTime date = Convert.ToDateTime(GridView_raportMonthly.Rows[rowind].Cells[1].Text);
-            Calendar_Appointments.StatusChanged(dropdownlist, time, date, name,surname);
-            Response.Write("<script>alert('Status changed')</script>");
-            GridView_raportMonthly.DataBind();
-
-        }
-        protected void SelectedIndexChanged2(object sender, EventArgs e)
-        {
            
-            DropDownList dropDownList = sender as DropDownList;
-            dropdownlist = dropDownList.SelectedItem.Text;
         }
-        protected void Button_Cancel_all_Click(object sender, EventArgs e)
+
+        protected void Button1_Click(object sender, EventArgs e)
         {
-            int day = Calendar_main.SelectedDate.Day;
-            int month = Calendar_main.SelectedDate.Month;
-            //List<DayAppointment> SelectDay = new List<DayAppointment>();
-            Label8.Visible = false;
-            Calendar_main.Visible = false;
-            Label9.Visible = true;
-            GridView_raportMonthly.Visible = true;
-            ImageButton_gocalendar.Visible = true;
-            Label10.Visible = true;
-            ImageButton_refresh.Visible = false;
-            Label4.Visible = false;
-            Label5.Visible = false;
-            Label6.Visible = false;
-            Label7.Visible = false;
-            Label11.Visible = false;
-            Label12.Visible = false;
-            Label13.Visible = false;
-            Label14.Visible = false;
-            Label3.Visible = false;
-            TextBox_name_filter.Visible = false;
-            TextBox_pesel.Visible = false;
-            TextBox_surname_filter.Visible = false;
-            Button_filter.Visible = false;
-            GridView_raportMonthly.Visible = true;
+            Calendar1.Visible = true;
+           
+            GridView1.Visible = true;
+            Button2.Visible = true;
+            Label1.Visible = true;
+            Label2.Visible = true;
+            RadioButtonList2.Visible = true;
+            RadioButtonList1.Visible = true;
+         
+            Button3.Visible = true;
+            Button4.Visible = true;
+            TextBox1.Visible = true;
+        }
 
-            GridView_raportMonthly.DataSource = Calendar_Appointments.Calendar_sectionchanged(day, month);
-            GridView_raportMonthly.DataBind();
+        protected void Button2_Click(object sender, EventArgs e)
 
-            Database.closeConnection();
+        {
+            
 
-            string status = "Canceled";
-            DateTime date = Calendar_main.SelectedDate;
-            Calendar_Appointments.CancelAllAppointments(status,date);
+            MySqlCommand command = Database.command("SELECT date FROM visits where month(date) = '" + Calendar1.SelectedDate.Month + "'");
+                MySqlDataReader r = command.ExecuteReader();
 
-            Response.Write("<script>alert('Status changed')</script>");
+
+                GridView2.DataSource = r;
+                GridView2.DataBind();
+
+
+                Database.closeConnection();
+        }
+
+        
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            GridView2.DataBind();
+           
+
+            if(RadioButtonList1.SelectedIndex==0)
+            {
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id ORDER BY pat.first_name ASC ");
+                MySqlDataReader r = command.ExecuteReader();
+
+
+                GridView1.DataSource = r;
+                GridView1.DataBind();
+                Database.closeConnection();
+            }
+            else
+            {
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id ORDER BY pat.first_name DESC ");
+                MySqlDataReader r = command.ExecuteReader();
+
+
+                GridView1.DataSource = r;
+                GridView1.DataBind();
+
+                Database.closeConnection();
+
+            }
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+
+            GridView2.DataBind();
+        
+            if(RadioButtonList2.SelectedIndex==0)
+            {
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.first_name like '" + TextBox1.Text + "%'"); ;
+                MySqlDataReader r = command.ExecuteReader();
+
+
+                GridView1.DataSource = r;
+                GridView1.DataBind();
+
+                Database.closeConnection();
+            }
+            else if(RadioButtonList2.SelectedIndex==1)
+            {
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.second_name like '" + TextBox1.Text + "%'");
+                MySqlDataReader r = command.ExecuteReader();
+
+
+                GridView1.DataSource = r;
+                GridView1.DataBind();
+
+                Database.closeConnection();
+            }
+            else if(RadioButtonList2.SelectedIndex==2)
+            {
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.pesel like '" + TextBox1.Text + "%'");
+                MySqlDataReader r = command.ExecuteReader();
+
+
+                GridView1.DataSource = r;
+                GridView1.DataBind();
+
+                Database.closeConnection();
+            }
+            else if(RadioButtonList2.SelectedIndex==3)
+            {
+                MySqlCommand command = Database.command("SELECT vis.date, vis.duration, vis.confirmed, vis.type, vis.id_patient, pat.first_name, pat.second_name, pat.pesel, pat.sex, pat.date_of_birth, pat.phone_number, pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.sex = '" + TextBox1.Text + "'");
+                MySqlDataReader r = command.ExecuteReader();
+
+
+                GridView1.DataSource = r;
+                GridView1.DataBind();
+
+                Database.closeConnection();
+            }
+            else if(RadioButtonList2.SelectedIndex==4)
+            {
+                MySqlCommand command = Database.command("SELECT vis.date,vis.duration,vis.confirmed,vis.type,vis.id_patient,pat.first_name,pat.second_name,pat.pesel,pat.sex,pat.date_of_birth,pat.phone_number,pat.email FROM visits vis INNER JOIN patients pat ON vis.id_patient = pat.id WHERE pat.date_of_birth like '" + TextBox1.Text + "%'");
+                MySqlDataReader r = command.ExecuteReader();
+
+
+                GridView1.DataSource = r;
+                GridView1.DataBind();
+
+                Database.closeConnection();
+            }
+            
+        }
+
+        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 
-    }
+        protected void RadioButtonList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-    
+        }
+    }
 }
